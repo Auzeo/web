@@ -1022,7 +1022,8 @@ footer{background:var(--sand);padding:clamp(54px,7vw,82px) 0 30px}
 .lkfs.over .lkfs-done{opacity:1}
 /* the dim screen, as in the app (lock.html, Ambient.java): five seconds with
    nobody touching anything and the block falls back to a small candle on black */
-.lkfs-amb{position:absolute;inset:0;background:#000;opacity:0;pointer-events:none;transition:opacity .9s ease;z-index:5}
+.lkfs-amb{position:absolute;inset:0;background:#000;opacity:0;pointer-events:none;transition:opacity .5s ease;z-index:5}
+.lkfs-amb.on{pointer-events:auto;cursor:pointer}
 .lkfs-amb.on{opacity:1}
 .lkfs-amb canvas{position:absolute;inset:0;width:100%;height:100%}
 .lkfs-ambT{position:absolute;left:0;right:0;text-align:center;color:#d8cfc2;font-size:16px}
@@ -1614,7 +1615,7 @@ svg.nc{overflow:visible}
   <div class="lkfs-hints"><span class="lk-kb">Hold <span class="k2" id="lkEsc"><i></i>Esc</span> to end this session early · 1 left this month<br><span class="f">Stuck on your lockscreen? Press Ctrl Alt Delete to get back in.</span></span><span class="lk-tc"><button type="button" class="lk-hold" id="lkHold"><i></i><span>Hold to end early</span></button><span class="f">Emergency escape · 1 left this month</span></span></div>
   <div class="lkfs-amb" id="lkAmb" aria-hidden="true"><canvas id="lkAmbCv"></canvas>
     <div class="lkfs-ambT" id="lkAmbT"><b id="lkAmbLeft"></b><span id="lkAmbBack"></span></div>
-    <div class="lkfs-ambH">The screen dims, as it does in the app. Move the mouse or tap to wake it.</div></div>
+    <div class="lkfs-ambH">This is your screen during a block. Tap or press any key to leave.</div></div>
 </div>
 
 <!-- ═══ BELOW THE HERO ═══ -->
@@ -2272,6 +2273,7 @@ function lockOpen(){
   fsLeft.textContent = mmss(total); fsAt.textContent = hhmm(new Date(Date.now() + total * 1000)); fsSess.textContent = human(total);
   fsRun = { total: total, t0: null, to: lineY(total) };
   ambWake();
+  amb.on = true; ambOpened = performance.now(); amb.el.classList.add("on");
   snd.press(); snd.strike();
   setTimeout(function(){ if (!fsRun) return; fsRun.t0 = performance.now(); L.target = 1; state = "burning"; snd.ignite(); snd.startBed(); }, 420);
   document.getElementById("lkEnd").focus({ preventScroll: true });
@@ -2298,8 +2300,11 @@ function lockClose(){
 /* the dim screen: the same candle the app draws on black (ui/lock.html) */
 var AMB_AFTER = 5000, amb = { on: false, touched: 0, el: document.getElementById("lkAmb"), cv: document.getElementById("lkAmbCv") };
 function ambWake(){ amb.touched = performance.now(); if (amb.on){ amb.on = false; amb.el.classList.remove("on"); } }
-["mousemove", "mousedown", "keydown", "wheel", "touchstart"].forEach(function(ev){
-  addEventListener(ev, function(){ if (fsOpen) ambWake(); }, { passive: true, capture: true });
+/* the demo is only the dim candle: a tap, click or key press leaves it */
+var ambOpened = 0;
+["pointerdown", "keydown"].forEach(function(ev){
+  addEventListener(ev, function(e){ if (!fsOpen || !amb.on || performance.now() - ambOpened < 500) return;
+    e.preventDefault(); e.stopPropagation(); lockClose(); }, { capture: true });
 });
 function ambDraw(r, sc){
   var cv = amb.cv, W = cv.clientWidth, H = cv.clientHeight; if (!W || !H) return;
@@ -2340,10 +2345,9 @@ function ambDraw(r, sc){
 }
 function ambTick(t, k){
   /* never while the escape is held, before the flame is lit, or once it has ended */
-  if (!fsRun || fsRun.t0 === null || escT) amb.touched = t;
-  if (!amb.on && fsOpen && t - amb.touched > AMB_AFTER){ amb.on = true; amb.el.classList.add("on"); }
+  if (!amb.on && fsOpen && fsRun){ amb.on = true; ambOpened = performance.now(); amb.el.classList.add("on"); }
   if (!fsRun && amb.on){ amb.on = false; amb.el.classList.remove("on"); }
-  if (amb.on && fsRun) ambDraw(fsRun.total * (1 - Math.min(1, (t - fsRun.t0) / (fsRun.total * 1000))), k);
+  if (amb.on && fsRun) ambDraw(fsRun.t0 === null ? fsRun.total : fsRun.total * (1 - Math.min(1, (t - fsRun.t0) / (fsRun.total * 1000))), k);
 }
 function fsFrame(t){
   var dt = fsLast ? Math.min(64, t - fsLast) : 16; fsLast = t; var k = t / 1000;
