@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="The All Block">
+  <!-- The app icon (logo 150, "Hearth"), round, at favicon scale: the same candle and
+       flame with a heavier line, so it still reads at 16 px. A new file name on
+       purpose: Firefox caches favicons by URL (see mark.svg). -->
+  <defs><linearGradient id="f" gradientUnits="userSpaceOnUse" x1="0" y1="224" x2="0" y2="430"><stop offset="0" stop-color="#f1ede4"/><stop offset=".45" stop-color="#f1ede4"/><stop offset="1" stop-color="#f1ede4" stop-opacity="0"/></linearGradient></defs>
+  <circle cx="256" cy="256" r="256" fill="#1b1a17"/>
+  <g transform="translate(256 262) scale(1.1) translate(-256 -267)">
+    <path d="M200 430V250q0-26 26-26h60q26 0 26 26v180" fill="none" stroke="url(#f)" stroke-width="24" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M256 202c-26-22-24-56 0-92c24 36 26 70 0 92z" fill="none" stroke="#f2b84b" stroke-width="24" stroke-linejoin="round"/>
+  </g>
+</svg>
