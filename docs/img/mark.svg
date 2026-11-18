@@ -7,8 +7,8 @@
        Renamed from favicon.svg on purpose: Firefox caches favicons hard and keys
        them by URL, so the old disc-and-slash icon (no ring) survived every edit
        made in place. A new path is the only reliable way to retire it. -->
-  <circle cx="32" cy="32" r="32" fill="#131316"/>
-  <g fill="none" stroke="#f5f5f7" stroke-width="3.49">
+  <circle cx="32" cy="32" r="32" fill="#1d1c17"/>
+  <g fill="none" stroke="#e9e6dd" stroke-width="3.49">
     <circle cx="32" cy="32" r="13.09"/>
     <path d="M22.74 22.74 41.26 41.26"/>
   </g>

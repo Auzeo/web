@@ -13,9 +13,9 @@ try{
 <meta name="description" content="End your screen time. The All Block is a focus blocker for your computer and phone. It locks the whole device until your session ends, not just a list of apps and sites. Free to start, no card needed.">
 <meta name="robots" content="noindex, nofollow">
 <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "The All Block", "url": "https://theallblock.com/", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Windows 10, Windows 11, Android 8.0+", "description": "A focus blocker for your computer and phone that locks the whole device until the session ends, not just a list of apps and sites.", "publisher": {"@type": "Organization", "name": "Auzeo"}, "offers": [{"@type": "Offer", "name": "Free", "price": "0", "priceCurrency": "GBP"}, {"@type": "Offer", "name": "Week pass", "price": "1.99", "priceCurrency": "GBP"}, {"@type": "Offer", "name": "Pro monthly", "price": "7.99", "priceCurrency": "GBP"}, {"@type": "Offer", "name": "Pro yearly", "price": "34.99", "priceCurrency": "GBP"}, {"@type": "Offer", "name": "Lifetime", "price": "49.99", "priceCurrency": "GBP"}]}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What if I really need to get out?", "acceptedAnswer": {"@type": "Answer", "text": "Use an emergency escape. You get one a month free, three on Pro, and they refill on the 1st. On Windows, hold Esc for five seconds on the lock screen. On the phone, tap Emergency escape. An extra escape costs £0.99."}}, {"@type": "Question", "name": "What still works on my phone?", "acceptedAnswer": {"@type": "Answer", "text": "Calls, the dialer and contacts. Everything else waits for the timer."}}, {"@type": "Question", "name": "Does restarting end a block?", "acceptedAnswer": {"@type": "Answer", "text": "No. It comes back locked, with the time that was left."}}, {"@type": "Question", "name": "What if Windows locks during a block?", "acceptedAnswer": {"@type": "Answer", "text": "Sign in as usual. The block carries on, and the clock keeps its time."}}, {"@type": "Question", "name": "Windows warned me about the download.", "acceptedAnswer": {"@type": "Answer", "text": "The All Block is not code-signed yet, so SmartScreen warns about it. Click More info, then Run anyway, then Yes on the admin prompt."}}]}]</script>
-<link rel="icon" href="/candle.ico?v=3" sizes="any">
-<link rel="icon" href="/img/flame.svg?v=1" type="image/svg+xml">
-<link rel="apple-touch-icon" href="/img/candle-touch.png?v=2">
+<link rel="icon" href="/candle.ico?v=4" sizes="any">
+<link rel="icon" href="/img/flame.svg?v=2" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/img/candle-touch.png?v=3">
 <meta name="theme-color" content="#faf9f6" id="metaThemeColor">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1444,6 +1444,83 @@ svg.nc{overflow:visible}
 .v2 .pl-cost .pl-cost-f{margin:22px 0 0;font-size:15px;color:var(--ash)}
 @media(max-width:520px){.pl-cost{padding:24px 20px}.pl-cost-g{grid-template-columns:1fr}.pl-cost-g div{display:flex;align-items:baseline;justify-content:space-between}}
 </style>
+<style id="nx">
+/* Ported from the /beta/new/ redesign (2026-11-18): the hero candle with its
+   hold button and demo block, the drawn devices, and the closing flame. */
+:root{--nx-wax:var(--ink);--nx-acc:var(--green-txt);--nx-acc-ink:#fff;--nx-glow:224,149,42;--nx-flame:#e0952a}
+:root[data-theme="dark"]{--nx-wax:#eef0f4;--nx-acc:#ffc867;--nx-acc-ink:#1a1304;--nx-glow:255,170,80;--nx-flame:#ffc867}
+.nxc-wax{fill:none;stroke:var(--nx-wax);stroke-width:5}
+.nxc-level{stroke:var(--nx-acc);stroke-width:3;stroke-dasharray:6 5;stroke-linecap:round}
+.nxc-flame{fill:rgba(var(--nx-glow),.16);stroke:var(--nx-flame);stroke-width:4;stroke-linejoin:round;transform-box:fill-box;transform-origin:50% 100%;animation:nx-flick 3.2s ease-in-out infinite}
+.nxc-halo{fill:rgba(var(--nx-glow),.22);filter:blur(22px)}
+@keyframes nx-flick{0%,100%{transform:scale(1,1) skewX(0)}12%{transform:scale(.97,1.04) skewX(-1.5deg)}24%{transform:scale(1.02,.97) skewX(1deg)}37%{transform:scale(.98,1.05) skewX(2deg)}49%{transform:scale(1.01,.98) skewX(-.5deg)}63%{transform:scale(.96,1.06) skewX(-2deg)}78%{transform:scale(1.02,.98) skewX(1.2deg)}}
+@media(prefers-reduced-motion:reduce){.nxc-flame{animation:none}}
+
+/* hero: the candle, and under it the same hold gesture as the app */
+.nx-stage{flex:none;display:flex;flex-direction:column;align-items:center;margin:0 clamp(0px,3vw,48px)}
+.nx-stage .pl-cw{margin:0}
+.nx-stage .pl-fx>*{top:16%}
+.nx-candle{display:block;height:min(52vh,470px);width:auto;overflow:visible}
+.nx-hold{position:relative;overflow:hidden;margin-top:22px;height:56px;padding:0 30px;border-radius:999px;border:1px solid var(--nx-acc);background:none;
+  color:var(--nx-acc);font:700 15.5px var(--display);display:inline-flex;align-items:center;cursor:pointer;user-select:none;-webkit-user-select:none;touch-action:none;
+  -webkit-tap-highlight-color:transparent;transition:transform .16s cubic-bezier(.23,1,.32,1)}
+.nx-hold:active{transform:scale(.97)}
+.nx-hold .fill,.nx-hold .over{position:absolute;inset:0;clip-path:inset(0 100% 0 0);transition:clip-path .25s cubic-bezier(.23,1,.32,1)}
+.nx-hold .fill{background:var(--nx-acc)}
+.nx-hold .over{display:flex;align-items:center;justify-content:center;color:var(--nx-acc-ink)}
+.nx-hold.on .fill,.nx-hold.on .over{clip-path:inset(0 0 0 0);transition:clip-path 2s linear}
+.nx-hold span{position:relative}
+.nx-hint{margin:12px 0 0;font-size:13.5px;color:var(--faint);text-align:center}
+@media(max-width:800px){.nx-stage{margin:0 auto 26px}.nx-candle{height:210px}.nx-stage .pl-cw{margin:0}}
+
+/* devices: the candle drawn on a laptop and a phone */
+.v2 .nx-big{font-size:clamp(40px,6vw,92px);font-stretch:118%;letter-spacing:-.045em;line-height:.98}
+.nx-dev{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(30px,6vw,90px);align-items:center}
+.nx-plats{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:34px}
+.nx-plat{display:flex;align-items:center;gap:14px;padding:16px 18px;border-radius:var(--r);border:1px solid var(--line);background:var(--card);color:var(--ink);text-decoration:none;line-height:1.25;transition:border-color .2s ease,transform .16s cubic-bezier(.23,1,.32,1)}
+a.nx-plat:active{transform:scale(.98)}
+@media(hover:hover){a.nx-plat:hover{border-color:var(--nx-acc)}}
+.nx-plat .pi{width:24px;height:24px;flex:none;fill:currentColor}
+.nx-plat b{display:block;font:700 16px var(--display);letter-spacing:-.01em}
+.nx-plat small{display:block;color:var(--faint);font-size:13px;white-space:nowrap}
+.nx-plat.off{opacity:.55}
+.nx-rig{position:relative;height:clamp(300px,36vw,460px)}
+.nx-laptop,.nx-phone{--nx-wax:#eef0f4;--nx-flame:#ffc867;--nx-acc:#ffc867;--nx-glow:255,170,80;position:absolute;background:#05070f;border:1px solid #2e3854;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.nx-laptop{left:0;top:4%;width:82%;aspect-ratio:16/10;border-radius:18px;box-shadow:0 40px 90px -40px rgba(0,0,0,.7);gap:9%}
+.nx-phone{right:0;bottom:0;width:27%;aspect-ratio:9/19;border-radius:26px;box-shadow:0 30px 80px -30px rgba(0,0,0,.7),0 0 0 6px var(--sand);flex-direction:column;gap:8%}
+.nx-laptop::after,.nx-phone::after{content:"";position:absolute;left:50%;top:38%;width:70%;aspect-ratio:1;transform:translate(-50%,-50%);background:radial-gradient(closest-side,rgba(255,170,80,.2),transparent 70%);pointer-events:none}
+.nx-laptop svg{height:68%;width:auto;overflow:visible;position:relative;z-index:1}
+.nx-phone svg{height:46%;width:auto;overflow:visible;position:relative;z-index:1}
+.nx-read{position:relative;z-index:1;font-family:var(--mono);color:#a9aebb;font-size:clamp(9px,.85vw,11px);letter-spacing:.14em;text-transform:uppercase;line-height:1.5}
+.nx-read b{display:block;color:#eef0f4;font-weight:500;font-size:clamp(24px,3.4vw,46px);letter-spacing:-.02em;margin:4px 0;font-variant-numeric:tabular-nums}
+.nx-phone .nx-read{text-align:center}.nx-phone .nx-read b{font-size:clamp(17px,2.2vw,28px)}
+@media(max-width:900px){.nx-dev{grid-template-columns:1fr}}
+@media(max-width:420px){.nx-plats{grid-template-columns:1fr}}
+
+/* closing: the flame alone, the line, two downloads */
+.nx-end{overflow:hidden;padding-bottom:clamp(90px,12vw,170px)!important}
+.nx-mark{display:block;width:86px;height:auto;margin:0 auto;overflow:visible}
+.v2 .nx-end h2{font-size:clamp(44px,8vw,120px);font-stretch:118%;letter-spacing:-.045em;line-height:.95;margin:26px auto 0;max-width:12ch}
+.nx-cta{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:38px}
+.nx-btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:56px;padding:0 28px;border-radius:999px;font:700 16px var(--display);text-decoration:none;white-space:nowrap;transition:transform .16s cubic-bezier(.23,1,.32,1),box-shadow .2s ease,border-color .2s ease}
+.nx-btn:active{transform:scale(.97)}
+.nx-dl{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.v2 .nx-btn-acc{background:var(--nx-acc);color:var(--nx-acc-ink);box-shadow:0 14px 44px -14px rgba(var(--nx-glow),.75)}
+.v2 .nx-btn-ghost{border:1px solid var(--line);color:var(--ink);background:var(--card)}
+@media(hover:hover){.nx-btn-ghost:hover{border-color:var(--nx-acc)}}
+.v2 .nx-meta{margin:26px 0 0;color:var(--faint);font-size:14.5px}
+
+/* the demo block screen */
+.nx-lock{--nx-wax:#eef0f4;--nx-flame:#ffc867;--nx-acc:#ffc867;--nx-glow:255,170,80;position:fixed;inset:0;z-index:1000;background:#05070f;color:#eef0f4;display:none;align-items:center;justify-content:center;gap:clamp(30px,8vw,120px);cursor:pointer;opacity:0;transition:opacity .6s ease}
+.nx-lock.show{display:flex}.nx-lock.in{opacity:1}
+.nx-lock::before{content:"";position:absolute;left:50%;top:44%;width:min(900px,120vw);aspect-ratio:1;transform:translate(-62%,-50%);background:radial-gradient(closest-side,rgba(255,170,80,.16),transparent 70%);pointer-events:none}
+.nx-lock>svg{height:min(62vh,520px);width:auto;overflow:visible;position:relative}
+.nx-lock-read{position:relative;font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#737a8c}
+.nx-lock-read .clock{display:block;font-size:clamp(64px,13vw,170px);font-weight:500;letter-spacing:-.04em;color:#eef0f4;line-height:1;margin:10px 0 14px;font-variant-numeric:tabular-nums}
+.nx-lock-read .at{color:#ffc867}
+.nx-lock-note{position:absolute;left:0;right:0;bottom:34px;margin:0;text-align:center;font-size:14px;color:#737a8c;padding:0 20px}
+@media(max-width:640px){.nx-lock{flex-direction:column;gap:24px}.nx-lock>svg{height:38vh}.nx-lock-read{text-align:center}}
+</style>
 </head>
 <body>
 
@@ -1475,7 +1552,11 @@ svg.nc{overflow:visible}
 
 <!-- ═══ HERO ═══ -->
 <!-- Hero: the tall candle above the clouds, notifications going quiet at the edge. -->
-<header class="nh tc q-row pl-hero" id="top"><div class="pl-cw"><svg class="pl-mark pl-mk1" viewBox="176 92 160 350" aria-hidden="true"><defs><linearGradient id="plpl-mk1" gradientUnits="userSpaceOnUse" x1="0" y1="224" x2="0" y2="430"><stop offset="0" style="stop-color:var(--ink)"/><stop offset=".45" style="stop-color:var(--ink)"/><stop offset="1" style="stop-color:var(--ink);stop-opacity:0"/></linearGradient></defs><g fill="none" stroke-width="11" stroke-linejoin="round"><path d="M200 430V250q0-26 26-26h60q26 0 26 26v180" stroke="url(#plpl-mk1)" stroke-linecap="round"/><path class="pl-fl" d="M256 202c-26-22-24-56 0-92c24 36 26 70 0 92z"/></g></svg><div class="pl-fx" aria-hidden="true"><span class="pl-flare"></span></div></div><div class="ov lf"><h1>End your screen time<span class="em">Once and for all.</span></h1><div class="pl-dl pl-dl8"><a class="ci on" data-os="win" href="/download/The.All.Block.v8.4.6.exe" aria-label="Download for Windows"><i><svg class="pi" viewBox="0 0 24 24" aria-hidden="true"><path d="M0 0h11.4v11.4H0zM12.6 0H24v11.4H12.6zM0 12.6h11.4V24H0zM12.6 12.6H24V24H12.6z"/></svg></i><b>Windows</b><small>Download<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M6 2v7M3 6.5 6 9.5 9 6.5"/></svg></small></a><a class="ci on" data-os="and" href="/download/The.All.Block.Companion.v1.5.8.apk" aria-label="Download for Android"><i><svg class="pi" viewBox="0 0 24 24" aria-hidden="true"><path d="M18.4395 5.5586c-.675 1.1664-1.352 2.3318-2.0274 3.498-.0366-.0155-.0742-.0286-.1113-.043-1.8249-.6957-3.484-.8-4.42-.787-1.8551.0185-3.3544.4643-4.2597.8203-.084-.1494-1.7526-3.021-2.0215-3.4864a1.1451 1.1451 0 0 0-.1406-.1914c-.3312-.364-.9054-.4859-1.379-.203-.475.282-.7136.9361-.3886 1.5019 1.9466 3.3696-.0966-.2158 1.9473 3.3593.0172.031-.4946.2642-1.3926 1.0177C2.8987 12.176.452 14.772 0 18.9902h24c-.119-1.1108-.3686-2.099-.7461-3.0683-.7438-1.9118-1.8435-3.2928-2.7402-4.1836a12.1048 12.1048 0 0 0-2.1309-1.6875c.6594-1.122 1.312-2.2559 1.9649-3.3848.2077-.3615.1886-.7956-.0079-1.1191a1.1001 1.1001 0 0 0-.8515-.5332c-.5225-.0536-.9392.3128-1.0488.5449zm-.0391 8.461c.3944.5926.324 1.3306-.1563 1.6503-.4799.3197-1.188.0985-1.582-.4941-.3944-.5927-.324-1.3307.1563-1.6504.4727-.315 1.1812-.1086 1.582.4941zM7.207 13.5273c.4803.3197.5506 1.0577.1563 1.6504-.394.5926-1.1038.8138-1.584.4941-.48-.3197-.5503-1.0577-.1563-1.6504.4008-.6021 1.1087-.8106 1.584-.4941z"/></svg></i><b>Android</b><small>Download<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M6 2v7M3 6.5 6 9.5 9 6.5"/></svg></small></a><span class="ci off"><i><svg class="pi" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg></i><b>macOS</b><small>Soon</small></span><span class="ci off"><i><svg class="pi" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg></i><b>iOS</b><small>Soon</small></span></div><button class="pl-demo" type="button" onclick="hsGo(3)">Watch the demo <span aria-hidden="true">→</span></button></div></header>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<linearGradient id="nxG" gradientUnits="userSpaceOnUse" x1="0" y1="130" x2="0" y2="470"><stop offset="0" stop-color="#fff"/><stop offset=".5" stop-color="#fff"/><stop offset=".8" stop-color="#fff" stop-opacity=".3"/><stop offset=".97" stop-color="#fff" stop-opacity="0"/></linearGradient>
+<mask id="nxM" maskUnits="userSpaceOnUse" x="0" y="100" width="130" height="400"><rect x="0" y="100" width="130" height="400" fill="url(#nxG)"/></mask></defs>
+<symbol id="nx-candle" viewBox="0 0 130 500" overflow="visible"><ellipse class="nxc-halo" cx="65" cy="78" rx="56" ry="70"/><g mask="url(#nxM)"><rect class="nxc-wax" x="33" y="130" width="64" height="360" rx="16"/></g><line class="nxc-level" x1="18" y1="318" x2="112" y2="318"/><path class="nxc-flame" d="M65 114 C 44 97, 46 72, 65 44 C 84 72, 86 97, 65 114 Z"/></symbol></svg>
+<header class="nh tc q-row pl-hero" id="top"><div class="nx-stage"><div class="pl-cw"><svg class="nx-candle" viewBox="0 0 130 500" aria-hidden="true"><use href="#nx-candle"/></svg><div class="pl-fx" aria-hidden="true"><span class="pl-flare"></span></div></div><button class="nx-hold" id="nxHold" type="button"><i class="fill"></i><span>Hold to start</span><b class="over" aria-hidden="true">Hold to start</b></button><p class="nx-hint">Hold for two seconds to see a block.</p></div><div class="ov lf"><h1>End your screen time<span class="em">Once and for all.</span></h1><div class="pl-dl pl-dl8"><a class="ci on" data-os="win" href="/download/The.All.Block.v8.4.6.exe" aria-label="Download for Windows"><i><svg class="pi" viewBox="0 0 24 24" aria-hidden="true"><path d="M0 0h11.4v11.4H0zM12.6 0H24v11.4H12.6zM0 12.6h11.4V24H0zM12.6 12.6H24V24H12.6z"/></svg></i><b>Windows</b><small>Download<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M6 2v7M3 6.5 6 9.5 9 6.5"/></svg></small></a><a class="ci on" data-os="and" href="/download/The.All.Block.Companion.v1.5.8.apk" aria-label="Download for Android"><i><svg class="pi" viewBox="0 0 24 24" aria-hidden="true"><path d="M18.4395 5.5586c-.675 1.1664-1.352 2.3318-2.0274 3.498-.0366-.0155-.0742-.0286-.1113-.043-1.8249-.6957-3.484-.8-4.42-.787-1.8551.0185-3.3544.4643-4.2597.8203-.084-.1494-1.7526-3.021-2.0215-3.4864a1.1451 1.1451 0 0 0-.1406-.1914c-.3312-.364-.9054-.4859-1.379-.203-.475.282-.7136.9361-.3886 1.5019 1.9466 3.3696-.0966-.2158 1.9473 3.3593.0172.031-.4946.2642-1.3926 1.0177C2.8987 12.176.452 14.772 0 18.9902h24c-.119-1.1108-.3686-2.099-.7461-3.0683-.7438-1.9118-1.8435-3.2928-2.7402-4.1836a12.1048 12.1048 0 0 0-2.1309-1.6875c.6594-1.122 1.312-2.2559 1.9649-3.3848.2077-.3615.1886-.7956-.0079-1.1191a1.1001 1.1001 0 0 0-.8515-.5332c-.5225-.0536-.9392.3128-1.0488.5449zm-.0391 8.461c.3944.5926.324 1.3306-.1563 1.6503-.4799.3197-1.188.0985-1.582-.4941-.3944-.5927-.324-1.3307.1563-1.6504.4727-.315 1.1812-.1086 1.582.4941zM7.207 13.5273c.4803.3197.5506 1.0577.1563 1.6504-.394.5926-1.1038.8138-1.584.4941-.48-.3197-.5503-1.0577-.1563-1.6504.4008-.6021 1.1087-.8106 1.584-.4941z"/></svg></i><b>Android</b><small>Download<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M6 2v7M3 6.5 6 9.5 9 6.5"/></svg></small></a><span class="ci off"><i><svg class="pi" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg></i><b>macOS</b><small>Soon</small></span><span class="ci off"><i><svg class="pi" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg></i><b>iOS</b><small>Soon</small></span></div><button class="pl-demo" type="button" onclick="hsGo(3)">Watch the demo <span aria-hidden="true">→</span></button></div></header>
 <!-- The old hero stays, off-screen, because its drum and Start button run the "Light it" demo. -->
 <header class="hero" id="oldtop" aria-hidden="true">
   <div class="hero-bg" aria-hidden="true">
@@ -1626,10 +1707,11 @@ svg.nc{overflow:visible}
  <p class="v-lede">Willpower runs out late at night. So decide in the daytime instead: set a sleep block once, and at ten your screen turns into a candle that burns until morning. No arguing with yourself, no "just one more".</p></div>
  <div><img class="v-shot" src="../img/v2/lock_aod.webp" alt="The candle dimmed for night"></div></div>
  <div class="v-wrap v-grid v-g4 v-mt"><div class="v-card"><span class="v-num">22:00 → 06:00</span><h3>Sleep</h3></div><div class="v-card"><span class="v-num">09:00 → 12:00</span><h3>Deep work</h3></div><div class="v-card"><span class="v-num">19:00 → 21:00</span><h3>Study</h3></div><div class="v-card"><span class="v-num">17:00 → 21:00</span><h3>Family</h3></div></div></section>
-<section id="devices" class="v-band v-sand"><div class="v-wrap v-split v-flip">
- <div><p class="v-eyebrow">Windows and Android</p><h2>One app,<br>every screen.</h2>
- <p class="v-lede">The same candle on your computer and your phone. On Pro, a schedule set on one runs on both.</p></div>
- <div class="pl-combo"><img class="pl-win v-sw-l" src="../img/v2/d_timer_light.webp" alt="The All Block on Windows" loading="lazy"><img class="pl-win v-sw-d" src="../img/v2/d_timer_dark.webp" alt="The All Block on Windows" loading="lazy"><img class="pl-ph v-sw-l" src="../img/v2/p_timer_light.webp" alt="The All Block on Android" loading="lazy"><img class="pl-ph v-sw-d" src="../img/v2/p_timer_dark.webp" alt="The All Block on Android" loading="lazy"></div></div></section>
+<section id="devices" class="v-band v-sand"><div class="v-wrap nx-dev">
+ <div><p class="v-eyebrow">Windows and Android</p><h2 class="nx-big">One app, every screen.</h2>
+ <p class="v-lede">The same candle on your computer and your phone. On Pro, a schedule set on one runs on both.</p>
+ <div class="nx-plats"><a class="nx-plat" href="/download/The.All.Block.v8.4.6.exe"><svg class="pi" viewBox="0 0 24 24" aria-hidden="true"><path d="M0 0h11.4v11.4H0zM12.6 0H24v11.4H12.6zM0 12.6h11.4V24H0zM12.6 12.6H24V24H12.6z"/></svg><span><b>Windows</b><small>Download · 10 and 11</small></span></a><a class="nx-plat" href="/download/The.All.Block.Companion.v1.5.8.apk"><svg class="pi" viewBox="0 0 24 24" aria-hidden="true"><path d="M18.4395 5.5586c-.675 1.1664-1.352 2.3318-2.0274 3.498-.0366-.0155-.0742-.0286-.1113-.043-1.8249-.6957-3.484-.8-4.42-.787-1.8551.0185-3.3544.4643-4.2597.8203-.084-.1494-1.7526-3.021-2.0215-3.4864a1.1451 1.1451 0 0 0-.1406-.1914c-.3312-.364-.9054-.4859-1.379-.203-.475.282-.7136.9361-.3886 1.5019 1.9466 3.3696-.0966-.2158 1.9473 3.3593.0172.031-.4946.2642-1.3926 1.0177C2.8987 12.176.452 14.772 0 18.9902h24c-.119-1.1108-.3686-2.099-.7461-3.0683-.7438-1.9118-1.8435-3.2928-2.7402-4.1836a12.1048 12.1048 0 0 0-2.1309-1.6875c.6594-1.122 1.312-2.2559 1.9649-3.3848.2077-.3615.1886-.7956-.0079-1.1191a1.1001 1.1001 0 0 0-.8515-.5332c-.5225-.0536-.9392.3128-1.0488.5449zm-.0391 8.461c.3944.5926.324 1.3306-.1563 1.6503-.4799.3197-1.188.0985-1.582-.4941-.3944-.5927-.324-1.3307.1563-1.6504.4727-.315 1.1812-.1086 1.582.4941zM7.207 13.5273c.4803.3197.5506 1.0577.1563 1.6504-.394.5926-1.1038.8138-1.584.4941-.48-.3197-.5503-1.0577-.1563-1.6504.4008-.6021 1.1087-.8106 1.584-.4941z"/></svg><span><b>Android</b><small>Download · 8.0 and up</small></span></a><div class="nx-plat off"><svg class="pi" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg><span><b>macOS</b><small>Soon</small></span></div><div class="nx-plat off"><svg class="pi" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg><span><b>iOS</b><small>Soon</small></span></div></div></div>
+ <div class="nx-rig" aria-hidden="true"><div class="nx-laptop"><svg viewBox="0 0 130 500"><use href="#nx-candle"/></svg><div class="nx-read">Device blocked<b>42:10</b>Back at 22:00</div></div><div class="nx-phone"><svg viewBox="0 0 130 500"><use href="#nx-candle"/></svg><div class="nx-read">Burning<b>42:10</b>Back at 22:00</div></div></div></div></section>
 <section id="how" class="v-band"><div class="v-wrap v-split">
  <div><p class="v-eyebrow">Why it's called The All Block</p><h2>Not a nudge.<br>A complete block.</h2>
  <ul class="v-ticks"><li>The whole device locks, not just a few apps. Calls still come through.</li><li>Restarting doesn't end it.</li><li>Closing the app doesn't end it.</li><li>A friend can hold the password (Pro).</li></ul>
@@ -1655,8 +1737,8 @@ svg.nc{overflow:visible}
 <p class="v-eyebrow">FAQ</p><h2>Questions</h2><div class="v-mt"><details><summary>What if I really need to get out?</summary><p>Use an emergency escape. You get one a month free, three on Pro, and they refill on the 1st. On Windows, hold <kbd>Esc</kbd> for five seconds on the lock screen. On the phone, tap Emergency escape. An extra escape costs £0.99.</p></details><details><summary>What still works on my phone?</summary><p>Calls, the dialer and contacts. Everything else waits for the timer.</p></details><details><summary>Does restarting end a block?</summary><p>No. It comes back locked, with the time that was left.</p></details><details><summary>What if Windows locks during a block?</summary><p>Sign in as usual. The block carries on, and the clock keeps its time.</p></details><details><summary>Windows warned me about the download.</summary><p>The All Block is not code-signed yet, so SmartScreen warns about it. Click <b>More info</b>, then <b>Run anyway</b>, then <b>Yes</b> on the admin prompt.</p></details></div>
 <p class="v-ash v-small v-mt">Still stuck? <a href="mailto:MrAuzeo@protonmail.com?subject=All%20Block%20help">Email me</a>. I love feedback, and I answer personally.</p>
 </div></section>
-<section class="v-band pl-end" id="get"><div class="v-wrap v-center"><svg class="pl-mark pl-mk2" viewBox="176 92 160 350" aria-hidden="true"><defs><linearGradient id="plpl-mk2" gradientUnits="userSpaceOnUse" x1="0" y1="224" x2="0" y2="430"><stop offset="0" style="stop-color:var(--ink)"/><stop offset=".45" style="stop-color:var(--ink)"/><stop offset="1" style="stop-color:var(--ink);stop-opacity:0"/></linearGradient></defs><g fill="none" stroke-width="10" stroke-linejoin="round"><path d="M200 430V250q0-26 26-26h60q26 0 26 26v180" stroke="url(#plpl-mk2)" stroke-linecap="round"/><path class="pl-fl" d="M256 202c-26-22-24-56 0-92c24 36 26 70 0 92z"/></g></svg>
-<h2>Light up your distractions.</h2><div class="v-cta-row"><a class="v-btn v-btn--light pl-end-go" href="#top">Download for free</a></div></div></section>
+<section class="v-band pl-end nx-end" id="get"><div class="v-wrap v-center"><svg class="nx-mark" viewBox="40 30 50 92" aria-hidden="true"><path class="nxc-flame" d="M65 114 C 44 97, 46 72, 65 44 C 84 72, 86 97, 65 114 Z"/></svg>
+<h2>Light up your distractions.</h2><div class="nx-cta"><a class="nx-btn nx-btn-acc" id="nxGo" href="/download/The.All.Block.v8.4.6.exe"><svg class="nx-dl" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3v10m0 0l-4-4m4 4l4-4M4 16.5h12"/></svg>Download for free</a><a class="nx-btn nx-btn-ghost" id="nxAlt" href="/download/The.All.Block.Companion.v1.5.8.apk"><svg class="nx-dl" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3v10m0 0l-4-4m4 4l4-4M4 16.5h12"/></svg><span>Android</span></a></div><p class="nx-meta" id="nxMeta">Windows 10 &amp; 11 · v8.4.6 · single .exe</p></div></section>
 </div>
 
 <div class="sc" id="scrollCandle" aria-hidden="true"><svg viewBox="0 0 26 150">
@@ -2684,5 +2766,23 @@ function setF(v){mode=v;
  if(v!=='0'&&!rm.matches){spawn();tm=setInterval(spawn,v==='5'?900:1400)}}
 setF('5')})()</script>
 <script>(function(){var r=document.getElementById("costR");if(!r)return;function f(h){var m=Math.round(h*60);return Math.floor(m/60)+"h"+(m%60?" "+m%60+"m":"")}function u(){var h=+r.value,d=Math.round(h*365/24),y=h*50/24;r.style.setProperty("--p",((h-1)/11*100)+"%");document.getElementById("costH").textContent=f(h);document.getElementById("costY").textContent=d+" days";document.getElementById("costL").textContent=(y<10?y.toFixed(1):Math.round(y))+" years";document.getElementById("costW").textContent=Math.round(h/16*100)+"%"}r.addEventListener("input",u);u();var g=document.querySelector(".pl-cost-go"),n=document.querySelector(".nav-cta");if(g&&n)g.href=n.getAttribute("href");var e=document.querySelector(".pl-end-go");if(e&&n)e.href=n.getAttribute("href")})()</script>
+<div class="nx-lock" id="nxLock" role="dialog" aria-label="A demo of the block screen" aria-hidden="true"><svg viewBox="0 0 130 500" aria-hidden="true"><use href="#nx-candle"/></svg><div class="nx-lock-read">Device blocked<span class="clock" id="nxClock">10:00</span>Back at <span class="at" id="nxAt">--:--</span></div><p class="nx-lock-note">This is your screen during a block. A real one has no way out. Click or press any key to leave.</p></div>
+<script>(function(){
+var $=function(i){return document.getElementById(i)},pad=function(n){return(n<10?"0":"")+n},hhmm=function(d){return pad(d.getHours())+":"+pad(d.getMinutes())};
+if(document.documentElement.classList.contains("is-android")){$("nxGo").href="/download/The.All.Block.Companion.v1.5.8.apk";$("nxAlt").href="/download/The.All.Block.v8.4.6.exe";$("nxAlt").lastChild.textContent="Windows";$("nxMeta").textContent="Android 8.0 and up · v1.5.8"}
+var hold=$("nxHold"),lock=$("nxLock"),tH=0,tT=0,ends=0,opened=0;if(!hold)return;
+function down(){if(tH)return;hold.classList.add("on");tH=setTimeout(function(){tH=0;hold.classList.remove("on");open()},2000)}
+function up(){if(!tH)return;clearTimeout(tH);tH=0;hold.classList.remove("on")}
+hold.addEventListener("pointerdown",function(e){try{hold.setPointerCapture(e.pointerId)}catch(_){}down()});
+["pointerup","pointercancel","lostpointercapture"].forEach(function(n){hold.addEventListener(n,up)});
+hold.addEventListener("keydown",function(e){if((e.key===" "||e.key==="Enter")&&!e.repeat){e.preventDefault();down()}});
+hold.addEventListener("keyup",up);hold.addEventListener("blur",up);hold.addEventListener("contextmenu",function(e){e.preventDefault()});
+function tick(){var l=Math.max(0,Math.round((ends-Date.now())/1000));$("nxClock").textContent=pad(Math.floor(l/60))+":"+pad(l%60);if(!l)close()}
+function open(){ends=Date.now()+600000;opened=Date.now();$("nxAt").textContent=hhmm(new Date(ends));tick();lock.classList.add("show");lock.setAttribute("aria-hidden","false");
+requestAnimationFrame(function(){requestAnimationFrame(function(){lock.classList.add("in")})});document.body.style.overflow="hidden";tT=setInterval(tick,1000)}
+function close(){if(!lock.classList.contains("show")||Date.now()-opened<700)return;clearInterval(tT);lock.classList.remove("in");lock.setAttribute("aria-hidden","true");
+document.body.style.overflow="";setTimeout(function(){lock.classList.remove("show")},600);hold.focus({preventScroll:true})}
+lock.addEventListener("click",close);document.addEventListener("keydown",function(e){if(!e.repeat)close()});
+})()</script>
 </body>
 </html>
