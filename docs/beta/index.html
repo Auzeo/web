@@ -2395,7 +2395,7 @@ var ambOpened = 0;
 function ambDraw(r, sc){
   var cv = amb.cv, W = cv.clientWidth, H = cv.clientHeight; if (!W || !H) return;
   var d = Math.min(3, Math.max(devicePixelRatio || 1, 1));
-  if (cv.width !== Math.round(W * d)){ cv.width = Math.round(W * d); cv.height = Math.round(H * d); }
+  if (cv.width !== Math.round(W * d) || cv.height !== Math.round(H * d)){ cv.width = Math.round(W * d); cv.height = Math.round(H * d); }
   var x = cv.getContext("2d"); x.setTransform(d, 0, 0, d, 0, 0); x.clearRect(0, 0, W, H);
   var u = Math.max(.9, Math.min(4, H / 870 * 1.4, W / 412 * 1.4));
   var dx = Math.sin(sc / 37) * 6 * u, dy = Math.cos(sc / 53) * 6 * u;
