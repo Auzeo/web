@@ -1,0 +1,737 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<script>document.documentElement.classList.add("js");
+try{var _t=localStorage.getItem("theme");if(_t==="light"||_t==="dark")document.documentElement.setAttribute("data-theme",_t)}catch(e){}
+</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The All Block: End Your Screen Time</title>
+<meta name="description" content="End your screen time. The All Block is a focus blocker for your computer and phone. It locks the whole device until your session ends, not just a list of apps and sites. Free to start, no card needed.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0a0e1c">
+<link rel="icon" href="/candle.ico?v=4" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/img/flame.svg?v=2">
+<link rel="apple-touch-icon" href="/img/candle-touch.png?v=3">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,400..900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<!-- BETA PREVIEW: a from-scratch redesign. Not linked from the live site.
+     Photography: the forest the live site already uses, darkened, white type over it. -->
+<style>
+/* ── tokens: Midnight navy and gold by night, paper and Linen green by day ── */
+:root{
+  --bg:#0a0e1c; --void:#05070f; --card:#111728; --card2:#161d31; --line:#222a3e; --line2:#2e3854;
+  --ink:#eef0f4; --ash:#a9aebb; --faint:#737a8c;
+  --gold:#ffc867; --gold-ink:#1a1304; --gold-soft:rgba(255,200,103,.12); --glow:255,170,80;
+  --wax:#eef0f4; --flame:#ffc867;
+  --display:"Archivo",system-ui,sans-serif; --mono:"JetBrains Mono",ui-monospace,monospace;
+  --wrap:1280px; --gut:clamp(20px,5vw,56px); --r:28px; --r2:18px;
+  --out:cubic-bezier(.23,1,.32,1);
+  color-scheme:dark;
+}
+:root[data-theme="light"]{
+  --bg:#efeee8; --void:#e5e3db; --card:#f8f7f3; --card2:#ffffff; --line:#d8d5cb; --line2:#c6c2b5;
+  --ink:#1a1b19; --ash:#53554f; --faint:#868880;
+  --gold:#3d5e3a; --gold-ink:#f4f6ef; --gold-soft:rgba(61,94,58,.1); --glow:224,149,42;
+  --wax:#1a1b19; --flame:#e0952a;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--display);font-size:17px;line-height:1.6;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3{margin:0;font-weight:800;font-stretch:112%;letter-spacing:-.035em;line-height:1;text-wrap:balance}
+p{margin:0}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:8px}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 var(--gut)}
+section{padding:clamp(72px,11vw,150px) 0;position:relative}
+.gold{color:var(--gold)}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+
+/* label above each headline */
+.tag{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:22px}
+.tag::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--gold);box-shadow:0 0 14px 2px rgba(var(--glow),.7)}
+.h2{font-size:clamp(36px,5.6vw,76px)}
+.lede{color:var(--ash);font-size:clamp(17px,1.5vw,20px);max-width:54ch;margin-top:22px}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:56px;padding:0 28px;border-radius:999px;
+  font-weight:700;font-size:16px;letter-spacing:-.01em;white-space:nowrap;transition:transform .16s var(--out),background .2s,border-color .2s,box-shadow .2s}
+.btn:active{transform:scale(.97)}
+.btn svg{width:18px;height:18px;flex:none}
+.btn-gold{background:var(--gold);color:var(--gold-ink);box-shadow:0 0 0 1px rgba(255,255,255,.14) inset,0 14px 44px -14px rgba(var(--glow),.75)}
+.btn-ghost{border:1px solid var(--line2);background:color-mix(in srgb,var(--card) 70%,transparent)}
+@media (hover:hover){.btn-gold:hover{box-shadow:0 0 0 1px rgba(255,255,255,.2) inset,0 18px 54px -12px rgba(var(--glow),.95)}.btn-ghost:hover{border-color:var(--gold)}}
+
+/* ── nav ── */
+.nav{position:fixed;top:14px;left:0;right:0;z-index:50;display:flex;justify-content:center;padding:0 14px;pointer-events:none}
+.nav-in{pointer-events:auto;display:flex;align-items:center;gap:4px;padding:7px 8px 7px 8px;border-radius:999px;
+  background:color-mix(in srgb,var(--card) 78%,transparent);border:1px solid var(--line);backdrop-filter:blur(18px) saturate(1.3);-webkit-backdrop-filter:blur(18px) saturate(1.3)}
+.nav-mark{width:38px;height:38px;border-radius:50%;overflow:hidden;flex:none;display:block}
+.nav-mark svg{width:100%;height:100%;display:block}
+.nav-name{font-weight:800;font-stretch:112%;letter-spacing:-.02em;font-size:15px;padding:0 14px 0 8px}
+.nav-links{display:flex}
+.nav-links a{padding:9px 14px;font-size:14.5px;font-weight:500;color:var(--ash);border-radius:999px;transition:color .2s}
+.nav-links a:hover{color:var(--ink)}
+.nav-theme{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;color:var(--ash)}
+.nav-theme svg{width:17px;height:17px}
+.nav .btn{height:40px;padding:0 18px;font-size:14.5px;box-shadow:none}
+@media (max-width:860px){.nav-links{display:none}}
+@media (max-width:420px){.nav-name{display:none}}
+
+/* ── hero ── */
+.hero{min-height:100dvh;padding:130px 0 70px;display:flex;align-items:center;overflow:hidden}
+.hero::before{content:"";position:absolute;right:-12%;top:-10%;width:min(1100px,95vw);aspect-ratio:1;pointer-events:none;
+  background:radial-gradient(closest-side,rgba(var(--glow),.2),rgba(var(--glow),.07) 42%,transparent 72%)}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,.6fr);gap:clamp(24px,5vw,80px);align-items:center;width:100%}
+.hero h1{font-size:clamp(44px,6.1vw,96px);font-stretch:118%;font-weight:800;letter-spacing:-.045em;line-height:.93}
+.hero h1 span{display:block}
+.hero .lede{font-size:clamp(18px,1.7vw,22px);max-width:36ch}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:38px}
+.hero-meta{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:26px;color:var(--faint);font-size:14.5px}
+.hero-meta span{display:inline-flex;align-items:center;gap:8px}
+.hero-meta i{width:5px;height:5px;border-radius:50%;background:var(--gold);opacity:.8}
+.soon{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;padding:3px 7px;border:1px solid var(--line2);border-radius:999px;color:var(--faint)}
+
+.stage{position:relative;display:flex;flex-direction:column;align-items:center}
+.stage svg.candle{height:min(58vh,520px);width:auto;overflow:visible}
+.stage-read{display:flex;align-items:baseline;gap:12px;margin-top:6px;color:var(--faint);font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-family:var(--mono)}
+.stage-read b{color:var(--ink);font-size:15px;letter-spacing:0;font-weight:500}
+
+/* the candle drawing, shared */
+.c-wax{fill:none;stroke:var(--wax);stroke-width:5}
+.c-level{stroke:var(--gold);stroke-width:3;stroke-dasharray:6 5;stroke-linecap:round}
+.c-flame{fill:rgba(var(--glow),.16);stroke:var(--flame);stroke-width:4;stroke-linejoin:round;transform-box:fill-box;transform-origin:50% 100%;animation:flick 3.2s ease-in-out infinite}
+.c-halo{fill:rgba(var(--glow),.22);filter:blur(22px)}
+@keyframes flick{0%,100%{transform:scale(1,1) skewX(0)}12%{transform:scale(.97,1.04) skewX(-1.5deg)}24%{transform:scale(1.02,.97) skewX(1deg)}37%{transform:scale(.98,1.05) skewX(2deg)}49%{transform:scale(1.01,.98) skewX(-.5deg)}63%{transform:scale(.96,1.06) skewX(-2deg)}78%{transform:scale(1.02,.98) skewX(1.2deg)}}
+
+/* hold button: fills over two seconds, the same gesture as the app */
+.hold{position:relative;overflow:hidden;margin-top:26px;height:56px;padding:0 30px;border-radius:999px;border:1px solid var(--gold);
+  color:var(--gold);font-weight:700;font-size:15.5px;display:inline-flex;align-items:center;gap:10px;user-select:none;-webkit-user-select:none;touch-action:none;
+  transition:transform .16s var(--out)}
+.hold:active{transform:scale(.97)}
+.hold .fill{position:absolute;inset:0;background:var(--gold);clip-path:inset(0 100% 0 0);transition:clip-path .25s var(--out)}
+.hold.on .fill{clip-path:inset(0 0 0 0);transition:clip-path 2s linear}
+.hold span{position:relative}
+.hold .over{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:10px;color:var(--gold-ink);clip-path:inset(0 100% 0 0);transition:clip-path .25s var(--out)}
+.hold.on .over{clip-path:inset(0 0 0 0);transition:clip-path 2s linear}
+.hold-hint{margin-top:12px;font-size:13.5px;color:var(--faint);text-align:center}
+@media (max-width:900px){
+  .hero{padding-top:110px}
+  .hero-grid{grid-template-columns:1fr}
+  .stage{margin-top:26px}
+  .stage svg.candle{height:min(34vh,300px)}
+  .hero::before{right:-40%;top:-18%;width:160vw}
+}
+
+/* ── the cost: one big sentence with live numbers ── */
+.cost{background:var(--void)}
+.cost-say{font-size:clamp(32px,5vw,74px);font-weight:800;font-stretch:112%;letter-spacing:-.04em;line-height:1.04;text-wrap:balance}
+.cost-say em{font-style:normal;color:var(--faint)}
+.cost-say b{color:var(--gold);font-weight:800;white-space:nowrap}
+.cost-row{display:grid;gap:clamp(36px,5vw,64px)}
+.cost-ctl{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(30px,6vw,90px);align-items:start;padding-top:clamp(28px,4vw,44px);border-top:1px solid var(--line)}
+.cost-ctl label{display:flex;justify-content:space-between;align-items:baseline;font-size:15px;color:var(--ash);margin-bottom:16px}
+.cost-ctl label b{font-family:var(--mono);font-weight:500;color:var(--ink);font-size:20px}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:36px;background:none;margin:0;cursor:pointer}
+input[type=range]::-webkit-slider-runnable-track{height:6px;border-radius:6px;background:linear-gradient(90deg,var(--gold) var(--p,27%),var(--line2) var(--p,27%))}
+input[type=range]::-moz-range-track{height:6px;border-radius:6px;background:var(--line2)}
+input[type=range]::-moz-range-progress{height:6px;border-radius:6px;background:var(--gold)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;border-radius:50%;background:var(--gold);margin-top:-10px;box-shadow:0 0 24px rgba(var(--glow),.8);border:4px solid var(--void)}
+input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:var(--gold);box-shadow:0 0 24px rgba(var(--glow),.8);border:4px solid var(--void)}
+.cost-ends{display:flex;justify-content:space-between;font-family:var(--mono);font-size:12px;color:var(--faint)}
+.cost-foot{color:var(--ash);font-size:18px;max-width:40ch}
+.cost-foot a{color:var(--gold);font-weight:700;white-space:nowrap}
+@media (max-width:860px){.cost-ctl{grid-template-columns:1fr}}
+
+/* ── features: big rounded panels ── */
+.feat-head{max-width:800px;margin-bottom:clamp(36px,5vw,64px)}
+.grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:18px}
+.panel{position:relative;overflow:hidden;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:clamp(26px,3.2vw,44px);display:flex;flex-direction:column}
+.panel h3{font-size:clamp(26px,3vw,40px);letter-spacing:-.035em}
+.panel p{color:var(--ash);margin-top:14px;max-width:46ch}
+.panel .tag{margin-bottom:16px}
+.s7{grid-column:span 7}.s5{grid-column:span 5}.s12{grid-column:span 12}
+.panel .vis{margin-top:auto;padding-top:34px}
+.panel.lit::after{content:"";position:absolute;right:-20%;bottom:-45%;width:80%;aspect-ratio:1;pointer-events:none;
+  background:radial-gradient(closest-side,rgba(var(--glow),.16),transparent 70%)}
+@media (max-width:940px){.s7,.s5{grid-column:span 12}}
+
+/* candle panel: the drum beside the candle */
+.timer{display:flex;align-items:center;justify-content:center;gap:clamp(20px,4vw,54px)}
+.drum{display:flex;flex-direction:column;align-items:flex-end;gap:2px;font-weight:800;font-stretch:112%;letter-spacing:-.03em;line-height:1.15}
+.drum span{color:var(--faint);opacity:.35;font-size:20px;transition:all .3s var(--out)}
+.drum span.n1{opacity:.6;font-size:26px}
+.drum span.n0{opacity:1;color:var(--ink);font-size:44px}
+.timer svg{height:250px;width:auto;overflow:visible;flex:none}
+.timer-side{display:flex;flex-direction:column;gap:6px;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+.timer-side b{font-size:22px;letter-spacing:0;color:var(--ink);font-weight:500;text-transform:none}
+@media (max-width:520px){.timer-side{display:none}}
+
+/* the block: a plain list of what does not end it */
+.nots{list-style:none;margin:0;padding:0;display:grid;gap:0}
+.nots li{display:flex;gap:14px;align-items:flex-start;padding:16px 0;border-top:1px solid var(--line);font-weight:600;letter-spacing:-.01em}
+.nots li:first-child{border-top:0}
+.nots svg{width:20px;height:20px;flex:none;margin-top:3px;color:var(--gold)}
+.nots small{display:block;font-weight:400;color:var(--ash);font-size:15px;margin-top:2px}
+
+/* schedules: a day, with the blocks laid on it */
+.sched{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,5vw,80px);align-items:center}
+@media (max-width:860px){.sched{grid-template-columns:1fr}}
+.day{display:grid;gap:14px}
+.day-row{display:grid;grid-template-columns:92px minmax(0,1fr);gap:14px;align-items:center;font-size:14.5px;font-weight:600}
+.day-row small{font-family:var(--mono);font-weight:400;font-size:11.5px;color:var(--faint);display:block}
+.track{position:relative;height:12px;border-radius:12px;background:var(--card2);border:1px solid var(--line)}
+.track i{position:absolute;top:-1px;bottom:-1px;border-radius:12px;background:var(--gold);box-shadow:0 0 18px -2px rgba(var(--glow),.7)}
+.day-ax{display:grid;grid-template-columns:92px minmax(0,1fr);gap:14px;font-family:var(--mono);font-size:10.5px;color:var(--faint)}
+.day-ax div{display:flex;justify-content:space-between}
+
+/* accountability lock */
+.lock-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(24px,3vw,44px);align-items:center;margin-top:28px}
+.ticks{list-style:none;margin:0;padding:0;display:grid;gap:12px;color:var(--ash);font-size:16px}
+.ticks li{display:flex;gap:12px;align-items:flex-start}
+.ticks svg{width:18px;height:18px;flex:none;margin-top:4px;color:var(--gold)}
+.pw{background:var(--card2);border:1px solid var(--line2);border-radius:var(--r2);padding:26px;position:relative;z-index:1}
+.pw h4{margin:0;font-size:19px;font-weight:800;letter-spacing:-.02em}
+.pw small{display:block;color:var(--faint);font-size:13.5px;margin-top:4px}
+.pw-field{display:flex;align-items:center;gap:9px;height:52px;margin-top:18px;padding:0 18px;border-radius:14px;background:var(--bg);border:1px solid var(--line)}
+.pw-field i{width:9px;height:9px;border-radius:50%;background:var(--ink);opacity:.85}
+.pw-btn{margin-top:12px;height:50px;border-radius:14px;background:var(--gold);color:var(--gold-ink);display:grid;place-items:center;font-weight:700;font-size:15px}
+.pro{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;padding:3px 8px;border-radius:999px;background:var(--gold-soft);color:var(--gold);margin-left:6px}
+@media (max-width:760px){.lock-grid{grid-template-columns:1fr}}
+
+/* escape */
+.pips{display:flex;gap:14px;align-items:center}
+.pip{width:64px;height:64px;border-radius:50%;border:1.5px dashed var(--line2);display:grid;place-items:center;color:var(--faint);font-family:var(--mono);font-size:11px}
+.pip.on{border:1.5px solid var(--gold);color:var(--gold);box-shadow:0 0 30px -6px rgba(var(--glow),.7) inset,0 0 30px -10px rgba(var(--glow),.7)}
+.pips-cap{margin-top:12px;font-size:13px;color:var(--faint)}
+
+/* ── the real world: the site's forest, darkened, white type ── */
+.world{padding:0}
+.world-in{position:relative;min-height:min(86vh,760px);display:flex;align-items:flex-end;overflow:hidden;color:#fff}
+.world-in img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.5) saturate(.8)}
+.world-in::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,var(--bg) 0,transparent 22%,transparent 55%,rgba(5,7,15,.85) 100%)}
+.world-copy{position:relative;z-index:1;padding-top:120px;padding-bottom:clamp(50px,7vw,96px);width:100%}
+.world-copy h2{font-size:clamp(38px,6.5vw,98px);font-stretch:118%;letter-spacing:-.045em;line-height:.95;color:#fff}
+.world-copy p{color:rgba(255,255,255,.82);font-size:clamp(17px,1.5vw,20px);max-width:44ch;margin-top:22px}
+
+/* ── devices ── */
+.dev-grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(30px,6vw,90px);align-items:center}
+.plats{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:34px}
+.plat{display:flex;align-items:center;gap:14px;padding:16px 18px;border-radius:var(--r2);border:1px solid var(--line);background:var(--card);transition:border-color .2s,transform .16s var(--out)}
+a.plat:hover{border-color:var(--gold)}a.plat:active{transform:scale(.98)}
+.plat svg{width:24px;height:24px;flex:none}
+.plat b{display:block;font-weight:700;letter-spacing:-.01em;line-height:1.2}
+.plat small{color:var(--faint);font-size:13px}
+.plat.off{opacity:.55}
+.rig{position:relative;height:clamp(300px,36vw,460px)}
+.laptop{position:absolute;left:0;top:4%;width:82%;aspect-ratio:16/10;border-radius:18px;background:var(--void);border:1px solid var(--line2);box-shadow:0 40px 90px -40px #000;display:flex;align-items:center;justify-content:center;gap:9%;overflow:hidden}
+.laptop::after,.phone::after{content:"";position:absolute;left:50%;top:38%;width:70%;aspect-ratio:1;transform:translate(-50%,-50%);background:radial-gradient(closest-side,rgba(var(--glow),.2),transparent 70%);pointer-events:none}
+.laptop svg{height:68%;width:auto;overflow:visible;position:relative;z-index:1}
+.dev-read{position:relative;z-index:1;font-family:var(--mono);color:#a9aebb;font-size:clamp(9px,.85vw,11px);letter-spacing:.14em;text-transform:uppercase}
+.dev-read b{display:block;color:#eef0f4;font-weight:500;font-size:clamp(24px,3.4vw,46px);letter-spacing:-.02em;margin:4px 0}
+.phone{position:absolute;right:0;bottom:0;width:27%;aspect-ratio:9/19;border-radius:26px;background:var(--void);border:1px solid var(--line2);box-shadow:0 30px 80px -30px #000,0 0 0 6px var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8%;overflow:hidden}
+.phone svg{height:46%;width:auto;overflow:visible;position:relative;z-index:1}
+.phone .dev-read{text-align:center}.phone .dev-read b{font-size:clamp(17px,2.2vw,28px)}
+.laptop,.phone,.lockscr{--wax:#eef0f4;--flame:#ffc867;--gold:#ffc867;--glow:255,170,80}
+.laptop,.phone{--void:#05070f;--line2:#2e3854}
+@media (max-width:900px){.dev-grid{grid-template-columns:1fr}}
+
+/* ── pricing ── */
+.price-head{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;flex-wrap:wrap;margin-bottom:44px}
+.bill{display:inline-flex;padding:5px;border-radius:999px;background:var(--card);border:1px solid var(--line)}
+.bill button{height:42px;padding:0 20px;border-radius:999px;font-size:14.5px;font-weight:600;color:var(--ash);transition:color .2s,background .2s}
+.bill button[aria-pressed=true]{background:var(--ink);color:var(--bg)}
+.bill em{font-style:normal;font-family:var(--mono);font-size:11px;margin-left:6px;opacity:.75}
+.plans{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;align-items:stretch}
+.plan{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:32px;display:flex;flex-direction:column}
+.plan.hot{border-color:var(--gold);background:linear-gradient(180deg,color-mix(in srgb,var(--gold) 9%,var(--card)),var(--card) 55%);box-shadow:0 30px 90px -50px rgba(var(--glow),.9)}
+.plan-name{display:flex;align-items:center;justify-content:space-between;font-weight:700;font-size:17px}
+.plan-name span{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;padding:4px 9px;border-radius:999px;background:var(--gold);color:var(--gold-ink);font-weight:500}
+.plan-price{font-size:58px;font-weight:800;font-stretch:112%;letter-spacing:-.045em;line-height:1;margin-top:26px;display:flex;align-items:baseline;gap:10px}
+.plan-price s{font-size:22px;color:var(--faint);font-weight:500;letter-spacing:-.02em}
+.plan-per{color:var(--faint);font-size:14.5px;margin-top:8px;min-height:1.6em}
+.plan ul{list-style:none;margin:26px 0 30px;padding:26px 0 0;border-top:1px solid var(--line);display:grid;gap:11px;font-size:15.5px;color:var(--ash)}
+.plan li{display:flex;gap:11px;align-items:flex-start}
+.plan li svg{width:17px;height:17px;flex:none;margin-top:4px;color:var(--gold)}
+.plan .btn{margin-top:auto;width:100%;height:52px;font-size:15px}
+.plan-foot{text-align:center;font-size:13px;color:var(--faint);margin-top:12px;min-height:1.6em}
+[data-show]{display:none}
+.plans[data-bill=year] [data-show~=year],.plans[data-bill=month] [data-show~=month],.plans[data-bill=once] [data-show~=once]{display:flex}
+.plans[data-bill=year] span[data-show~=year],.plans[data-bill=month] span[data-show~=month]{display:inline}
+.price-note{margin-top:26px;color:var(--faint);font-size:14.5px;text-align:center}
+.price-note a{color:var(--ash);text-decoration:underline;text-underline-offset:3px}
+@media (max-width:940px){.plans{grid-template-columns:1fr}}
+
+/* ── faq ── */
+.faq-grid{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(30px,6vw,90px)}
+.faq details{border-top:1px solid var(--line)}
+.faq details:last-of-type{border-bottom:1px solid var(--line)}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:24px 0;font-weight:700;font-size:clamp(18px,1.7vw,21px);letter-spacing:-.02em}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"";width:12px;height:12px;flex:none;border-right:2px solid var(--gold);border-bottom:2px solid var(--gold);transform:rotate(45deg);transition:transform .25s var(--out);margin-right:6px}
+.faq details[open] summary::after{transform:rotate(-135deg)}
+.faq details p{color:var(--ash);padding:0 40px 26px 0;max-width:60ch}
+.faq-more{margin-top:26px;color:var(--ash)}
+.faq-more a{color:var(--gold);font-weight:700}
+@media (max-width:860px){.faq-grid{grid-template-columns:1fr}}
+
+/* ── closing ── */
+.end{text-align:center;overflow:hidden;padding-bottom:clamp(90px,12vw,170px)}
+.end::before{content:"";position:absolute;left:50%;top:0;width:min(1000px,130vw);aspect-ratio:1;transform:translate(-50%,-22%);pointer-events:none;
+  background:radial-gradient(closest-side,rgba(var(--glow),.2),rgba(var(--glow),.06) 45%,transparent 72%)}
+.end svg.mark{width:86px;height:auto;overflow:visible;position:relative}
+.end h2{font-size:clamp(44px,8vw,120px);font-stretch:118%;letter-spacing:-.045em;line-height:.95;margin:26px auto 0;max-width:12ch;position:relative}
+.end .hero-cta{justify-content:center;position:relative}
+.end .hero-meta{justify-content:center;position:relative}
+
+/* ── footer ── */
+footer{border-top:1px solid var(--line);padding:56px 0 40px;font-size:15px}
+.foot{display:grid;grid-template-columns:minmax(0,1.6fr) repeat(3,minmax(0,1fr));gap:40px}
+.foot-brand b{font-size:19px;font-weight:800;font-stretch:112%;letter-spacing:-.02em}
+.foot-brand p{color:var(--ash);margin-top:10px;max-width:30ch}
+.foot-brand small{display:block;margin-top:14px;font-family:var(--mono);font-size:11.5px;color:var(--faint)}
+.foot h5{margin:0 0 14px;font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+.foot a{display:block;padding:5px 0;color:var(--ash);transition:color .2s}.foot a:hover{color:var(--ink)}
+.foot-base{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-top:48px;padding-top:24px;border-top:1px solid var(--line);color:var(--faint);font-size:13.5px}
+@media (max-width:760px){.foot{grid-template-columns:1fr 1fr}.foot-brand{grid-column:span 2}}
+
+/* ── the demo lock ── */
+.lockscr{position:fixed;inset:0;z-index:100;background:#05070f;color:#eef0f4;display:none;align-items:center;justify-content:center;gap:clamp(30px,8vw,120px);cursor:pointer;opacity:0;transition:opacity .6s ease}
+.lockscr.show{display:flex}.lockscr.in{opacity:1}
+.lockscr::before{content:"";position:absolute;left:50%;top:44%;width:min(900px,120vw);aspect-ratio:1;transform:translate(-62%,-50%);background:radial-gradient(closest-side,rgba(255,170,80,.16),transparent 70%);pointer-events:none}
+.lockscr svg{height:min(62vh,520px);width:auto;overflow:visible;position:relative}
+.lock-read{position:relative;font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#737a8c}
+.lock-read .clock{display:block;font-size:clamp(64px,13vw,170px);font-weight:500;letter-spacing:-.04em;color:#eef0f4;line-height:1;margin:10px 0 14px}
+.lock-read .at{color:#ffc867}
+.lock-note{position:absolute;left:0;right:0;bottom:34px;text-align:center;font-size:14px;color:#737a8c;padding:0 20px}
+@media (max-width:640px){.lockscr{flex-direction:column;gap:24px}.lockscr svg{height:38vh}.lock-read{text-align:center}}
+
+/* ── reveal on scroll (only when scripted, never for reduced motion) ── */
+html.js .rise{opacity:0;transform:translateY(22px);transition:opacity .8s var(--out),transform .8s var(--out)}
+html.js .rise.seen{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  html.js .rise{opacity:1;transform:none;transition:none}
+  .c-flame{animation:none}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body id="top">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="cdG" gradientUnits="userSpaceOnUse" x1="0" y1="130" x2="0" y2="470">
+      <stop offset="0" stop-color="#fff"/><stop offset=".5" stop-color="#fff"/>
+      <stop offset=".8" stop-color="#fff" stop-opacity=".3"/><stop offset=".97" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
+    <mask id="cdM" maskUnits="userSpaceOnUse" x="0" y="100" width="130" height="400"><rect x="0" y="100" width="130" height="400" fill="url(#cdG)"/></mask>
+  </defs>
+  <symbol id="candle" viewBox="0 0 130 500" overflow="visible">
+    <ellipse class="c-halo" cx="65" cy="78" rx="56" ry="70"/>
+    <g mask="url(#cdM)"><rect class="c-wax" x="33" y="130" width="64" height="360" rx="16"/></g>
+    <line class="c-level" x1="18" y1="318" x2="112" y2="318"/>
+    <path class="c-flame" d="M65 114 C 44 97, 46 72, 65 44 C 84 72, 86 97, 65 114 Z"/>
+  </symbol>
+  <symbol id="ok" viewBox="0 0 20 20"><path d="M4 10.5l4 4 8-9" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-pc" viewBox="0 0 24 24"><path d="M3 5h18v11H3zM9 20h6M12 16v4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-ph" viewBox="0 0 24 24"><path d="M7.5 2.5h9a1.5 1.5 0 0 1 1.5 1.5v16a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 6 20V4a1.5 1.5 0 0 1 1.5-1.5zM10.5 18.5h3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-dl" viewBox="0 0 20 20"><path d="M10 3v10m0 0l-4-4m4 4l4-4M4 16.5h12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</svg>
+
+<nav class="nav" aria-label="Main">
+  <div class="nav-in">
+    <a class="nav-mark" href="#top" aria-label="The All Block, back to top">
+      <svg viewBox="0 5 512 512" aria-hidden="true"><defs><radialGradient id="nbG" gradientUnits="userSpaceOnUse" cx="256" cy="275" r="230"><stop offset="0" stop-color="#ffaa50" stop-opacity=".34"/><stop offset=".35" stop-color="#ff8732" stop-opacity=".12"/><stop offset=".75" stop-color="#ff7828" stop-opacity=".03"/><stop offset="1" stop-color="#ff7828" stop-opacity="0"/></radialGradient></defs><rect x="0" y="0" width="512" height="520" fill="#000"/><rect x="0" y="0" width="512" height="520" fill="url(#nbG)"/><path transform="translate(256 261) scale(2.7) translate(-256 -165)" d="M256 202c-24-19-22-46 0-74c22 28 24 55 0 74z" fill="none" stroke="#ffc867" stroke-width="11" stroke-linejoin="round"/></svg>
+    </a>
+    <a class="nav-name" href="#top">The All Block</a>
+    <div class="nav-links">
+      <a href="#how">How it works</a>
+      <a href="#devices">Devices</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">Help</a>
+    </div>
+    <button class="nav-theme" id="theme" aria-label="Switch between light and dark">
+      <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.5a7.5 7.5 0 1 0 0 15z" fill="currentColor"/><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+    </button>
+    <a class="btn btn-gold" href="#download">Download</a>
+  </div>
+</nav>
+
+<main>
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <h1><span>End your screen time.</span><span class="gold">Once and for all.</span></h1>
+      <p class="lede">The All Block locks your whole device until the candle burns down. No apps. No exceptions. Just the real world.</p>
+      <div class="hero-cta" id="download">
+        <a class="btn btn-gold" href="/download/The.All.Block.v8.4.6.exe"><svg aria-hidden="true"><use href="#i-dl"/></svg>Download for Windows</a>
+        <a class="btn btn-ghost" href="/download/The.All.Block.Companion.v1.5.8.apk"><svg aria-hidden="true"><use href="#i-dl"/></svg>Download for Android</a>
+      </div>
+      <div class="hero-meta">
+        <span><i></i>Free for good</span><span><i></i>No account</span><span><i></i>No card</span>
+        <span>macOS and iOS <b class="soon">Soon</b></span>
+      </div>
+    </div>
+    <div class="stage">
+      <svg class="candle" viewBox="0 0 130 500" aria-hidden="true"><use href="#candle"/></svg>
+      <button class="hold" id="hold" type="button">
+        <i class="fill"></i><span>Hold to start</span><b class="over" aria-hidden="true">Hold to start</b>
+      </button>
+      <p class="hold-hint">Hold for two seconds to see a block.</p>
+    </div>
+  </div>
+</section>
+
+<section class="cost" id="cost">
+  <div class="wrap">
+    <div class="tag rise">What it costs you</div>
+    <div class="cost-row">
+      <p class="cost-say rise"><b id="cH">4 hours</b> a day is <b id="cD">61 days</b> every year. <em>And</em> <b id="cY">8.3 years</b> <em>of the next fifty.</em></p>
+      <div class="cost-ctl rise">
+        <div>
+        <label for="hrs"><span>I spend this long on my phone each day</span><b id="cL">4h</b></label>
+        <input type="range" id="hrs" min="1" max="12" step="0.5" value="4">
+        <div class="cost-ends"><span>1h</span><span>12h</span></div>
+        </div>
+        <p class="cost-foot">That is <b class="gold" id="cP">25%</b> of your waking hours. That time is your life. The All Block gives it back. <a href="#download">Get my time back →</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="how">
+  <div class="wrap">
+    <div class="feat-head rise">
+      <div class="tag">How it works</div>
+      <h2 class="h2">Not a nudge. A&nbsp;complete block.</h2>
+      <p class="lede">Most blockers hide a few apps and hope you leave them hidden. The All Block locks the whole device for the time you chose.</p>
+    </div>
+    <div class="grid">
+      <article class="panel s7 lit rise">
+        <div class="tag">The candle</div>
+        <h3>Set a time. Light&nbsp;it. Walk&nbsp;away.</h3>
+        <p>Pick a length, hold the button for two seconds, and the device locks until the candle burns down. Sessions from 10 seconds to 3 hours are free for good.</p>
+        <div class="vis timer" aria-hidden="true">
+          <div class="drum"><span>5 min</span><span class="n1">15 min</span><span class="n0">30 min</span><span class="n1">45 min</span><span>1 hour</span></div>
+          <svg viewBox="0 0 130 500"><use href="#candle"/></svg>
+          <div class="timer-side"><span>Locked for</span><b>30 minutes</b><span style="margin-top:14px">Back at</span><b id="backAt">18:30</b></div>
+        </div>
+      </article>
+      <article class="panel s5 rise">
+        <div class="tag">The block</div>
+        <h3>Nothing gets you out early.</h3>
+        <div class="vis">
+          <ul class="nots">
+            <li><svg aria-hidden="true"><use href="#ok"/></svg><div>The whole device locks<small>Not just a few apps.</small></div></li>
+            <li><svg aria-hidden="true"><use href="#ok"/></svg><div>Restarting doesn't end it<small>It comes back locked, with the time that was left.</small></div></li>
+            <li><svg aria-hidden="true"><use href="#ok"/></svg><div>Closing the app doesn't end it</div></li>
+            <li><svg aria-hidden="true"><use href="#ok"/></svg><div>Calls still come through<small>The dialer and contacts keep working.</small></div></li>
+          </ul>
+        </div>
+      </article>
+      <article class="panel s12 rise">
+        <div class="sched">
+        <div>
+        <div class="tag">Schedules</div>
+        <h3>It's 1 a.m. You said you'd stop at 11.</h3>
+        <p>Willpower runs out late at night, so decide in the daytime. Set a sleep block once, and at ten your screen turns into a candle that burns until morning.</p>
+        </div>
+        <div class="day" aria-hidden="true">
+          <div class="day-row"><div>Sleep<small>22:00 → 06:00</small></div><div class="track"><i style="left:91.67%;right:0"></i><i style="left:0;width:25%"></i></div></div>
+          <div class="day-row"><div>Deep work<small>09:00 → 12:00</small></div><div class="track"><i style="left:37.5%;width:12.5%"></i></div></div>
+          <div class="day-row"><div>Family<small>17:00 → 21:00</small></div><div class="track"><i style="left:70.83%;width:16.67%"></i></div></div>
+          <div class="day-ax"><span></span><div><span>00</span><span>06</span><span>12</span><span>18</span><span>24</span></div></div>
+        </div>
+        </div>
+      </article>
+      <article class="panel s7 rise">
+        <div class="tag">Accountability Lock <span class="pro">Pro</span></div>
+        <h3>Keep getting past? Give someone else the password.</h3>
+        <div class="lock-grid">
+          <div>
+            <ul class="ticks">
+              <li><svg aria-hidden="true"><use href="#ok"/></svg>Without it, the schedule can't be changed or switched off.</li>
+              <li><svg aria-hidden="true"><use href="#ok"/></svg>On Android, the app can't be deleted to get out of a block. The iPhone app will do the same.</li>
+              <li><svg aria-hidden="true"><use href="#ok"/></svg>It comes back on every time the app restarts.</li>
+              <li><svg aria-hidden="true"><use href="#ok"/></svg>Your monthly emergency escape still works.</li>
+            </ul>
+          </div>
+          <div class="pw" aria-hidden="true">
+            <h4>Accountability Lock</h4>
+            <small>Locked. Changing schedules needs the password.</small>
+            <div class="pw-field"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            <div class="pw-btn">Unlock</div>
+            <small style="margin-top:14px">Hint: Sam has it</small>
+          </div>
+        </div>
+      </article>
+      <article class="panel s5 rise">
+        <div class="tag">Emergency escape</div>
+        <h3>A way out, for when you really need one.</h3>
+        <p>One escape a month is free, three on Pro, and they refill on the 1st. On Windows, hold Esc for five seconds on the lock screen. On the phone, tap Emergency escape.</p>
+        <div class="vis" aria-hidden="true">
+          <div class="pips"><div class="pip on">ESC</div><div class="pip">PRO</div><div class="pip">PRO</div></div>
+          <div class="pips-cap">One a month free. Three on Pro.</div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="world" aria-label="Just the real world">
+  <div class="world-in">
+    <img src="../../img/photos/forest-1024.jpg" alt="" loading="lazy" decoding="async">
+    <div class="wrap world-copy rise">
+      <h2>No apps.<br>No exceptions.<br>Just the real world.</h2>
+      <p>When the candle is lit there is nothing left on the screen to argue with. So you go and do the thing you meant to do.</p>
+    </div>
+  </div>
+</section>
+
+<section id="devices">
+  <div class="wrap dev-grid">
+    <div class="rise">
+      <div class="tag">Windows and Android</div>
+      <h2 class="h2">One app, every screen.</h2>
+      <p class="lede">The same candle on your computer and your phone. On Pro, a schedule set on one runs on both.</p>
+      <div class="plats">
+        <a class="plat" href="/download/The.All.Block.v8.4.6.exe"><svg aria-hidden="true"><use href="#i-pc"/></svg><div><b>Windows</b><small>Download · 10 and 11</small></div></a>
+        <a class="plat" href="/download/The.All.Block.Companion.v1.5.8.apk"><svg aria-hidden="true"><use href="#i-ph"/></svg><div><b>Android</b><small>Download · 8.0 and up</small></div></a>
+        <div class="plat off"><svg aria-hidden="true"><use href="#i-pc"/></svg><div><b>macOS</b><small>Soon</small></div></div>
+        <div class="plat off"><svg aria-hidden="true"><use href="#i-ph"/></svg><div><b>iOS</b><small>Soon</small></div></div>
+      </div>
+    </div>
+    <div class="rig rise" aria-hidden="true">
+      <div class="laptop">
+        <svg viewBox="0 0 130 500"><use href="#candle"/></svg>
+        <div class="dev-read">Device blocked<b class="mono">42:10</b>Back at 22:00</div>
+      </div>
+      <div class="phone">
+        <svg viewBox="0 0 130 500"><use href="#candle"/></svg>
+        <div class="dev-read">Burning<b class="mono">42:10</b>Back at 22:00</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="pricing" style="background:var(--void)">
+  <div class="wrap">
+    <div class="price-head rise">
+      <div>
+        <div class="tag">Pricing</div>
+        <h2 class="h2">Free to start.<br>Free for good.</h2>
+        <p class="lede">Manual sessions up to three hours are free for good, with no card to enter.</p>
+      </div>
+      <div class="bill" role="group" aria-label="How to pay">
+        <button type="button" data-bill="year" aria-pressed="true">Yearly<em>save 64%</em></button>
+        <button type="button" data-bill="month" aria-pressed="false">Monthly</button>
+        <button type="button" data-bill="once" aria-pressed="false">One-off</button>
+      </div>
+    </div>
+    <div class="plans rise" id="plans" data-bill="year">
+      <div class="plan" data-show="year month">
+        <div class="plan-name">Free</div>
+        <div class="plan-price">£0</div>
+        <div class="plan-per">for good</div>
+        <ul>
+          <li><svg aria-hidden="true"><use href="#ok"/></svg>Sessions from 10 seconds to 3 hours</li>
+          <li><svg aria-hidden="true"><use href="#ok"/></svg>One scheduled block, up to 3 hours</li>
+          <li><svg aria-hidden="true"><use href="#ok"/></svg>One emergency escape a month</li>
+          <li><svg aria-hidden="true"><use href="#ok"/></svg>No account, no card</li>
+        </ul>
+        <a class="btn btn-ghost" href="#download">Download</a>
+        <div class="plan-foot"></div>
+      </div>
+      <div class="plan hot" data-show="year month">
+        <div class="plan-name">Pro <span>Recommended</span></div>
+        <div class="plan-price"><span data-show="year">£2.99</span><s data-show="year">£7.99</s><span data-show="month">£7.99</span></div>
+        <div class="plan-per"><span data-show="year">a month, billed £34.99 a year</span><span data-show="month">a month, billed monthly</span></div>
+        <ul>
+          <li><svg aria-hidden="true"><use href="#ok"/></svg>Sessions and schedules up to 24 hours</li>
+          <li><svg aria-hidden="true"><use href="#ok"/></svg>Unlimited scheduled blocks</li>
+          <li><svg aria-hidden="true"><use href="#ok"/></svg>Accountability Lock</li>
+          <li><svg aria-hidden="true"><use href="#ok"/></svg>Three emergency escapes a month</li>
+          <li><svg aria-hidden="true"><use href="#ok"/></svg>Schedules sync with Android</li>
+        </ul>
+        <a class="btn btn-gold" href="#download">Get Pro in the app</a>
+        <div class="plan-foot">Cancel any time</div>
+      </div>
+      <div class="plan" data-show="year month once">
+        <div class="plan-name">Lifetime <span>Launch price</span></div>
+        <div class="plan-price">£49.99<s>£79.99</s></div>
+        <div class="plan-per">once, at the launch price</div>
+        <ul>
+          <li><svg aria-hidden="true"><use href="#ok"/></svg>Everything in Pro, for good</li>
+          <li><svg aria-hidden="true"><use href="#ok"/></svg>One payment, nothing renews</li>
+          <li><svg aria-hidden="true"><use href="#ok"/></svg>Every future update</li>
+        </ul>
+        <a class="btn btn-ghost" href="#download">Get Lifetime in the app</a>
+        <div class="plan-foot">Pay once, nothing renews</div>
+      </div>
+      <div class="plan" data-show="once">
+        <div class="plan-name">Week</div>
+        <div class="plan-price">£1.99</div>
+        <div class="plan-per">once, for seven days</div>
+        <ul>
+          <li><svg aria-hidden="true"><use href="#ok"/></svg>Everything in Pro for a week</li>
+          <li><svg aria-hidden="true"><use href="#ok"/></svg>Ends on its own, nothing renews</li>
+          <li><svg aria-hidden="true"><use href="#ok"/></svg>No subscription to cancel</li>
+        </ul>
+        <a class="btn btn-ghost" href="#download">Get a week in the app</a>
+        <div class="plan-foot"></div>
+      </div>
+      <div class="plan" data-show="once">
+        <div class="plan-name">Escape</div>
+        <div class="plan-price">£0.99</div>
+        <div class="plan-per">once, for when you need out</div>
+        <ul>
+          <li><svg aria-hidden="true"><use href="#ok"/></svg>One more emergency escape</li>
+          <li><svg aria-hidden="true"><use href="#ok"/></svg>Ends a block early</li>
+          <li><svg aria-hidden="true"><use href="#ok"/></svg>Never expires</li>
+        </ul>
+        <a class="btn btn-ghost" href="#download">Get an escape in the app</a>
+        <div class="plan-foot"></div>
+      </div>
+    </div>
+    <p class="price-note">Changed your mind? Every purchase has a <a href="/refunds.html">14-day refund</a>, no questions asked.</p>
+  </div>
+</section>
+
+<section class="faq" id="faq">
+  <div class="wrap faq-grid">
+    <div class="rise">
+      <div class="tag">Help</div>
+      <h2 class="h2">Questions</h2>
+      <p class="faq-more">Still stuck? <a href="mailto:MrAuzeo@protonmail.com?subject=All%20Block%20help">Email me</a>. I love feedback, and I answer personally.</p>
+    </div>
+    <div class="rise">
+      <details open><summary>What if I really need to get out?</summary><p>Use an emergency escape. You get one a month free, three on Pro, and they refill on the 1st. On Windows, hold Esc for five seconds on the lock screen. On the phone, tap Emergency escape. An extra escape costs £0.99.</p></details>
+      <details><summary>What still works on my phone?</summary><p>Calls, the dialer and contacts. Everything else waits for the timer.</p></details>
+      <details><summary>Does restarting end a block?</summary><p>No. It comes back locked, with the time that was left.</p></details>
+      <details><summary>What if Windows locks during a block?</summary><p>Sign in as usual. The block carries on, and the clock keeps its time.</p></details>
+      <details><summary>Windows warned me about the download.</summary><p>The All Block is not code-signed yet, so SmartScreen warns about it. Click <b>More info</b>, then <b>Run anyway</b>, then <b>Yes</b> on the admin prompt.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="end">
+  <div class="wrap">
+    <svg class="mark rise" viewBox="40 30 50 92" aria-hidden="true"><path class="c-flame" d="M65 114 C 44 97, 46 72, 65 44 C 84 72, 86 97, 65 114 Z"/></svg>
+    <h2 class="rise">Light up your distractions.</h2>
+    <div class="hero-cta rise">
+      <a class="btn btn-gold" href="/download/The.All.Block.v8.4.6.exe"><svg aria-hidden="true"><use href="#i-dl"/></svg>Download for free</a>
+      <a class="btn btn-ghost" href="/download/The.All.Block.Companion.v1.5.8.apk"><svg aria-hidden="true"><use href="#i-dl"/></svg>Android</a>
+    </div>
+    <div class="hero-meta rise"><span>Windows 10 &amp; 11 · v8.4.6 · single .exe</span></div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div class="foot-brand">
+        <b>The All Block</b>
+        <p>"The All Block" because it's total.</p>
+        <small>Made by one person.</small>
+      </div>
+      <div><h5>Product</h5><a href="#how">How it works</a><a href="#devices">Devices</a><a href="#pricing">Pricing</a></div>
+      <div><h5>Help</h5><a href="#faq">FAQ</a><a href="mailto:MrAuzeo@protonmail.com">Contact</a></div>
+      <div><h5>Legal</h5><a href="/terms.html">Terms of service</a><a href="/privacy.html">Privacy policy</a><a href="/refunds.html">Refund policy</a><a href="/delete-account.html">Delete account</a></div>
+    </div>
+    <div class="foot-base"><span>© 2026 Auzeo · All rights reserved</span><a href="#top">Back to top</a></div>
+  </div>
+</footer>
+
+<div class="lockscr" id="lock" role="dialog" aria-label="A demo of the block screen" aria-hidden="true">
+  <svg viewBox="0 0 130 500" aria-hidden="true"><use href="#candle"/></svg>
+  <div class="lock-read">Device blocked<span class="clock" id="lockClock">10:00</span>Back at <span class="at" id="lockAt">--:--</span></div>
+  <p class="lock-note">This is your screen during a block. A real one has no way out. Click or press any key to leave.</p>
+</div>
+
+<script>
+(function(){
+  var $=function(id){return document.getElementById(id)},root=document.documentElement;
+  var pad=function(n){return (n<10?"0":"")+n};
+  var hhmm=function(d){return pad(d.getHours())+":"+pad(d.getMinutes())};
+
+  // theme
+  $("theme").addEventListener("click",function(){
+    var t=root.getAttribute("data-theme")==="light"?"dark":"light";
+    root.setAttribute("data-theme",t);
+    try{localStorage.setItem("theme",t)}catch(e){}
+  });
+
+  // what it costs you
+  var hrs=$("hrs");
+  function cost(){
+    var h=parseFloat(hrs.value),lab=(h%1?h.toFixed(1):h)+"h";
+    $("cL").textContent=lab;
+    $("cH").textContent=(h%1?h.toFixed(1):h)+(h===1?" hour":" hours");
+    $("cD").textContent=Math.round(h/24*365)+" days";
+    $("cY").textContent=(h/24*50).toFixed(1)+" years";
+    $("cP").textContent=Math.round(h/16*100)+"%";
+    hrs.style.setProperty("--p",((h-1)/11*100)+"%");
+  }
+  hrs.addEventListener("input",cost);cost();
+
+  // the timer card's "back at" is half an hour from now
+  $("backAt").textContent=hhmm(new Date(Date.now()+30*60000));
+
+  // pricing
+  var plans=$("plans");
+  document.querySelectorAll(".bill button").forEach(function(b){
+    b.addEventListener("click",function(){
+      plans.setAttribute("data-bill",b.getAttribute("data-bill"));
+      document.querySelectorAll(".bill button").forEach(function(o){o.setAttribute("aria-pressed",o===b?"true":"false")});
+    });
+  });
+
+  // hold to start: two seconds, then the block screen
+  var hold=$("hold"),lock=$("lock"),tHold=0,tTick=0,ends=0,opened=0;
+  function down(){ if(tHold)return; hold.classList.add("on"); tHold=setTimeout(function(){tHold=0;hold.classList.remove("on");openLock()},2000) }
+  function up(){ if(!tHold)return; clearTimeout(tHold);tHold=0;hold.classList.remove("on") }
+  hold.addEventListener("pointerdown",function(e){try{hold.setPointerCapture(e.pointerId)}catch(_){ }down()});
+  ["pointerup","pointercancel","lostpointercapture"].forEach(function(n){hold.addEventListener(n,up)});
+  hold.addEventListener("keydown",function(e){if((e.key===" "||e.key==="Enter")&&!e.repeat){e.preventDefault();down()}});
+  hold.addEventListener("keyup",up);hold.addEventListener("blur",up);
+  hold.addEventListener("contextmenu",function(e){e.preventDefault()});
+
+  function tick(){
+    var left=Math.max(0,Math.round((ends-Date.now())/1000));
+    $("lockClock").textContent=pad(Math.floor(left/60))+":"+pad(left%60);
+    if(!left)closeLock();
+  }
+  function openLock(){
+    ends=Date.now()+600000;opened=Date.now();
+    $("lockAt").textContent=hhmm(new Date(ends));tick();
+    lock.classList.add("show");lock.setAttribute("aria-hidden","false");
+    requestAnimationFrame(function(){requestAnimationFrame(function(){lock.classList.add("in")})});
+    document.body.style.overflow="hidden";
+    tTick=setInterval(tick,1000);
+  }
+  function closeLock(){
+    if(!lock.classList.contains("show")||Date.now()-opened<700)return;
+    clearInterval(tTick);lock.classList.remove("in");lock.setAttribute("aria-hidden","true");
+    document.body.style.overflow="";
+    setTimeout(function(){lock.classList.remove("show")},600);
+    hold.focus({preventScroll:true});
+  }
+  lock.addEventListener("click",closeLock);
+  document.addEventListener("keydown",function(e){if(!e.repeat)closeLock()});
+
+  // reveal on scroll
+  var rise=document.querySelectorAll(".rise");
+  if("IntersectionObserver" in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("seen");io.unobserve(e.target)}})},{rootMargin:"0px 0px -8% 0px"});
+    rise.forEach(function(el){io.observe(el)});
+  }else rise.forEach(function(el){el.classList.add("seen")});
+})();
+</script>
+
+</body>
+</html>
