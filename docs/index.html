@@ -147,6 +147,10 @@ h2.big{font-size:clamp(30px,4.2vw,48px)}
   margin-right:6px;transition:transform .25s}
 .nav-badge:hover{transform:translateY(-1px);background:#000}
 .nav-badge svg{width:36px;height:36px;display:block}
+/* Light mode: the nav badge in warm ink with an amber glow and a faint gold ring (picked 2026-11-18). */
+:root:not([data-theme="dark"]) .nav-pill a.nav-badge{background:radial-gradient(circle at 50% 62%,#4a3418 0,#2a2117 45%,#1a1b19 75%);box-shadow:0 0 0 3px rgba(224,149,42,.14)}
+:root:not([data-theme="dark"]) .nav-badge svg rect{display:none}
+:root:not([data-theme="dark"]) .nav-badge svg path{stroke:#ffc867}
 /* .nav-pill a would otherwise out-specify these two on colour */
 .nav-pill a.nav-cta{display:inline-flex;align-items:center;
   background:var(--onyx);color:var(--onyx-txt);
