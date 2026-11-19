@@ -1418,12 +1418,26 @@ svg.nc{overflow:visible}
 @media(max-width:800px){.pl-hero .pl-cw{margin:0 auto 22px}.fx-n{width:190px;font-size:11.5px}}
 
 /* One app, every screen: the desktop window with the phone over its corner */
-.pl-combo{position:relative;padding:0 9% 12% 0}
 .pl-lockph{display:block;width:100%;max-width:460px;height:auto;margin:0 auto;border-radius:22px;box-shadow:0 0 0 1px var(--line),0 30px 60px -30px rgba(40,34,20,.45)}
 :root[data-theme="dark"] .pl-lockph{box-shadow:0 0 0 1px var(--line),0 30px 60px -30px rgba(0,0,0,.8)}
-.pl-combo .pl-win{width:100%;border-radius:12px;box-shadow:0 0 0 1px var(--line),0 36px 70px -30px rgba(40,34,20,.45)}
-.pl-combo .pl-ph{position:absolute;right:0;bottom:0;height:78%;width:auto;border-radius:8.8%/4.1%;filter:drop-shadow(0 26px 36px rgba(40,34,20,.32))}
-:root[data-theme="dark"] .pl-combo .pl-win{box-shadow:0 0 0 1px var(--line),0 36px 70px -30px rgba(0,0,0,.8)}
+/* A soft lit card, a few shades off the page, with a warm glow behind the devices */
+.pl-combo{border-radius:28px;padding:7% 6% 6%;background:radial-gradient(60% 55% at 55% 45%,rgba(255,170,80,.16),transparent 70%),linear-gradient(180deg,#fff,#ece8e1);box-shadow:0 0 0 1px rgba(20,22,28,.07)}
+:root[data-theme="dark"] .pl-combo{background:radial-gradient(60% 55% at 55% 45%,rgba(255,160,70,.13),transparent 70%),linear-gradient(180deg,#252f4d,#161c32);box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 0 0 1px rgba(160,175,215,.12)}
+.pl-stage{position:relative;padding:0 0 9% 9%}
+.v2 #devices .v-wrap{max-width:1240px}
+.v2 #devices .v-split{grid-template-columns:1.6fr 1fr}
+@media(max-width:860px){.v2 #devices .v-split{grid-template-columns:1fr}}
+.pl-win{border-radius:12px;overflow:hidden;box-shadow:0 0 0 1px rgba(20,22,28,.08),0 36px 70px -30px rgba(40,34,20,.4)}
+:root[data-theme="dark"] .pl-win{box-shadow:0 0 0 1px rgba(255,255,255,.14),0 36px 70px -30px rgba(0,0,0,.7)}
+.pl-win img,.pl-scr img{display:block;width:100%;height:auto}
+.pl-pw{position:absolute;left:0;bottom:0;width:24%}
+.pl-phone{position:relative;padding:3.2%;border-radius:15%/7%;background:linear-gradient(145deg,#4a5064,#262b3b 40%,#4a5064);box-shadow:inset 0 0 0 1px rgba(255,255,255,.18),0 0 0 1px rgba(0,0,0,.35),0 30px 60px -24px rgba(0,0,0,.7)}
+.pl-scr{position:relative;container-type:inline-size;border-radius:12.6%/5.9%;overflow:hidden;background:#f3f1ed}
+:root[data-theme="dark"] .pl-scr{background:#090e1c}
+.pl-sb{position:relative;display:flex;justify-content:space-between;align-items:center;height:11cqw;padding:1.5cqw 9cqw 0 10cqw;font:600 4.4cqw/1 Montserrat,sans-serif;color:#14161c}
+:root[data-theme="dark"] .pl-sb{color:#e8e9ee}
+.pl-sb i{font-style:normal;display:flex;gap:1.4cqw;align-items:center}
+.pl-sb .cam{position:absolute;left:50%;top:55%;width:4cqw;height:4cqw;border-radius:50%;background:#000;transform:translate(-50%,-50%)}
 
 /* Pricing colour (2026-11-18): Free neutral, Pro green, Lifetime gold */
 .v2 #pricing{--pro:#3d5e3a;--pro-ink:#fff;--pro-soft:#e3ebdf;--pro-line:#3d5e3a;--gold:#a8701c;--gold-soft:#f5ead6;--gold-line:#d9b77a}
@@ -1670,7 +1684,7 @@ svg.nc{overflow:visible}
 <section id="devices" class="v-band v-sand"><div class="v-wrap v-split v-flip">
  <div><p class="v-eyebrow">Windows and Android</p><h2>One app,<br>every screen.</h2>
  <p class="v-lede">The same candle on your computer and your phone. On Pro, a schedule set on one runs on both.</p></div>
- <div class="pl-combo"><img class="pl-win v-sw-l" src="img/v3/d_timer_light.webp" alt="The All Block on Windows" loading="lazy"><img class="pl-win v-sw-d" src="img/v3/d_timer_dark.webp" alt="The All Block on Windows" loading="lazy"><img class="pl-ph v-sw-l" src="img/v3/p_timer_light.webp" alt="The All Block on Android" loading="lazy"><img class="pl-ph v-sw-d" src="img/v3/p_timer_dark.webp" alt="The All Block on Android" loading="lazy"></div></div></section>
+ <div class="pl-combo"><div class="pl-stage"><div class="pl-win"><img class="v-sw-l" src="img/v3/d_timer_light.webp" alt="The All Block on Windows" loading="lazy"><img class="v-sw-d" src="img/v3/d_timer_dark.webp" alt="The All Block on Windows" loading="lazy"></div><div class="pl-pw"><div class="pl-phone"><div class="pl-scr"><div class="pl-sb" aria-hidden="true"><i>9:30</i><i class="cam"></i><i><svg width="1em" height="1em" viewBox="0 0 24 24" fill="currentColor"><path d="M12 20 1 8a16 16 0 0 1 22 0z"/></svg><svg width="1em" height="1em" viewBox="0 0 24 24" fill="currentColor"><path d="M22 2v20H2z"/></svg><svg width=".6em" height="1em" viewBox="0 0 14 24" fill="currentColor"><rect x="1" y="3" width="12" height="20" rx="2"/><rect x="4" y="0" width="6" height="3"/></svg></i></div><img class="v-sw-l" src="img/v3/p_timer_light.webp" alt="The All Block on Android" loading="lazy"><img class="v-sw-d" src="img/v3/p_timer_dark.webp" alt="The All Block on Android" loading="lazy"></div></div></div></div></div></div></section>
 <section id="how" class="v-band"><div class="v-wrap v-split">
  <div><p class="v-eyebrow">Why it's called The All Block</p><h2>Not a nudge.<br>A complete block.</h2>
  <ul class="v-ticks"><li>The whole device locks, not just a few apps. Calls still come through.</li><li>Restarting doesn't end it.</li><li>Closing the app doesn't end it.</li><li>A friend can hold the password (Pro).</li></ul>
