@@ -10,7 +10,7 @@ try{
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The All Block: End Your Screen Time | Focus Blocker for PC and Phone</title>
-<meta name="description" content="End your screen time. The All Block is a focus blocker for your computer and phone. It locks the whole device until your session ends, not just a list of apps and sites. Free to start, no card needed.">
+<meta name="description" content="End your screen time. The All Block is a focus blocker for your computer and phone. It locks the whole device until your session ends, not just a list of apps and sites.">
 <meta name="robots" content="noindex, nofollow">
 <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "The All Block", "url": "https://theallblock.com/", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Windows 10, Windows 11, Android 8.0+", "description": "A focus blocker for your computer and phone that locks the whole device until the session ends, not just a list of apps and sites.", "publisher": {"@type": "Organization", "name": "Auzeo"}, "offers": [{"@type": "Offer", "name": "Free", "price": "0", "priceCurrency": "GBP"}, {"@type": "Offer", "name": "Week pass", "price": "1.99", "priceCurrency": "GBP"}, {"@type": "Offer", "name": "Pro monthly", "price": "7.99", "priceCurrency": "GBP"}, {"@type": "Offer", "name": "Pro yearly", "price": "34.99", "priceCurrency": "GBP"}, {"@type": "Offer", "name": "Lifetime", "price": "49.99", "priceCurrency": "GBP"}]}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What if I really need to get out?", "acceptedAnswer": {"@type": "Answer", "text": "Use an emergency escape. You get one a month free, three on Pro, and they refill on the 1st. On Windows, hold Esc for five seconds on the lock screen. On the phone, tap Emergency escape. An extra escape costs £0.99."}}, {"@type": "Question", "name": "What still works on my phone?", "acceptedAnswer": {"@type": "Answer", "text": "Calls, the dialer and contacts. Everything else waits for the timer."}}, {"@type": "Question", "name": "Does restarting end a block?", "acceptedAnswer": {"@type": "Answer", "text": "No. It comes back locked, with the time that was left."}}, {"@type": "Question", "name": "What if Windows locks during a block?", "acceptedAnswer": {"@type": "Answer", "text": "Sign in as usual. The block carries on, and the clock keeps its time."}}, {"@type": "Question", "name": "Windows warned me about the download.", "acceptedAnswer": {"@type": "Answer", "text": "The All Block is not code-signed yet, so SmartScreen warns about it. Click More info, then Run anyway, then Yes on the admin prompt."}}]}]</script>
 <link rel="icon" href="/candle.ico?v=4" sizes="any">
@@ -24,7 +24,6 @@ try{
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,400..900&family=Montserrat:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&family=Caveat:wght@500;600;700&display=swap"></noscript>
 <style>
 /* ═══════════════════════════════════════════════════════════════════
-   BETA PREVIEW — noindex, not linked from the live site.
    Photography: generated for this project, no licence or credit obligations.
    ═══════════════════════════════════════════════════════════════════ */
 :root{
@@ -134,6 +133,10 @@ h2.big{font-size:clamp(30px,4.2vw,48px)}
   margin-right:6px;transition:transform .25s}
 .nav-badge:hover{transform:translateY(-1px);background:#000}
 .nav-badge svg{width:36px;height:36px;display:block}
+/* Light mode: the nav badge in warm ink with an amber glow and a faint gold ring (picked 2026-11-18). */
+:root:not([data-theme="dark"]) .nav-pill a.nav-badge{background:radial-gradient(circle at 50% 62%,#4a3418 0,#2a2117 45%,#1a1b19 75%);box-shadow:0 0 0 3px rgba(224,149,42,.14)}
+:root:not([data-theme="dark"]) .nav-badge svg rect{display:none}
+:root:not([data-theme="dark"]) .nav-badge svg path{stroke:#ffc867}
 /* .nav-pill a would otherwise out-specify these two on colour */
 .nav-pill a.nav-cta{display:inline-flex;align-items:center;
   background:var(--onyx);color:var(--onyx-txt);
@@ -1405,12 +1408,12 @@ svg.nc{overflow:visible}
 .pl-lockph{display:block;width:100%;max-width:460px;height:auto;margin:0 auto;border-radius:22px;box-shadow:0 0 0 1px var(--line),0 30px 60px -30px rgba(40,34,20,.45)}
 :root[data-theme="dark"] .pl-lockph{box-shadow:0 0 0 1px var(--line),0 30px 60px -30px rgba(0,0,0,.8)}
 .pl-combo .pl-win{width:100%;border-radius:12px;box-shadow:0 0 0 1px var(--line),0 36px 70px -30px rgba(40,34,20,.45)}
-.pl-combo .pl-ph{position:absolute;right:0;bottom:0;height:78%;width:auto;filter:drop-shadow(0 26px 36px rgba(40,34,20,.32))}
+.pl-combo .pl-ph{position:absolute;right:0;bottom:0;height:78%;width:auto;border-radius:8.8%/4.1%;filter:drop-shadow(0 26px 36px rgba(40,34,20,.32))}
 :root[data-theme="dark"] .pl-combo .pl-win{box-shadow:0 0 0 1px var(--line),0 36px 70px -30px rgba(0,0,0,.8)}
 
-/* Pricing colour (2026-11-17): Free neutral, Pro green for "go" and trust, Lifetime gold for keeps */
-.v2 #pricing{--pro:#a94e1c;--pro-ink:#fff;--pro-soft:#f5e6dc;--pro-line:#a94e1c;--gold:#a8701c;--gold-soft:#f5ead6;--gold-line:#d9b77a}
-:root[data-theme="dark"] .v2 #pricing{--pro:#e08a52;--pro-ink:#1a0f08;--pro-soft:#2a1d14;--pro-line:#e08a52;--gold:#ffc867;--gold-soft:#231f16;--gold-line:#6b5530}
+/* Pricing colour (2026-11-18): Free neutral, Pro green, Lifetime gold */
+.v2 #pricing{--pro:#3d5e3a;--pro-ink:#fff;--pro-soft:#e3ebdf;--pro-line:#3d5e3a;--gold:#a8701c;--gold-soft:#f5ead6;--gold-line:#d9b77a}
+:root[data-theme="dark"] .v2 #pricing{--pro:#8fd0a2;--pro-ink:#0b1a10;--pro-soft:#15241f;--pro-line:#8fd0a2;--gold:#ffc867;--gold-soft:#231f16;--gold-line:#6b5530}
 .v2 #pricing .v-plan.v-pick{border:2px solid var(--pro-line);background:linear-gradient(180deg,var(--pro-soft),var(--card) 62%);box-shadow:0 30px 60px -36px color-mix(in srgb,var(--pro) 70%,transparent)}
 .v2 #pricing .v-pick .v-price{color:var(--pro)}
 .v2 #pricing .v-cxl{margin:12px 0 0;text-align:center;font-size:13px;color:var(--ash)}
@@ -1444,87 +1447,37 @@ svg.nc{overflow:visible}
 .v2 .pl-cost .pl-cost-f{margin:22px 0 0;font-size:15px;color:var(--ash)}
 @media(max-width:520px){.pl-cost{padding:24px 20px}.pl-cost-g{grid-template-columns:1fr}.pl-cost-g div{display:flex;align-items:baseline;justify-content:space-between}}
 </style>
-<style id="nx">
-/* Ported from the /beta/new/ redesign (2026-11-18): the hero candle with its
-   hold button and demo block, the drawn devices, and the closing flame. */
-:root{--nx-wax:var(--ink);--nx-acc:var(--green-txt);--nx-acc-ink:#fff;--nx-glow:224,149,42;--nx-flame:#e0952a}
-:root[data-theme="dark"]{--nx-wax:#eef0f4;--nx-acc:#ffc867;--nx-acc-ink:#1a1304;--nx-glow:255,170,80;--nx-flame:#ffc867}
-.nxc-wax{fill:none;stroke:var(--nx-wax);stroke-width:5}
-.nxc-level{stroke:var(--nx-acc);stroke-width:3;stroke-dasharray:6 5;stroke-linecap:round}
-.nxc-flame{fill:rgba(var(--nx-glow),.16);stroke:var(--nx-flame);stroke-width:4;stroke-linejoin:round;transform-box:fill-box;transform-origin:50% 100%;animation:nx-flick 3.2s ease-in-out infinite}
-.nxc-halo{fill:rgba(var(--nx-glow),.22);filter:blur(22px)}
-@keyframes nx-flick{0%,100%{transform:scale(1,1) skewX(0)}12%{transform:scale(.97,1.04) skewX(-1.5deg)}24%{transform:scale(1.02,.97) skewX(1deg)}37%{transform:scale(.98,1.05) skewX(2deg)}49%{transform:scale(1.01,.98) skewX(-.5deg)}63%{transform:scale(.96,1.06) skewX(-2deg)}78%{transform:scale(1.02,.98) skewX(1.2deg)}}
-@media(prefers-reduced-motion:reduce){.nxc-flame{animation:none}}
-
-/* hero: the candle, and under it the same hold gesture as the app */
-.nx-stage{flex:none;display:flex;flex-direction:column;align-items:center;margin:0 clamp(0px,3vw,48px)}
-.nx-stage .pl-cw{margin:0}
-.nx-stage .pl-fx>*{top:16%}
-.nx-candle{display:block;height:min(52vh,470px);width:auto;overflow:visible}
-.nx-hold{position:relative;overflow:hidden;margin-top:22px;height:56px;padding:0 30px;border-radius:999px;border:1px solid var(--nx-acc);background:none;
-  color:var(--nx-acc);font:700 15.5px var(--display);display:inline-flex;align-items:center;cursor:pointer;user-select:none;-webkit-user-select:none;touch-action:none;
-  -webkit-tap-highlight-color:transparent;transition:transform .16s cubic-bezier(.23,1,.32,1)}
-.nx-hold:active{transform:scale(.97)}
-.nx-hold .fill,.nx-hold .over{position:absolute;inset:0;clip-path:inset(0 100% 0 0);transition:clip-path .25s cubic-bezier(.23,1,.32,1)}
-.nx-hold .fill{background:var(--nx-acc)}
-.nx-hold .over{display:flex;align-items:center;justify-content:center;color:var(--nx-acc-ink)}
-.nx-hold.on .fill,.nx-hold.on .over{clip-path:inset(0 0 0 0);transition:clip-path 2s linear}
-.nx-hold span{position:relative}
-.nx-hint{margin:12px 0 0;font-size:13.5px;color:var(--faint);text-align:center}
-@media(max-width:800px){.nx-stage{margin:0 auto 26px}.nx-candle{height:210px}.nx-stage .pl-cw{margin:0}}
-
-/* devices: the candle drawn on a laptop and a phone */
-.v2 .nx-big{font-size:clamp(40px,6vw,92px);font-stretch:118%;letter-spacing:-.045em;line-height:.98}
-.nx-dev{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(30px,6vw,90px);align-items:center}
-.nx-plats{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:34px}
-.nx-plat{display:flex;align-items:center;gap:14px;padding:16px 18px;border-radius:var(--r);border:1px solid var(--line);background:var(--card);color:var(--ink);text-decoration:none;line-height:1.25;transition:border-color .2s ease,transform .16s cubic-bezier(.23,1,.32,1)}
-a.nx-plat:active{transform:scale(.98)}
-@media(hover:hover){a.nx-plat:hover{border-color:var(--nx-acc)}}
-.nx-plat .pi{width:24px;height:24px;flex:none;fill:currentColor}
-.nx-plat b{display:block;font:700 16px var(--display);letter-spacing:-.01em}
-.nx-plat small{display:block;color:var(--faint);font-size:13px;white-space:nowrap}
-.nx-plat.off{opacity:.55}
-.nx-rig{position:relative;height:clamp(300px,36vw,460px)}
-.nx-laptop,.nx-phone{--nx-wax:#eef0f4;--nx-flame:#ffc867;--nx-acc:#ffc867;--nx-glow:255,170,80;position:absolute;background:#05070f;border:1px solid #2e3854;display:flex;align-items:center;justify-content:center;overflow:hidden}
-.nx-laptop{left:0;top:4%;width:82%;aspect-ratio:16/10;border-radius:18px;box-shadow:0 40px 90px -40px rgba(0,0,0,.7);gap:9%}
-.nx-phone{right:0;bottom:0;width:27%;aspect-ratio:9/19;border-radius:26px;box-shadow:0 30px 80px -30px rgba(0,0,0,.7),0 0 0 6px var(--sand);flex-direction:column;gap:8%}
-.nx-laptop::after,.nx-phone::after{content:"";position:absolute;left:50%;top:38%;width:70%;aspect-ratio:1;transform:translate(-50%,-50%);background:radial-gradient(closest-side,rgba(255,170,80,.2),transparent 70%);pointer-events:none}
-.nx-laptop svg{height:68%;width:auto;overflow:visible;position:relative;z-index:1}
-.nx-phone svg{height:46%;width:auto;overflow:visible;position:relative;z-index:1}
-.nx-read{position:relative;z-index:1;font-family:var(--mono);color:#a9aebb;font-size:clamp(9px,.85vw,11px);letter-spacing:.14em;text-transform:uppercase;line-height:1.5}
-.nx-read b{display:block;color:#eef0f4;font-weight:500;font-size:clamp(24px,3.4vw,46px);letter-spacing:-.02em;margin:4px 0;font-variant-numeric:tabular-nums}
-.nx-phone .nx-read{text-align:center}.nx-phone .nx-read b{font-size:clamp(17px,2.2vw,28px)}
-@media(max-width:900px){.nx-dev{grid-template-columns:1fr}}
-@media(max-width:420px){.nx-plats{grid-template-columns:1fr}}
-
-/* closing: the flame alone, the line, two downloads */
-.nx-end{overflow:hidden;padding-bottom:clamp(90px,12vw,170px)!important}
-.nx-mark{display:block;width:86px;height:auto;margin:0 auto;overflow:visible}
-.v2 .nx-end h2{font-size:clamp(44px,8vw,120px);font-stretch:118%;letter-spacing:-.045em;line-height:.95;margin:26px auto 0;max-width:12ch}
-.nx-cta{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:38px}
-.nx-btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:56px;padding:0 28px;border-radius:999px;font:700 16px var(--display);text-decoration:none;white-space:nowrap;transition:transform .16s cubic-bezier(.23,1,.32,1),box-shadow .2s ease,border-color .2s ease}
-.nx-btn:active{transform:scale(.97)}
-.nx-dl{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.v2 .nx-btn-acc{background:var(--nx-acc);color:var(--nx-acc-ink);box-shadow:0 14px 44px -14px rgba(var(--nx-glow),.75)}
-.v2 .nx-btn-ghost{border:1px solid var(--line);color:var(--ink);background:var(--card)}
-@media(hover:hover){.nx-btn-ghost:hover{border-color:var(--nx-acc)}}
-.v2 .nx-meta{margin:26px 0 0;color:var(--faint);font-size:14.5px}
-
-/* the demo block screen */
-.nx-lock{--nx-wax:#eef0f4;--nx-flame:#ffc867;--nx-acc:#ffc867;--nx-glow:255,170,80;position:fixed;inset:0;z-index:1000;background:#05070f;color:#eef0f4;display:none;align-items:center;justify-content:center;gap:clamp(30px,8vw,120px);cursor:pointer;opacity:0;transition:opacity .6s ease}
-.nx-lock.show{display:flex}.nx-lock.in{opacity:1}
-.nx-lock::before{content:"";position:absolute;left:50%;top:44%;width:min(900px,120vw);aspect-ratio:1;transform:translate(-62%,-50%);background:radial-gradient(closest-side,rgba(255,170,80,.16),transparent 70%);pointer-events:none}
-.nx-lock>svg{height:min(62vh,520px);width:auto;overflow:visible;position:relative}
-.nx-lock-read{position:relative;font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#737a8c}
-.nx-lock-read .clock{display:block;font-size:clamp(64px,13vw,170px);font-weight:500;letter-spacing:-.04em;color:#eef0f4;line-height:1;margin:10px 0 14px;font-variant-numeric:tabular-nums}
-.nx-lock-read .at{color:#ffc867}
-.nx-lock-note{position:absolute;left:0;right:0;bottom:34px;margin:0;text-align:center;font-size:14px;color:#737a8c;padding:0 20px}
-@media(max-width:640px){.nx-lock{flex-direction:column;gap:24px}.nx-lock>svg{height:38vh}.nx-lock-read{text-align:center}}
+<style id="phonehero">/* phones: the hero fills exactly one screen. The candle is large, the downloads sit at
+   the bottom, and nothing of the next section shows until you scroll. */
+@media(max-width:800px){
+.nh.q-row.pl-hero{min-height:100vh;min-height:100svh;flex-direction:column;align-items:center;justify-content:space-between;gap:0;padding:84px 20px 26px}
+.pl-hero>.pl-cw{margin:auto}
+.pl-hero .pl-cw .pl-mark{height:clamp(220px,44svh,440px)}
+.pl-hero .ov.lf{display:flex;flex-direction:column;align-items:center;width:100%;margin-top:22px}
+.pl-hero .pl-demo{order:1;margin-top:6px}
+.pl-hero .pl-dl{order:2;margin-top:20px}
+#who{margin-top:max(160px,24vh)}}
+</style>
+<style id="mountains">
+/* Hero (2026-11-18): The All Block in gold above a smaller, condensed "Extinguish your screen time" */
+.nh.pl-hero .ov h1{font-size:clamp(30px,4vw,58px);font-weight:800;font-stretch:82%;font-variation-settings:"wdth" 82;letter-spacing:0;line-height:.98}
+.nh.pl-hero h1 .em.top{margin:0 0 12px}
+/* The white-mountains photo behind the hero, darkened, white type over it. */
+.nh.pl-hero{background:#0b1220 url(../img/photos/dawn-1536.jpg) center 42%/cover no-repeat;position:relative;isolation:isolate;
+ --ink:#fff;--faint:rgba(255,255,255,.66);--line:rgba(255,255,255,.24);--green-txt:#ffc867;--paper:#0f1626;color:#fff}
+.nh.pl-hero::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+ background:linear-gradient(180deg,rgba(6,10,20,.55),rgba(6,10,20,.38) 45%,rgba(6,10,20,.72)),radial-gradient(60vmax 50vmax at 30% 40%,rgba(6,10,20,.15),rgba(6,10,20,.45))}
+@media(max-width:800px){.nh.pl-hero{background-position:28% 40%}}
+/* Notifications over the photo: dark frosted glass instead of white cards. */
+.nh.pl-hero .fx-n,.nh.pl-hero .fx-t{background:rgba(14,18,30,.55);border-color:rgba(255,255,255,.16);color:#fff;
+ -webkit-backdrop-filter:blur(10px) saturate(1.2);backdrop-filter:blur(10px) saturate(1.2);box-shadow:0 18px 36px -20px rgba(0,0,0,.8)}
+.nh.pl-hero .fx-n b{color:rgba(255,255,255,.62)}
+.nh.pl-hero .fx-t{color:rgba(255,255,255,.82)}
+.nh.pl-hero .fx-o{color:#fff}
 </style>
 <style id="dl-paused">.dl-off{cursor:default!important;pointer-events:none;opacity:.6}</style></head>
 <body>
 
-<span class="beta-flag">Beta preview</span>
 
 <!-- ═══ NAV ═══ -->
 <nav class="nav">
@@ -1533,11 +1486,11 @@ a.nx-plat:active{transform:scale(.98)}
       <svg viewBox="0 5 512 512" aria-hidden="true"><defs><radialGradient id="nbG" gradientUnits="userSpaceOnUse" cx="256" cy="275" r="230"><stop offset="0" stop-color="#ffaa50" stop-opacity=".34"/><stop offset=".35" stop-color="#ff8732" stop-opacity=".12"/><stop offset=".75" stop-color="#ff7828" stop-opacity=".03"/><stop offset="1" stop-color="#ff7828" stop-opacity="0"/></radialGradient><radialGradient id="nbF" gradientUnits="userSpaceOnUse" cx="256" cy="322" r="215"><stop offset="0" stop-color="#fffbe8"/><stop offset=".3" stop-color="#ffd680" stop-opacity=".97"/><stop offset=".7" stop-color="#f68c34" stop-opacity=".7"/><stop offset="1" stop-color="#d24618" stop-opacity="0"/></radialGradient></defs><rect x="0" y="0" width="512" height="512" fill="#000"/><rect x="0" y="0" width="512" height="512" fill="url(#nbG)"/><path transform="translate(256 261) scale(2.7) translate(-256 -165)" d="M256 202c-24-19-22-46 0-74c22 28 24 55 0 74z" fill="none" stroke="#ffc867" stroke-width="11" stroke-linejoin="round"/></svg>
     </a>
     <a href="#top" class="here" data-spy="top">Home</a>
-    <a href="#who" data-spy="who devices">The app</a>
-    <a href="#how" data-spy="why how">How it works</a>
-    <a href="#lock" data-spy="lock">The Lock</a>
+    <a href="#devices" data-spy="who devices">Devices</a>
+    <a href="#how" data-spy="why how">The block</a>
+    <a href="#lock" data-spy="lock">Accountability</a>
     <a href="#pricing" data-spy="pricing">Pricing</a>
-    <a href="#faq" data-spy="faq">Help</a>
+    <a href="#faq" data-spy="faq">FAQ</a>
     <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode">
       <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
         <circle cx="12" cy="12" r="4.5"/><path d="M12 2.5V5M12 19v2.5M4.2 4.2L6 6M18 18l1.8 1.8M2.5 12H5M19 12h2.5M4.2 19.8L6 18M18 6l1.8-1.8"/>
@@ -1552,11 +1505,7 @@ a.nx-plat:active{transform:scale(.98)}
 
 <!-- ═══ HERO ═══ -->
 <!-- Hero: the tall candle above the clouds, notifications going quiet at the edge. -->
-<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
-<linearGradient id="nxG" gradientUnits="userSpaceOnUse" x1="0" y1="130" x2="0" y2="470"><stop offset="0" stop-color="#fff"/><stop offset=".5" stop-color="#fff"/><stop offset=".8" stop-color="#fff" stop-opacity=".3"/><stop offset=".97" stop-color="#fff" stop-opacity="0"/></linearGradient>
-<mask id="nxM" maskUnits="userSpaceOnUse" x="0" y="100" width="130" height="400"><rect x="0" y="100" width="130" height="400" fill="url(#nxG)"/></mask></defs>
-<symbol id="nx-candle" viewBox="0 0 130 500" overflow="visible"><ellipse class="nxc-halo" cx="65" cy="78" rx="56" ry="70"/><g mask="url(#nxM)"><rect class="nxc-wax" x="33" y="130" width="64" height="360" rx="16"/></g><line class="nxc-level" x1="18" y1="318" x2="112" y2="318"/><path class="nxc-flame" d="M65 114 C 44 97, 46 72, 65 44 C 84 72, 86 97, 65 114 Z"/></symbol></svg>
-<header class="nh tc q-row pl-hero" id="top"><div class="nx-stage"><div class="pl-cw"><svg class="nx-candle" viewBox="0 0 130 500" aria-hidden="true"><use href="#nx-candle"/></svg><div class="pl-fx" aria-hidden="true"><span class="pl-flare"></span></div></div><button class="nx-hold" id="nxHold" type="button"><i class="fill"></i><span>Hold to start</span><b class="over" aria-hidden="true">Hold to start</b></button><p class="nx-hint">Hold for two seconds to see a block.</p></div><div class="ov lf"><h1>End your screen time<span class="em">Once and for all.</span></h1><div class="pl-dl pl-dl8"><span class="ci off"><i><svg class="pi" viewBox="0 0 24 24" aria-hidden="true"><path d="M0 0h11.4v11.4H0zM12.6 0H24v11.4H12.6zM0 12.6h11.4V24H0zM12.6 12.6H24V24H12.6z"/></svg></i><b>Windows</b><small>Coming soon</small></span><span class="ci off"><i><svg class="pi" viewBox="0 0 24 24" aria-hidden="true"><path d="M18.4395 5.5586c-.675 1.1664-1.352 2.3318-2.0274 3.498-.0366-.0155-.0742-.0286-.1113-.043-1.8249-.6957-3.484-.8-4.42-.787-1.8551.0185-3.3544.4643-4.2597.8203-.084-.1494-1.7526-3.021-2.0215-3.4864a1.1451 1.1451 0 0 0-.1406-.1914c-.3312-.364-.9054-.4859-1.379-.203-.475.282-.7136.9361-.3886 1.5019 1.9466 3.3696-.0966-.2158 1.9473 3.3593.0172.031-.4946.2642-1.3926 1.0177C2.8987 12.176.452 14.772 0 18.9902h24c-.119-1.1108-.3686-2.099-.7461-3.0683-.7438-1.9118-1.8435-3.2928-2.7402-4.1836a12.1048 12.1048 0 0 0-2.1309-1.6875c.6594-1.122 1.312-2.2559 1.9649-3.3848.2077-.3615.1886-.7956-.0079-1.1191a1.1001 1.1001 0 0 0-.8515-.5332c-.5225-.0536-.9392.3128-1.0488.5449zm-.0391 8.461c.3944.5926.324 1.3306-.1563 1.6503-.4799.3197-1.188.0985-1.582-.4941-.3944-.5927-.324-1.3307.1563-1.6504.4727-.315 1.1812-.1086 1.582.4941zM7.207 13.5273c.4803.3197.5506 1.0577.1563 1.6504-.394.5926-1.1038.8138-1.584.4941-.48-.3197-.5503-1.0577-.1563-1.6504.4008-.6021 1.1087-.8106 1.584-.4941z"/></svg></i><b>Android</b><small>Coming soon</small></span><span class="ci off"><i><svg class="pi" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg></i><b>macOS</b><small>Coming soon</small></span><span class="ci off"><i><svg class="pi" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg></i><b>iOS</b><small>Coming soon</small></span></div><button class="pl-demo" type="button" onclick="hsGo(3)">Watch the demo <span aria-hidden="true">→</span></button></div></header>
+<header class="nh tc q-row pl-hero" id="top"><div class="pl-cw"><svg class="pl-mark pl-mk1" viewBox="176 92 160 350" aria-hidden="true"><defs><linearGradient id="plpl-mk1" gradientUnits="userSpaceOnUse" x1="0" y1="224" x2="0" y2="430"><stop offset="0" style="stop-color:var(--ink)"/><stop offset=".45" style="stop-color:var(--ink)"/><stop offset="1" style="stop-color:var(--ink);stop-opacity:0"/></linearGradient></defs><g fill="none" stroke-width="11" stroke-linejoin="round"><path d="M200 430V250q0-26 26-26h60q26 0 26 26v180" stroke="url(#plpl-mk1)" stroke-linecap="round"/><path class="pl-fl" d="M256 202c-26-22-24-56 0-92c24 36 26 70 0 92z"/></g></svg><div class="pl-fx" aria-hidden="true"><span class="pl-flare"></span></div></div><div class="ov lf"><h1><span class="em top">The All Block</span>Extinguish your<br>screen time</h1><div class="pl-dl pl-dl8"><span class="ci off"><i><svg class="pi" viewBox="0 0 24 24" aria-hidden="true"><path d="M0 0h11.4v11.4H0zM12.6 0H24v11.4H12.6zM0 12.6h11.4V24H0zM12.6 12.6H24V24H12.6z"/></svg></i><b>Windows</b><small>Coming soon</small></span><span class="ci off"><i><svg class="pi" viewBox="0 0 24 24" aria-hidden="true"><path d="M18.4395 5.5586c-.675 1.1664-1.352 2.3318-2.0274 3.498-.0366-.0155-.0742-.0286-.1113-.043-1.8249-.6957-3.484-.8-4.42-.787-1.8551.0185-3.3544.4643-4.2597.8203-.084-.1494-1.7526-3.021-2.0215-3.4864a1.1451 1.1451 0 0 0-.1406-.1914c-.3312-.364-.9054-.4859-1.379-.203-.475.282-.7136.9361-.3886 1.5019 1.9466 3.3696-.0966-.2158 1.9473 3.3593.0172.031-.4946.2642-1.3926 1.0177C2.8987 12.176.452 14.772 0 18.9902h24c-.119-1.1108-.3686-2.099-.7461-3.0683-.7438-1.9118-1.8435-3.2928-2.7402-4.1836a12.1048 12.1048 0 0 0-2.1309-1.6875c.6594-1.122 1.312-2.2559 1.9649-3.3848.2077-.3615.1886-.7956-.0079-1.1191a1.1001 1.1001 0 0 0-.8515-.5332c-.5225-.0536-.9392.3128-1.0488.5449zm-.0391 8.461c.3944.5926.324 1.3306-.1563 1.6503-.4799.3197-1.188.0985-1.582-.4941-.3944-.5927-.324-1.3307.1563-1.6504.4727-.315 1.1812-.1086 1.582.4941zM7.207 13.5273c.4803.3197.5506 1.0577.1563 1.6504-.394.5926-1.1038.8138-1.584.4941-.48-.3197-.5503-1.0577-.1563-1.6504.4008-.6021 1.1087-.8106 1.584-.4941z"/></svg></i><b>Android</b><small>Coming soon</small></span><span class="ci off"><i><svg class="pi" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg></i><b>macOS</b><small>Coming soon</small></span><span class="ci off"><i><svg class="pi" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg></i><b>iOS</b><small>Coming soon</small></span></div><button class="pl-demo" type="button" onclick="hsGo(3)">Watch the demo <span aria-hidden="true">→</span></button></div></header>
 <!-- The old hero stays, off-screen, because its drum and Start button run the "Light it" demo. -->
 <header class="hero" id="oldtop" aria-hidden="true">
   <div class="hero-bg" aria-hidden="true">
@@ -1694,7 +1643,7 @@ a.nx-plat:active{transform:scale(.98)}
   <div class="lkfs-hints"><span class="lk-kb">Hold <span class="k2" id="lkEsc"><i></i>Esc</span> to end this session early · 1 left this month<br><span class="f">Stuck on your lockscreen? Press Ctrl Alt Delete to get back in.</span></span><span class="lk-tc"><button type="button" class="lk-hold" id="lkHold"><i></i><span>Hold to end early</span></button><span class="f">Emergency escape · 1 left this month</span></span></div>
   <div class="lkfs-amb" id="lkAmb" aria-hidden="true"><canvas id="lkAmbCv"></canvas>
     <div class="lkfs-ambT" id="lkAmbT"><b id="lkAmbLeft"></b><span id="lkAmbBack"></span></div>
-    <div class="lkfs-ambH"><span class="kb">This is your screen during a block. Click or press any key to leave.</span><span class="tc">Tap to leave.</span></div></div>
+    <div class="lkfs-ambH"><span class="kb">This is all you see during a session.</span><span class="tc">Tap to leave.</span></div></div>
 </div>
 
 <!-- ═══ BELOW THE HERO ═══ -->
@@ -1704,11 +1653,10 @@ a.nx-plat:active{transform:scale(.98)}
  <p class="v-lede">Willpower runs out late at night. So decide in the daytime instead: set a sleep block once, and at ten your screen turns into a candle that burns until morning. No arguing with yourself, no "just one more".</p></div>
  <div><img class="v-shot" src="../img/v2/lock_aod.webp" alt="The candle dimmed for night"></div></div>
  <div class="v-wrap v-grid v-g4 v-mt"><div class="v-card"><span class="v-num">22:00 → 06:00</span><h3>Sleep</h3></div><div class="v-card"><span class="v-num">09:00 → 12:00</span><h3>Deep work</h3></div><div class="v-card"><span class="v-num">19:00 → 21:00</span><h3>Study</h3></div><div class="v-card"><span class="v-num">17:00 → 21:00</span><h3>Family</h3></div></div></section>
-<section id="devices" class="v-band v-sand"><div class="v-wrap nx-dev">
- <div><p class="v-eyebrow">Windows and Android</p><h2 class="nx-big">One app, every screen.</h2>
- <p class="v-lede">The same candle on your computer and your phone. On Pro, a schedule set on one runs on both.</p>
- <div class="nx-plats"><span class="nx-plat dl-off" aria-disabled="true"><svg class="pi" viewBox="0 0 24 24" aria-hidden="true"><path d="M0 0h11.4v11.4H0zM12.6 0H24v11.4H12.6zM0 12.6h11.4V24H0zM12.6 12.6H24V24H12.6z"/></svg><span><b>Windows</b><small>Coming soon</small></span></span><span class="nx-plat dl-off" aria-disabled="true"><svg class="pi" viewBox="0 0 24 24" aria-hidden="true"><path d="M18.4395 5.5586c-.675 1.1664-1.352 2.3318-2.0274 3.498-.0366-.0155-.0742-.0286-.1113-.043-1.8249-.6957-3.484-.8-4.42-.787-1.8551.0185-3.3544.4643-4.2597.8203-.084-.1494-1.7526-3.021-2.0215-3.4864a1.1451 1.1451 0 0 0-.1406-.1914c-.3312-.364-.9054-.4859-1.379-.203-.475.282-.7136.9361-.3886 1.5019 1.9466 3.3696-.0966-.2158 1.9473 3.3593.0172.031-.4946.2642-1.3926 1.0177C2.8987 12.176.452 14.772 0 18.9902h24c-.119-1.1108-.3686-2.099-.7461-3.0683-.7438-1.9118-1.8435-3.2928-2.7402-4.1836a12.1048 12.1048 0 0 0-2.1309-1.6875c.6594-1.122 1.312-2.2559 1.9649-3.3848.2077-.3615.1886-.7956-.0079-1.1191a1.1001 1.1001 0 0 0-.8515-.5332c-.5225-.0536-.9392.3128-1.0488.5449zm-.0391 8.461c.3944.5926.324 1.3306-.1563 1.6503-.4799.3197-1.188.0985-1.582-.4941-.3944-.5927-.324-1.3307.1563-1.6504.4727-.315 1.1812-.1086 1.582.4941zM7.207 13.5273c.4803.3197.5506 1.0577.1563 1.6504-.394.5926-1.1038.8138-1.584.4941-.48-.3197-.5503-1.0577-.1563-1.6504.4008-.6021 1.1087-.8106 1.584-.4941z"/></svg><span><b>Android</b><small>Coming soon</small></span></span><div class="nx-plat off"><svg class="pi" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg><span><b>macOS</b><small>Coming soon</small></span></div><div class="nx-plat off"><svg class="pi" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg><span><b>iOS</b><small>Coming soon</small></span></div></div></div>
- <div class="nx-rig" aria-hidden="true"><div class="nx-laptop"><svg viewBox="0 0 130 500"><use href="#nx-candle"/></svg><div class="nx-read">Device blocked<b>42:10</b>Back at 22:00</div></div><div class="nx-phone"><svg viewBox="0 0 130 500"><use href="#nx-candle"/></svg><div class="nx-read">Burning<b>42:10</b>Back at 22:00</div></div></div></div></section>
+<section id="devices" class="v-band v-sand"><div class="v-wrap v-split v-flip">
+ <div><p class="v-eyebrow">Windows and Android</p><h2>One app,<br>every screen.</h2>
+ <p class="v-lede">The same candle on your computer and your phone. On Pro, a schedule set on one runs on both.</p></div>
+ <div class="pl-combo"><img class="pl-win v-sw-l" src="../img/v3/d_timer_light.webp" alt="The All Block on Windows" loading="lazy"><img class="pl-win v-sw-d" src="../img/v3/d_timer_dark.webp" alt="The All Block on Windows" loading="lazy"><img class="pl-ph v-sw-l" src="../img/v3/p_timer_light.webp" alt="The All Block on Android" loading="lazy"><img class="pl-ph v-sw-d" src="../img/v3/p_timer_dark.webp" alt="The All Block on Android" loading="lazy"></div></div></section>
 <section id="how" class="v-band"><div class="v-wrap v-split">
  <div><p class="v-eyebrow">Why it's called The All Block</p><h2>Not a nudge.<br>A complete block.</h2>
  <ul class="v-ticks"><li>The whole device locks, not just a few apps. Calls still come through.</li><li>Restarting doesn't end it.</li><li>Closing the app doesn't end it.</li><li>A friend can hold the password (Pro).</li></ul>
@@ -1717,13 +1665,13 @@ a.nx-plat:active{transform:scale(.98)}
 <section id="lock" class="v-band v-sand"><div class="v-wrap v-split v-flip">
  <div><p class="v-eyebrow">Accountability Lock · Pro</p><h2>Keep getting past?</h2><p class="v-lede">Give the password to someone else. Without it, the schedule can't be changed or switched off.</p>
  <ul class="v-ticks"><li>Uninstall protection: on Android, the app can't be deleted to get out of a block. The iPhone app will do the same.</li><li>It comes back on every time the app restarts.</li><li>Your monthly emergency escape still works.</li></ul></div>
- <div><img class="pl-lockph v-sw-l" src="../img/v2/p_guard_light.webp" alt="The Accountability Lock on Android" loading="lazy"><img class="pl-lockph v-sw-d" src="../img/v2/p_guard_dark.webp" alt="Accountability Lock" loading="lazy"></div></div></section>
+ <div><img class="pl-lockph v-sw-l" src="../img/v3/p_guard_light.webp" alt="The Accountability Lock on Android" loading="lazy"><img class="pl-lockph v-sw-d" src="../img/v3/p_guard_dark.webp" alt="Accountability Lock" loading="lazy"></div></div></section>
 
 <section class="v-band v-sand" id="pricing"><div class="v-wrap v-center" data-bill="y">
-<p class="v-eyebrow">Pricing</p><h2>End your screen time, for real this time.</h2><p class="v-lede">Manual sessions up to three hours are free for good, with no card to enter.</p>
+<p class="v-eyebrow">Pricing</p><h2>End your screen time, for real this time.</h2><p class="v-lede">Manual sessions up to three hours are free for good.</p>
 <div class="v-toggle"><button data-b="m" aria-pressed="false">Monthly</button><button data-b="y" class="v-on" aria-pressed="true">Yearly <em class="v-save">save 64%</em></button><button data-b="o" aria-pressed="false">One-off</button></div>
 <div class="v-plans">
- <div class="v-plan"><h3>Free</h3><p class="v-price">£0</p><p class="v-per">for good</p><ul class="v-ticks"><li>Sessions from 10 seconds to 3 hours</li><li>One scheduled block, up to 3 hours</li><li>One emergency escape a month</li><li>No account, no card</li></ul><span class="v-btn v-btn--ghost dl-off" aria-disabled="true">Coming soon</span></div>
+ <div class="v-plan"><h3>Free</h3><p class="v-price">£0</p><p class="v-per">for good</p><ul class="v-ticks"><li>Sessions from 10 seconds to 3 hours</li><li>One scheduled block, up to 3 hours</li><li>One emergency escape a month</li></ul><span class="v-btn v-btn--ghost dl-off" aria-disabled="true">Coming soon</span></div>
  <div class="v-plan v-pick"><h3>Pro <span class="v-badge">Recommended</span></h3><p class="v-price"><span class="v-yr">£2.99</span><span class="v-mo">£7.99</span></p>
   <p class="v-per"><span class="v-yr">a month, billed £34.99 a year</span><span class="v-mo">a month, billed monthly</span></p><ul class="v-ticks"><li>Sessions and schedules up to 24 hours</li><li>Unlimited scheduled blocks</li><li>Accountability Lock</li><li>Three emergency escapes a month</li><li>Schedules sync with Android</li></ul><span class="v-btn dl-off" aria-disabled="true">Coming soon</span><p class="v-cxl">Cancel any time</p></div>
  <div class="v-plan v-life"><h3>Lifetime <span class="v-badge">Launch price</span></h3><p class="v-price">£49.99<s class="v-was">£79.99</s></p><p class="v-per">once, at the launch price</p><ul class="v-ticks"><li>Everything in Pro, for good</li><li>One payment, nothing renews</li><li>Every future update</li></ul><span class="v-btn v-btn--ghost dl-off" aria-disabled="true">Coming soon</span></div>
@@ -1734,8 +1682,8 @@ a.nx-plat:active{transform:scale(.98)}
 <p class="v-eyebrow">FAQ</p><h2>Questions</h2><div class="v-mt"><details><summary>What if I really need to get out?</summary><p>Use an emergency escape. You get one a month free, three on Pro, and they refill on the 1st. On Windows, hold <kbd>Esc</kbd> for five seconds on the lock screen. On the phone, tap Emergency escape. An extra escape costs £0.99.</p></details><details><summary>What still works on my phone?</summary><p>Calls, the dialer and contacts. Everything else waits for the timer.</p></details><details><summary>Does restarting end a block?</summary><p>No. It comes back locked, with the time that was left.</p></details><details><summary>What if Windows locks during a block?</summary><p>Sign in as usual. The block carries on, and the clock keeps its time.</p></details><details><summary>Windows warned me about the download.</summary><p>The All Block is not code-signed yet, so SmartScreen warns about it. Click <b>More info</b>, then <b>Run anyway</b>, then <b>Yes</b> on the admin prompt.</p></details></div>
 <p class="v-ash v-small v-mt">Still stuck? <a href="mailto:MrAuzeo@protonmail.com?subject=All%20Block%20help">Email me</a>. I love feedback, and I answer personally.</p>
 </div></section>
-<section class="v-band pl-end nx-end" id="get"><div class="v-wrap v-center"><svg class="nx-mark" viewBox="40 30 50 92" aria-hidden="true"><path class="nxc-flame" d="M65 114 C 44 97, 46 72, 65 44 C 84 72, 86 97, 65 114 Z"/></svg>
-<h2>Light up your distractions.</h2><div class="nx-cta"><span class="nx-btn nx-btn-acc dl-off" aria-disabled="true" id="nxGo">Coming soon</span><span class="nx-btn nx-btn-ghost" id="nxAlt" hidden><span></span></span></div><p class="nx-meta" id="nxMeta">Windows, Android, macOS and iOS</p></div></section>
+<section class="v-band pl-end" id="get"><div class="v-wrap v-center"><svg class="pl-mark pl-mk2" viewBox="176 92 160 350" aria-hidden="true"><defs><linearGradient id="plpl-mk2" gradientUnits="userSpaceOnUse" x1="0" y1="224" x2="0" y2="430"><stop offset="0" style="stop-color:var(--ink)"/><stop offset=".45" style="stop-color:var(--ink)"/><stop offset="1" style="stop-color:var(--ink);stop-opacity:0"/></linearGradient></defs><g fill="none" stroke-width="10" stroke-linejoin="round"><path d="M200 430V250q0-26 26-26h60q26 0 26 26v180" stroke="url(#plpl-mk2)" stroke-linecap="round"/><path class="pl-fl" d="M256 202c-26-22-24-56 0-92c24 36 26 70 0 92z"/></g></svg>
+<h2>Light up your distractions.</h2><div class="v-cta-row"><span class="v-btn v-btn--light pl-end-go dl-off" aria-disabled="true">Coming soon</span></div></div></section>
 </div>
 
 <div class="sc" id="scrollCandle" aria-hidden="true"><svg viewBox="0 0 26 150">
@@ -1753,10 +1701,7 @@ a.nx-plat:active{transform:scale(.98)}
           <span class="brand-mark">
             <svg viewBox="0 0 512 512" aria-hidden="true"><defs><linearGradient id="cw2" gradientUnits="userSpaceOnUse" x1="0" y1="224" x2="0" y2="430"><stop offset="0" stop-color="#f1ede4"/><stop offset=".45" stop-color="#f1ede4"/><stop offset="1" stop-color="#f1ede4" stop-opacity="0"/></linearGradient></defs>
         <circle cx="256" cy="256" r="256" fill="#1b1a17"/>
-        <!-- experiment (2026-11-18): the hero's hollow flame alone, centred, in place of the candle and flame -->
-        <radialGradient id="fm2"><stop offset="0" stop-color="#ffb450" stop-opacity=".18"/><stop offset="1" stop-color="#ffb450" stop-opacity="0"/></radialGradient>
-        <circle cx="256" cy="262" r="210" fill="url(#fm2)"/>
-        <path transform="translate(256 262) scale(2.7) translate(-256 -165)" d="M256 202c-24-19-22-46 0-74c22 28 24 55 0 74z" fill="none" stroke="#ffc867" stroke-width="11" stroke-linejoin="round"/>
+        <g transform="translate(256 262) scale(1.08) translate(-256 -267)" fill="none" stroke-width="22" stroke-linejoin="round"><path d="M200 430V250q0-26 26-26h60q26 0 26 26v180" stroke="url(#cw2)" stroke-linecap="round"/><path d="M256 202c-26-22-24-56 0-92c24 36 26 70 0 92z" stroke="#f2b84b"/></g>
       </svg>
           </span>
           The All Block
@@ -1771,8 +1716,9 @@ a.nx-plat:active{transform:scale(.98)}
       </div>
       <div class="foot-col">
         <h4>Product</h4>
-        <a href="#who">The app</a>
+        <a href="#how">The block</a>
         <a href="#devices">Devices</a>
+        <a href="#lock">Accountability</a>
         <a href="#pricing">Pricing</a>
       </div>
       <div class="foot-col">
@@ -2762,23 +2708,5 @@ function setF(v){mode=v;
  if(v!=='0'&&!rm.matches){spawn();tm=setInterval(spawn,v==='5'?900:1400)}}
 setF('5')})()</script>
 <script>(function(){var r=document.getElementById("costR");if(!r)return;function f(h){var m=Math.round(h*60);return Math.floor(m/60)+"h"+(m%60?" "+m%60+"m":"")}function u(){var h=+r.value,d=Math.round(h*365/24),y=h*50/24;r.style.setProperty("--p",((h-1)/11*100)+"%");document.getElementById("costH").textContent=f(h);document.getElementById("costY").textContent=d+" days";document.getElementById("costL").textContent=(y<10?y.toFixed(1):Math.round(y))+" years";document.getElementById("costW").textContent=Math.round(h/16*100)+"%"}r.addEventListener("input",u);u();var g=document.querySelector(".pl-cost-go"),n=document.querySelector(".nav-cta");if(g&&n)g.href=n.getAttribute("href");var e=document.querySelector(".pl-end-go");if(e&&n)e.href=n.getAttribute("href")})()</script>
-<div class="nx-lock" id="nxLock" role="dialog" aria-label="A demo of the block screen" aria-hidden="true"><svg viewBox="0 0 130 500" aria-hidden="true"><use href="#nx-candle"/></svg><div class="nx-lock-read">Device blocked<span class="clock" id="nxClock">10:00</span>Back at <span class="at" id="nxAt">--:--</span></div><p class="nx-lock-note">This is your screen during a block. A real one has no way out. Click or press any key to leave.</p></div>
-<script>(function(){
-var $=function(i){return document.getElementById(i)},pad=function(n){return(n<10?"0":"")+n},hhmm=function(d){return pad(d.getHours())+":"+pad(d.getMinutes())};
-if(document.documentElement.classList.contains("is-android")){}
-var hold=$("nxHold"),lock=$("nxLock"),tH=0,tT=0,ends=0,opened=0;if(!hold)return;
-function down(){if(tH)return;hold.classList.add("on");tH=setTimeout(function(){tH=0;hold.classList.remove("on");open()},2000)}
-function up(){if(!tH)return;clearTimeout(tH);tH=0;hold.classList.remove("on")}
-hold.addEventListener("pointerdown",function(e){try{hold.setPointerCapture(e.pointerId)}catch(_){}down()});
-["pointerup","pointercancel","lostpointercapture"].forEach(function(n){hold.addEventListener(n,up)});
-hold.addEventListener("keydown",function(e){if((e.key===" "||e.key==="Enter")&&!e.repeat){e.preventDefault();down()}});
-hold.addEventListener("keyup",up);hold.addEventListener("blur",up);hold.addEventListener("contextmenu",function(e){e.preventDefault()});
-function tick(){var l=Math.max(0,Math.round((ends-Date.now())/1000));$("nxClock").textContent=pad(Math.floor(l/60))+":"+pad(l%60);if(!l)close()}
-function open(){ends=Date.now()+600000;opened=Date.now();$("nxAt").textContent=hhmm(new Date(ends));tick();lock.classList.add("show");lock.setAttribute("aria-hidden","false");
-requestAnimationFrame(function(){requestAnimationFrame(function(){lock.classList.add("in")})});document.body.style.overflow="hidden";tT=setInterval(tick,1000)}
-function close(){if(!lock.classList.contains("show")||Date.now()-opened<700)return;clearInterval(tT);lock.classList.remove("in");lock.setAttribute("aria-hidden","true");
-document.body.style.overflow="";setTimeout(function(){lock.classList.remove("show")},600);hold.focus({preventScroll:true})}
-lock.addEventListener("click",close);document.addEventListener("keydown",function(e){if(!e.repeat)close()});
-})()</script>
 </body>
 </html>
