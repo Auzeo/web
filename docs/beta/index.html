@@ -1470,7 +1470,7 @@ svg.nc{overflow:visible}
 .pl-hero .ov.lf{display:flex;flex-direction:column;align-items:center;width:100%;margin-top:22px}
 .pl-hero .pl-demo{order:1;margin-top:6px}
 .pl-hero .pl-dl{order:2;margin-top:20px}
-#who{margin-top:max(160px,24vh)}}
+#devices{margin-top:max(160px,24vh)}}
 </style>
 <style id="mountains">
 /* Hero (2026-11-18): The All Block in gold above a smaller, condensed "Extinguish your screen time" */
@@ -1489,7 +1489,32 @@ svg.nc{overflow:visible}
 .nh.pl-hero .fx-t{color:rgba(255,255,255,.82)}
 .nh.pl-hero .fx-o{color:#fff}
 </style>
-<style id="dl-paused">.dl-off{cursor:default!important;pointer-events:none;opacity:.6}</style></head>
+<style id="dl-paused">.dl-off{cursor:default!important;pointer-events:none;opacity:.6}</style><style id="waitlist">
+/* Hero waiting list (2026-11-20): one field and one button, frosted over the photo. */
+.wl{margin-top:30px;max-width:470px}
+.wl-row{display:flex;gap:6px;padding:6px;border-radius:999px;background:rgba(14,18,30,.5);border:1px solid rgba(255,255,255,.22);
+ -webkit-backdrop-filter:blur(10px) saturate(1.2);backdrop-filter:blur(10px) saturate(1.2);transition:border-color .2s ease}
+.wl-row:focus-within{border-color:rgba(255,200,103,.75)}
+.wl input{flex:1;min-width:0;background:none;border:0;outline:0;color:#fff;font:inherit;font-size:16px;padding:0 8px 0 16px}
+.wl input::placeholder{color:rgba(255,255,255,.5)}
+.wl button{flex:none;border:0;border-radius:999px;background:#fff;color:#141416;font:inherit;font-size:14.5px;font-weight:700;
+ padding:12px 20px;cursor:pointer;white-space:nowrap;transition:transform .16s cubic-bezier(.23,1,.32,1),opacity .2s ease}
+.wl button:active{transform:scale(.97)}
+.wl button:focus-visible{outline:2px solid #ffc867;outline-offset:2px}
+.wl button[disabled]{opacity:.6;cursor:default}
+.wl-msg{margin:10px 0 0 16px;font-size:12.5px;color:rgba(255,255,255,.6);}
+.wl-msg:empty{display:none}
+.wl-msg.bad{color:#ffb8ab}
+.wl-row.bad{border-color:rgba(255,140,120,.8)}
+.wl-fix{background:none;border:0;padding:0;font:inherit;font-weight:700;color:#fff;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.wl-fix:focus-visible{outline:2px solid #ffc867;outline-offset:2px;border-radius:3px}
+.wl.done .wl-row{display:none}
+.wl.done .wl-msg{margin:0;font-size:19px;font-weight:700;color:#ffc867}
+@media(max-width:800px){.pl-hero .pl-cw .pl-mark{height:clamp(190px,34svh,400px)}.wl{width:100%;max-width:420px;margin-top:20px}.wl-msg{text-align:center;margin-left:0;margin-right:0}}
+@media(max-width:380px){.wl button{padding:12px 15px}}
+@media (prefers-reduced-motion:reduce){.wl button,.wl-row{transition:none}}
+</style>
+</head>
 <body>
 
 
@@ -1513,13 +1538,13 @@ svg.nc{overflow:visible}
         <path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5Z"/>
       </svg>
     </button>
-    <a class="nav-cta" href="#get">Coming soon</a>
+    <a class="nav-cta" href="#top" id="wl-nav">Join the list</a>
   </div>
 </nav>
 
 <!-- ═══ HERO ═══ -->
 <!-- Hero: the tall candle above the clouds, notifications going quiet at the edge. -->
-<header class="nh tc q-row pl-hero" id="top"><div class="pl-cw"><svg class="pl-mark pl-mk1" viewBox="176 92 160 350" aria-hidden="true"><defs><linearGradient id="plpl-mk1" gradientUnits="userSpaceOnUse" x1="0" y1="224" x2="0" y2="430"><stop offset="0" style="stop-color:var(--ink)"/><stop offset=".45" style="stop-color:var(--ink)"/><stop offset="1" style="stop-color:var(--ink);stop-opacity:0"/></linearGradient></defs><g fill="none" stroke-width="11" stroke-linejoin="round"><path d="M200 430V250q0-26 26-26h60q26 0 26 26v180" stroke="url(#plpl-mk1)" stroke-linecap="round"/><path class="pl-fl" d="M256 202c-26-22-24-56 0-92c24 36 26 70 0 92z"/></g></svg><div class="pl-fx" aria-hidden="true"><span class="pl-flare"></span></div></div><div class="ov lf"><h1><span class="em top">The All Block</span>Extinguish your<br>distractions</h1><div class="pl-dl pl-dl8"><span class="ci off"><i><svg class="pi" viewBox="0 0 24 24" aria-hidden="true"><path d="M0 0h11.4v11.4H0zM12.6 0H24v11.4H12.6zM0 12.6h11.4V24H0zM12.6 12.6H24V24H12.6z"/></svg></i><b>Windows</b><small>Coming soon</small></span><span class="ci off"><i><svg class="pi" viewBox="0 0 24 24" aria-hidden="true"><path d="M18.4395 5.5586c-.675 1.1664-1.352 2.3318-2.0274 3.498-.0366-.0155-.0742-.0286-.1113-.043-1.8249-.6957-3.484-.8-4.42-.787-1.8551.0185-3.3544.4643-4.2597.8203-.084-.1494-1.7526-3.021-2.0215-3.4864a1.1451 1.1451 0 0 0-.1406-.1914c-.3312-.364-.9054-.4859-1.379-.203-.475.282-.7136.9361-.3886 1.5019 1.9466 3.3696-.0966-.2158 1.9473 3.3593.0172.031-.4946.2642-1.3926 1.0177C2.8987 12.176.452 14.772 0 18.9902h24c-.119-1.1108-.3686-2.099-.7461-3.0683-.7438-1.9118-1.8435-3.2928-2.7402-4.1836a12.1048 12.1048 0 0 0-2.1309-1.6875c.6594-1.122 1.312-2.2559 1.9649-3.3848.2077-.3615.1886-.7956-.0079-1.1191a1.1001 1.1001 0 0 0-.8515-.5332c-.5225-.0536-.9392.3128-1.0488.5449zm-.0391 8.461c.3944.5926.324 1.3306-.1563 1.6503-.4799.3197-1.188.0985-1.582-.4941-.3944-.5927-.324-1.3307.1563-1.6504.4727-.315 1.1812-.1086 1.582.4941zM7.207 13.5273c.4803.3197.5506 1.0577.1563 1.6504-.394.5926-1.1038.8138-1.584.4941-.48-.3197-.5503-1.0577-.1563-1.6504.4008-.6021 1.1087-.8106 1.584-.4941z"/></svg></i><b>Android</b><small>Coming soon</small></span><span class="ci off"><i><svg class="pi" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg></i><b>macOS</b><small>Coming soon</small></span><span class="ci off"><i><svg class="pi" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg></i><b>iOS</b><small>Coming soon</small></span></div><button class="pl-demo" type="button" onclick="hsGo(3)">Watch the demo <span aria-hidden="true">→</span></button></div></header>
+<header class="nh tc q-row pl-hero" id="top"><div class="pl-cw"><svg class="pl-mark pl-mk1" viewBox="176 92 160 350" aria-hidden="true"><defs><linearGradient id="plpl-mk1" gradientUnits="userSpaceOnUse" x1="0" y1="224" x2="0" y2="430"><stop offset="0" style="stop-color:var(--ink)"/><stop offset=".45" style="stop-color:var(--ink)"/><stop offset="1" style="stop-color:var(--ink);stop-opacity:0"/></linearGradient></defs><g fill="none" stroke-width="11" stroke-linejoin="round"><path d="M200 430V250q0-26 26-26h60q26 0 26 26v180" stroke="url(#plpl-mk1)" stroke-linecap="round"/><path class="pl-fl" d="M256 202c-26-22-24-56 0-92c24 36 26 70 0 92z"/></g></svg><div class="pl-fx" aria-hidden="true"><span class="pl-flare"></span></div></div><div class="ov lf"><h1><span class="em top">The All Block</span>Extinguish your<br>distractions</h1><form class="wl" id="wl" novalidate><div class="wl-row"><input id="wl-e" type="email" name="email" autocomplete="email" inputmode="email" autocapitalize="off" spellcheck="false" placeholder="Your email address" aria-label="Your email address" required><button type="submit">Join the list</button></div><p class="wl-msg" id="wl-m" role="status" aria-live="polite"></p></form><div class="pl-dl pl-dl8"><span class="ci off"><i><svg class="pi" viewBox="0 0 24 24" aria-hidden="true"><path d="M0 0h11.4v11.4H0zM12.6 0H24v11.4H12.6zM0 12.6h11.4V24H0zM12.6 12.6H24V24H12.6z"/></svg></i><b>Windows</b><small>Coming soon</small></span><span class="ci off"><i><svg class="pi" viewBox="0 0 24 24" aria-hidden="true"><path d="M18.4395 5.5586c-.675 1.1664-1.352 2.3318-2.0274 3.498-.0366-.0155-.0742-.0286-.1113-.043-1.8249-.6957-3.484-.8-4.42-.787-1.8551.0185-3.3544.4643-4.2597.8203-.084-.1494-1.7526-3.021-2.0215-3.4864a1.1451 1.1451 0 0 0-.1406-.1914c-.3312-.364-.9054-.4859-1.379-.203-.475.282-.7136.9361-.3886 1.5019 1.9466 3.3696-.0966-.2158 1.9473 3.3593.0172.031-.4946.2642-1.3926 1.0177C2.8987 12.176.452 14.772 0 18.9902h24c-.119-1.1108-.3686-2.099-.7461-3.0683-.7438-1.9118-1.8435-3.2928-2.7402-4.1836a12.1048 12.1048 0 0 0-2.1309-1.6875c.6594-1.122 1.312-2.2559 1.9649-3.3848.2077-.3615.1886-.7956-.0079-1.1191a1.1001 1.1001 0 0 0-.8515-.5332c-.5225-.0536-.9392.3128-1.0488.5449zm-.0391 8.461c.3944.5926.324 1.3306-.1563 1.6503-.4799.3197-1.188.0985-1.582-.4941-.3944-.5927-.324-1.3307.1563-1.6504.4727-.315 1.1812-.1086 1.582.4941zM7.207 13.5273c.4803.3197.5506 1.0577.1563 1.6504-.394.5926-1.1038.8138-1.584.4941-.48-.3197-.5503-1.0577-.1563-1.6504.4008-.6021 1.1087-.8106 1.584-.4941z"/></svg></i><b>Android</b><small>Coming soon</small></span><span class="ci off"><i><svg class="pi" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg></i><b>macOS</b><small>Coming soon</small></span><span class="ci off"><i><svg class="pi" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg></i><b>iOS</b><small>Coming soon</small></span></div><button class="pl-demo" type="button" onclick="hsGo(3)">Watch the demo <span aria-hidden="true">→</span></button></div></header>
 <!-- The old hero stays, off-screen, because its drum and Start button run the "Light it" demo. -->
 <header class="hero" id="oldtop" aria-hidden="true">
   <div class="hero-bg" aria-hidden="true">
@@ -1662,11 +1687,6 @@ svg.nc{overflow:visible}
 
 <!-- ═══ BELOW THE HERO ═══ -->
 <div class="v2">
-<section id="who" class="v-band"><div class="v-wrap v-split v-even">
- <div><p class="v-eyebrow">For the late nights</p><h2>It's 1 a.m. You said you'd stop at 11.</h2>
- <p class="v-lede">Willpower runs out late at night. So decide in the daytime instead: set a sleep block once, and at ten your screen turns into a candle that burns until morning. No arguing with yourself, no "just one more".</p></div>
- <div><img class="v-shot" src="../img/v2/lock_aod.webp" alt="The candle dimmed for night"></div></div>
- <div class="v-wrap v-grid v-g4 v-mt"><div class="v-card"><span class="v-num">22:00 → 06:00</span><h3>Sleep</h3></div><div class="v-card"><span class="v-num">09:00 → 12:00</span><h3>Deep work</h3></div><div class="v-card"><span class="v-num">19:00 → 21:00</span><h3>Study</h3></div><div class="v-card"><span class="v-num">17:00 → 21:00</span><h3>Family</h3></div></div></section>
 <section id="devices" class="v-band v-sand"><div class="v-wrap v-split v-flip">
  <div><p class="v-eyebrow">Windows and Android</p><h2>One app,<br>every screen.</h2>
  <p class="v-lede">The same candle on your computer and your phone. On Pro, a schedule set on one runs on both.</p></div>
@@ -2722,5 +2742,63 @@ function setF(v){mode=v;
  if(v!=='0'&&!rm.matches){spawn();tm=setInterval(spawn,v==='5'?900:1400)}}
 setF('5')})()</script>
 <script>(function(){var r=document.getElementById("costR");if(!r)return;function f(h){var m=Math.round(h*60);return Math.floor(m/60)+"h"+(m%60?" "+m%60+"m":"")}function u(){var h=+r.value,d=Math.round(h*365/24),y=h*50/24;r.style.setProperty("--p",((h-1)/11*100)+"%");document.getElementById("costH").textContent=f(h);document.getElementById("costY").textContent=d+" days";document.getElementById("costL").textContent=(y<10?y.toFixed(1):Math.round(y))+" years";document.getElementById("costW").textContent=Math.round(h/16*100)+"%"}r.addEventListener("input",u);u();var g=document.querySelector(".pl-cost-go"),n=document.querySelector(".nav-cta");if(g&&n)g.href=n.getAttribute("href");var e=document.querySelector(".pl-end-go");if(e&&n)e.href=n.getAttribute("href")})()</script>
+<script>/* hero waiting list -> Supabase join_waitlist() (insert-only; the list itself can't be read from here) */
+(function(){
+ var f=document.getElementById('wl');if(!f)return;
+ var SUPA="https://jkssypznppzqmdndmssz.supabase.co",ANON="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6" +
+             "Imprc3N5cHpucHB6cW1kbmRtc3N6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODcyMDcw" +
+             "NjYsImV4cCI6MjEwMjc4MzA2Nn0.ujK9-FfekXhQ_6F2nep47u4K5KU2_Pwyax3Xww-YMMw";
+ var e=document.getElementById('wl-e'),m=document.getElementById('wl-m'),b=f.querySelector('button'),u=navigator.userAgent;
+ var plat=/Android/i.test(u)?'android':/iPhone|iPad/i.test(u)?'ios':/Macintosh/i.test(u)?'mac':/Windows/i.test(u)?'windows':'';
+ var row=f.querySelector('.wl-row'),asked='';
+ function say(t,bad){m.textContent=t;m.classList.toggle('bad',!!bad);row.classList.toggle('bad',!!bad);if(bad)e.setAttribute('aria-invalid','true');else e.removeAttribute('aria-invalid')}
+ /* the address itself: one @, no spaces, a real-looking name and domain */
+ function wrong(v){
+  if(!v)return 'Enter your email address.';
+  if(/\s/.test(v))return 'Remove the space from your email address.';
+  var at=v.split('@');
+  if(at.length<2)return 'Add the @ to your email address.';
+  if(at.length>2)return 'An email address has only one @.';
+  var n=at[0],d=at[1].toLowerCase();
+  if(!n)return 'Add the part before the @.';
+  if(!d)return 'Finish the address after the @, like gmail.com.';
+  if(v.length>254||n.length>64)return 'That address is too long.';
+  if(!/^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+$/i.test(n)||/^\.|\.$|\.\./.test(n))return 'Check the part before the @ for typos.';
+  if(d.indexOf('.')<0)return 'Finish the address after the @, like gmail.com.';
+  if(!/^(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z]{2,24}$/.test(d))return 'Check the part after the @ for typos.';
+  return '';
+ }
+ /* common slips in the big providers' names */
+ var TYPO={'gmial.com':'gmail.com','gmai.com':'gmail.com','gmal.com':'gmail.com','gnail.com':'gmail.com','gamil.com':'gmail.com','gmaill.com':'gmail.com','gmail.co':'gmail.com','gmail.con':'gmail.com','gmail.cm':'gmail.com','gmail.om':'gmail.com','googlemail.co':'googlemail.com',
+  'hotmial.com':'hotmail.com','hotmai.com':'hotmail.com','hotmal.com':'hotmail.com','hotmail.co':'hotmail.com','hotmail.con':'hotmail.com','hotmail.co.k':'hotmail.co.uk',
+  'yaho.com':'yahoo.com','yahooo.com':'yahoo.com','yahoo.co':'yahoo.com','yahoo.con':'yahoo.com','yahoo.co.k':'yahoo.co.uk',
+  'outlok.com':'outlook.com','outllok.com':'outlook.com','outlook.co':'outlook.com','outlook.con':'outlook.com',
+  'iclod.com':'icloud.com','icoud.com':'icloud.com','icloud.co':'icloud.com','icloud.con':'icloud.com',
+  'protonmial.com':'protonmail.com','protonmail.co':'protonmail.com','proton.me.com':'proton.me','live.co':'live.com','aol.co':'aol.com'};
+ function typo(v){var i=v.lastIndexOf('@'),d=v.slice(i+1).toLowerCase(),t=TYPO[d]||(/\.(con|cmo|ocm|vom|xom|coma|comm|cim|cpm|cok)$/.test(d)?d.replace(/\.[a-z]+$/,'.com'):'');return t?v.slice(0,i+1)+t:''}
+ e.addEventListener('input',function(){if(m.classList.contains('bad'))say('')});
+ function done(){f.classList.add('done');say("You're on the list.")}
+ try{if(localStorage.getItem('ab-waitlist'))done()}catch(x){}
+ var nav=document.getElementById('wl-nav');
+ if(nav)nav.addEventListener('click',function(){if(!f.classList.contains('done'))setTimeout(function(){e.focus({preventScroll:true})},450)});
+ f.addEventListener('submit',function(ev){
+  ev.preventDefault();var v=e.value.trim();
+  e.value=v;if(wrong(v)){say('Please enter a valid email.',1);e.focus();return}
+  var t=typo(v);
+  if(t&&asked!==v){asked=v;say('Did you mean ',1);var fx=document.createElement('button');fx.type='button';fx.className='wl-fix';fx.textContent=t;
+   fx.onclick=function(){e.value=t;say('');e.focus()};m.appendChild(fx);m.appendChild(document.createTextNode('?'));return}
+  b.disabled=true;
+  fetch(SUPA+'/rest/v1/rpc/join_waitlist',{method:'POST',headers:{apikey:ANON,Authorization:'Bearer '+ANON,'Content-Type':'application/json'},
+   body:JSON.stringify({p_email:v,p_platform:plat})})
+  .then(function(r){return r.ok?r.json():Promise.reject('server')})
+  .then(function(r){
+   if(r==='ok'){done();try{localStorage.setItem('ab-waitlist','1')}catch(x){}}
+   else if(r==='slow')say('Too many sign-ups from this connection. Try again in an hour.',1);
+   else{say('Please enter a valid email.',1);e.focus()}})
+  .catch(function(x){say(x==='server'?"Something went wrong on our side. Your email wasn't saved. Please try again later.":'No internet connection. Check it and try again.',1)})
+  .then(function(){b.disabled=false});
+ });
+})();
+</script>
 </body>
 </html>
