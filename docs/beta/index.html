@@ -137,12 +137,6 @@ h2.big{font-size:clamp(30px,4.2vw,48px)}
 :root:not([data-theme="dark"]) .nav-pill a.nav-badge{background:radial-gradient(circle at 50% 62%,#4a3418 0,#2a2117 45%,#1a1b19 75%);box-shadow:0 0 0 3px rgba(224,149,42,.14)}
 :root:not([data-theme="dark"]) .nav-badge svg rect{display:none}
 :root:not([data-theme="dark"]) .nav-badge svg path{stroke:#ffc867}
-/* .nav-pill a would otherwise out-specify these two on colour */
-.nav-pill a.nav-cta{display:inline-flex;align-items:center;
-  background:var(--onyx);color:var(--onyx-txt);
-  font-weight:700;font-size:13.5px;padding:8px 19px;border-radius:999px;
-  margin-left:6px;transition:background .22s,color .22s}
-.nav-pill a.nav-cta:hover{background:var(--green);color:#fff}
 .theme-toggle{width:31px;height:31px;flex:none;border-radius:50%;padding:0;
   border:1px solid var(--line);background:var(--sand);color:var(--ink);cursor:pointer;
   display:grid;place-items:center;margin-left:4px;margin-right:2px;
@@ -153,7 +147,7 @@ h2.big{font-size:clamp(30px,4.2vw,48px)}
 :root[data-theme="dark"] .theme-toggle .i-sun{display:none}
 :root[data-theme="dark"] .theme-toggle .i-moon{display:block}
 /* below this the section links would wrap; keep the badge and the action */
-@media(max-width:1020px){.nav-pill a:not(.nav-badge):not(.nav-cta){display:none}}
+@media(max-width:1020px){.nav-pill a:not(.nav-badge){display:none}}
 /* phones: no nav at all; the hero's own keys do the job */
 @media(max-width:800px){.nav{display:none}}
 
@@ -1407,8 +1401,7 @@ svg.nc{overflow:visible}
 .pl-lockph{display:block;width:100%;max-width:460px;height:auto;margin:0 auto;border-radius:22px;box-shadow:0 0 0 1px var(--line),0 30px 60px -30px rgba(40,34,20,.45)}
 :root[data-theme="dark"] .pl-lockph{box-shadow:0 0 0 1px var(--line),0 30px 60px -30px rgba(0,0,0,.8)}
 /* A soft lit card, a few shades off the page, with a warm glow behind the devices */
-.pl-combo{border-radius:28px;padding:7% 6% 6%;background:radial-gradient(60% 55% at 55% 45%,rgba(255,170,80,.16),transparent 70%),linear-gradient(180deg,#fff,#ece8e1);box-shadow:0 0 0 1px rgba(20,22,28,.07)}
-:root[data-theme="dark"] .pl-combo{background:radial-gradient(60% 55% at 55% 45%,rgba(255,160,70,.13),transparent 70%),linear-gradient(180deg,#252f4d,#161c32);box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 0 0 1px rgba(160,175,215,.12)}
+.pl-combo{padding:0}
 .pl-stage{position:relative;padding:0 0 9% 9%}
 .v2 #devices .v-wrap{max-width:1240px}
 .v2 #devices .v-split{grid-template-columns:1.6fr 1fr}
@@ -1489,30 +1482,130 @@ svg.nc{overflow:visible}
 .nh.pl-hero .fx-t{color:rgba(255,255,255,.82)}
 .nh.pl-hero .fx-o{color:#fff}
 </style>
-<style id="dl-paused">.dl-off{cursor:default!important;pointer-events:none;opacity:.6}</style><style id="waitlist">
-/* Hero waiting list (2026-11-20): one field and one button, frosted over the photo. */
-.wl{margin-top:30px;max-width:470px}
-.wl-row{display:flex;gap:6px;padding:6px;border-radius:999px;background:rgba(14,18,30,.5);border:1px solid rgba(255,255,255,.22);
- -webkit-backdrop-filter:blur(10px) saturate(1.2);backdrop-filter:blur(10px) saturate(1.2);transition:border-color .2s ease}
-.wl-row:focus-within{border-color:rgba(255,200,103,.75)}
-.wl input{flex:1;min-width:0;background:none;border:0;outline:0;color:#fff;font:inherit;font-size:16px;padding:0 8px 0 16px}
-.wl input::placeholder{color:rgba(255,255,255,.5)}
-.wl button{flex:none;border:0;border-radius:999px;background:#fff;color:#141416;font:inherit;font-size:14.5px;font-weight:700;
- padding:12px 20px;cursor:pointer;white-space:nowrap;transition:transform .16s cubic-bezier(.23,1,.32,1),opacity .2s ease}
-.wl button:active{transform:scale(.97)}
-.wl button:focus-visible{outline:2px solid #ffc867;outline-offset:2px}
-.wl button[disabled]{opacity:.6;cursor:default}
-.wl-msg{margin:10px 0 0 16px;font-size:12.5px;color:rgba(255,255,255,.6);}
-.wl-msg:empty{display:none}
-.wl-msg.bad{color:#ffb8ab}
-.wl-row.bad{border-color:rgba(255,140,120,.8)}
-.wl-fix{background:none;border:0;padding:0;font:inherit;font-weight:700;color:#fff;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
-.wl-fix:focus-visible{outline:2px solid #ffc867;outline-offset:2px;border-radius:3px}
-.wl.done .wl-row{display:none}
-.wl.done .wl-msg{margin:0;font-size:19px;font-weight:700;color:#ffc867}
-@media(max-width:800px){.pl-hero .pl-cw .pl-mark{height:clamp(190px,34svh,400px)}.wl{width:100%;max-width:420px;margin-top:20px}.wl-msg{text-align:center;margin-left:0;margin-right:0}}
-@media(max-width:380px){.wl button{padding:12px 15px}}
-@media (prefers-reduced-motion:reduce){.wl button,.wl-row{transition:none}}
+<style id="dl-paused">.dl-off{cursor:default!important;pointer-events:none;opacity:.6}</style><style>
+@media(max-width:800px){.pl-hero .pl-cw .pl-mark{height:clamp(190px,34svh,400px)}}
+/* Accountability Lock (2026-11-21): centred, a lock bar, then the facts as pills. */
+.v2 .al{--al-g:#a8701c;--al-s:#f3e6cc;background:var(--sand)}
+:root[data-theme="dark"] .v2 .al{--al-g:#ffc867;--al-s:#2a2619}
+.v2 .al .v-eyebrow{color:var(--al-g)}
+.v2 .al .ic{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.v2 .al .v-wrap{text-align:center}
+.v2 .al h2 em{font-style:normal;color:var(--al-g)}
+.v2 .al .al-bar{display:flex;align-items:center;gap:22px;max-width:620px;margin:40px auto 24px;padding:18px 26px;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:999px;box-shadow:var(--shadow)}
+.v2 .al .al-big{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:var(--al-s);color:var(--al-g);flex:none}
+.v2 .al .al-big .ic{width:24px;height:24px}
+.v2 .al .al-k{font:700 11px var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--faint)}
+.v2 .al .al-dots{font:800 22px var(--mono);letter-spacing:.3em;color:var(--ink)}
+.v2 .al .al-cap{display:flex;align-items:center;gap:8px;margin:0 0 0 auto;color:var(--al-g);font-size:15px;font-weight:600}
+.v2 .al .al-fx{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;justify-content:center;gap:12px}
+.v2 .al .al-fx li{display:flex;gap:10px;align-items:center;padding:8px 20px 8px 8px;background:var(--card);border:1px solid var(--line);border-radius:999px}
+.v2 .al .al-bub{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:var(--al-s);color:var(--al-g);flex:none}
+.v2 .al .al-fx b{font:800 15px var(--display);letter-spacing:-.01em;color:var(--ink)}
+@media (max-width:860px){.v2 .al .al-bar{flex-wrap:wrap;border-radius:24px}.v2 .al .al-cap{margin-left:0;width:100%}}
+</style>
+<style>/* Be honest: the screen-time reality check (#how) */
+.v2 .nn h2 { margin: 0px; }
+.v2 .nn .nn-col { max-width: 760px; }
+.v2 .nn .nn-col.c { margin: 0px auto; text-align: center; }
+.v2 .nn output { color: var(--flame); font-variant-numeric: tabular-nums; }
+.v2 .nn button:active { transform: scale(0.96); }
+.v2 .nn button:focus-visible { outline: 2px solid var(--flame); outline-offset: 3px; }
+.v2 .nn.pre:not(.done) .ck-res, .v2 .nn.pre:not(.done) .ck-show, .v2 .nn.done .ck-wait { display: none; }
+.v2 .nn.done .ck-res, .v2 .nn.done .ck-show { animation: 0.4s cubic-bezier(0.23, 1, 0.32, 1) 0s 1 normal none running ckIn; }
+@keyframes ckIn { 
+  0% { opacity: 0; transform: translateY(6px); }
+}
+.v2 .nn .ck-show { margin-top: 22px; }
+.v2 .nn button:active { transform: scale(0.97); }
+.v2 .nn .r3 { display: flex; flex-direction: column; border-top: 1px solid var(--line); }
+.v2 .nn .r3 button { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding: 13px 6px; border-top: 0px; border-right: 0px; border-left: 0px; border-image: none; border-bottom: 1px solid var(--line); border-radius: 0px; background: none; font: 600 16px var(--body); color: var(--ink); cursor: pointer; text-align: left; transition: background-color 0.15s, padding 0.2s cubic-bezier(0.23, 1, 0.32, 1); }
+.v2 .nn .r3 button:active { transform: none; }
+.v2 .nn .r3 button:hover { background: color-mix(in srgb,var(--card) 70%,transparent); }
+.v2 .nn .r3 .v { color: var(--faint); font-weight: 500; font-variant-numeric: tabular-nums; }
+.v2 .nn.pre:not(.done) .r3 button { background: none; color: var(--ink); border-color: var(--line); }
+.v2 .nn.pre:not(.done) .r3 button:hover { background: color-mix(in srgb,var(--card) 70%,transparent); }
+.v2 .nn.done .r3 button.on { background: var(--ink); color: var(--paper); padding-inline: 16px; border-radius: 12px; }
+.v2 .nn.done .r3 button.on .v { color: var(--flame); font-weight: 700; }
+.v2 .nn.w-white { background: var(--paper); }
+[data-theme="dark"] .v2 .nn.w-white { background: var(--paper); }
+.v2 .nn .r4-tap { margin: 0px 0px 12px; font: 700 15px var(--body); color: var(--ink); }
+.v2 .nn .r4 .v { white-space: nowrap; }
+.v2 .nn .r4 .b { display: none; }
+.v2 .nn .r4 .b b { font-weight: 800; }
+.v2 .nn.done .r4 button.on .a { display: none; }
+.v2 .nn.done .r4 button.on .b { display: inline; color: color-mix(in srgb,var(--paper) 70%,transparent); font-weight: 500; animation: 0.35s cubic-bezier(0.23, 1, 0.32, 1) 0s 1 normal none running ckIn; }
+.v2 .nn.done .r4 button.on .b b { color: var(--flame); font-size: 18px; }
+.v2 .nn.done .r4 button.on { padding-block: 16px; }
+.v2 .nn .r4.tight button { padding: 8px 4px; font-size: 14px; }
+.v2 .nn.done .r4.tight button.on { padding: 10px 12px; }
+.v2 .nn.done .r4.tight button.on .b b { font-size: 16px; }
+.v2 .nn .r4.duo { display: grid; grid-template-columns: 1fr 1fr; grid-auto-flow: column; grid-template-rows: repeat(6, auto); gap: 0px 24px; border-top: 0px; }
+.v2 .nn .r4.duo button:nth-child(1), .v2 .nn .r4.duo button:nth-child(7) { border-top: 1px solid var(--line); }
+.v2 .nn .r4.duo .v { font-size: 13px; }
+.v2 .nn h2 + .r4-tap { margin-top: 30px; }
+.v2 .nn .r4.duo:not(.mini) button { flex-wrap: nowrap; }
+.v2 .nn .r7 { text-align: center; }
+.v2 .nn .r7 .r4-tap { text-align: center; }
+.v2 .nn .r7 .r4.duo { max-width: 620px; margin-inline: auto; text-align: left; }
+.v2 .nn.w-white.done .r4 button.on .b b { color: rgb(255, 200, 103); }
+.v2 .nn .r4.duo button > span:first-child { white-space: nowrap; }
+.v2 .nn .r8 { margin-top: 56px; text-align: center; }
+.v2 .nn.w-white .r8 .r8-n { color: rgb(224, 134, 26); }
+.v2 .nn .r8-n { font: 800 clamp(80px,9vw,128px)/.9 var(--display); letter-spacing: -0.045em; color: var(--flame); }
+.v2 .nn .r8-u { margin: 12px 0px 0px; font: 600 17px/1.4 var(--body); color: var(--ash); }
+.v2 .nn .r8-btn { margin-top: 32px; }
+.v2 .nn.w-white { --fl: #e0861a; }
+[data-theme="dark"] .v2 .nn.w-white { --fl: var(--flame); }
+.v2 .nn .r10 { max-width: 720px; margin: 0px auto; }
+.v2 .nn .r10 .p, .v2 .nn .r10 .e { transition: flex-grow 0.8s cubic-bezier(0.23, 1, 0.32, 1); }
+.v2 .nn .r10 .p { flex: 12.5 1 0px; }
+.v2 .nn .r10 .e { flex: 37.5 1 0px; }
+.v2 .nn .r10 .r8-n { font-size: clamp(64px, 7vw, 96px); }
+.v2 .nn.w-white .r10 .e .r8-n, .v2 .nn .r10 .e .r8-n { color: var(--ink); }
+.v2 .nn .r10 .r8-u { margin-top: 10px; }
+.v2 .nn .r10-br { display: flex; gap: 6px; margin-top: 30px; }
+.v2 .nn .r10-br i { display: block; height: 16px; border-width: 2px 2px 0px; border-style: solid solid none; border-color: currentcolor; border-image: none; border-radius: 6px 6px 0px 0px; }
+.v2 .nn .r10-br .p { border-color: var(--fl); }
+.v2 .nn .r10-br .e { border-color: var(--ink); }
+.v2 .nn .r10-ln { height: 2px; background: var(--line); }
+.v2 .nn .r10 .tk { display: flex; justify-content: space-between; margin-top: 10px; font: 600 13px var(--body); color: var(--faint); }
+.v2 .nn .r10-lab { display: flex; gap: 24px; align-items: flex-end; }
+.v2 .nn .r10-lab > div { min-width: max-content; text-align: center; }
+.v2 .nn .r10-lab .r8-u { margin-top: 8px; }
+.v2 .nn .r8 .r8-btn { margin-top: 44px; }
+.v2 .nn .r8 a.bx { position: relative; display: inline-flex; align-items: center; gap: 14px; overflow: hidden; font: 700 18px/1 var(--body); text-decoration: none; transition: transform 0.16s ease-out, box-shadow 0.2s, background-size 0.35s cubic-bezier(0.23, 1, 0.32, 1), color 0.2s; }
+.v2 .nn .r8 a.bx:active { transform: scale(0.97); }
+.v2 .nn { --p: .25; --q: .75; --sp: .5; --sq: .866; }
+.v2 .nn .r11 .r10-lab { align-items: flex-end; }
+.v2 .nn .r11 .r8-n { transition: font-size 0.7s cubic-bezier(0.23, 1, 0.32, 1), color 0.5s, opacity 0.5s; }
+.v2 .nn .r11 .p .r8-n { font-size: calc(150px*var(--sp)); }
+.v2 .nn .r11 .e .r8-n { font-size: calc(150px*var(--sq)); }
+.v2 .nn .r8 a.bx output { font: inherit; color: inherit; }
+.v2 .nn .r8 a.b6 { padding: 22px 44px; border-radius: 999px; background: var(--ink); color: rgb(255, 255, 255); box-shadow: rgba(0, 0, 0, 0.5) 0px 12px 30px -14px; }
+.v2 .nn .r8 a.b6 em { font-style: normal; color: rgb(255, 200, 103); }
+.v2 .nn .r8 a.b6:hover, .v2 .nn .r8 a.b6:focus-visible { transform: translateY(-2px); }
+[data-theme="dark"] .v2 .nn .r8 a.b6 { background: var(--ink); color: rgb(20, 20, 22); box-shadow: none; }
+[data-theme="dark"] .v2 .nn .r8 a.b6 em { color: rgb(179, 93, 0); }
+[data-theme="dark"] .v2 .nn.done .r4 button.on .b b { color: rgb(179, 93, 0); }
+[data-theme="dark"] .v2 .nn.done .r4 button.on .b { color: rgb(58, 58, 64); }
+.v2 .nn.done .r8 .r8-btn { animation: 0.4s cubic-bezier(0.23, 1, 0.32, 1) 0s 1 normal both running hwIn; }
+@keyframes hwIn { 
+  0% { opacity: 0; transform: translateY(10px); }
+  100% { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce){
+.v2 .nn.done .r8 .r8-btn { animation: auto ease 0s 1 normal none running none; }
+}
+@media (max-width:700px){
+.v2 .nn .r4.duo { grid-template-columns: 1fr; grid-auto-flow: row; grid-template-rows: none; }
+.v2 .nn .r4.duo button:nth-child(7) { border-top: 0; }
+.v2 .nn .r10-lab { gap: 12px; }
+.v2 .nn .r10-lab > div { min-width: min-content; }
+.v2 .nn .r10 .r8-u { font-size: 13px; }
+.v2 .nn .r11 .p .r8-n { font-size: calc(min(150px, 26vw)*var(--sp)); }
+.v2 .nn .r11 .e .r8-n { font-size: calc(min(150px, 26vw)*var(--sq)); }
+.v2 .nn .r8 a.b6 { padding: 20px 36px; }
+}
 </style>
 </head>
 <body>
@@ -1526,8 +1619,8 @@ svg.nc{overflow:visible}
     </a>
     <a href="#top" class="here" data-spy="top">Home</a>
     <a href="#devices" data-spy="who devices">Devices</a>
-    <a href="#how" data-spy="why how">The block</a>
     <a href="#lock" data-spy="lock">Accountability</a>
+    <a href="#how" data-spy="why how">The block</a>
     <a href="#pricing" data-spy="pricing">Pricing</a>
     <a href="#faq" data-spy="faq">FAQ</a>
     <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode">
@@ -1538,13 +1631,12 @@ svg.nc{overflow:visible}
         <path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5Z"/>
       </svg>
     </button>
-    <a class="nav-cta" href="#top" id="wl-nav">Join the list</a>
   </div>
 </nav>
 
 <!-- ═══ HERO ═══ -->
 <!-- Hero: the tall candle above the clouds, notifications going quiet at the edge. -->
-<header class="nh tc q-row pl-hero" id="top"><div class="pl-cw"><svg class="pl-mark pl-mk1" viewBox="176 92 160 350" aria-hidden="true"><defs><linearGradient id="plpl-mk1" gradientUnits="userSpaceOnUse" x1="0" y1="224" x2="0" y2="430"><stop offset="0" style="stop-color:var(--ink)"/><stop offset=".45" style="stop-color:var(--ink)"/><stop offset="1" style="stop-color:var(--ink);stop-opacity:0"/></linearGradient></defs><g fill="none" stroke-width="11" stroke-linejoin="round"><path d="M200 430V250q0-26 26-26h60q26 0 26 26v180" stroke="url(#plpl-mk1)" stroke-linecap="round"/><path class="pl-fl" d="M256 202c-26-22-24-56 0-92c24 36 26 70 0 92z"/></g></svg><div class="pl-fx" aria-hidden="true"><span class="pl-flare"></span></div></div><div class="ov lf"><h1><span class="em top">The All Block</span>Extinguish your<br>distractions</h1><form class="wl" id="wl" novalidate><div class="wl-row"><input id="wl-e" type="email" name="email" autocomplete="email" inputmode="email" autocapitalize="off" spellcheck="false" placeholder="Your email address" aria-label="Your email address" required><button type="submit">Join the list</button></div><p class="wl-msg" id="wl-m" role="status" aria-live="polite"></p></form><div class="pl-dl pl-dl8"><span class="ci off"><i><svg class="pi" viewBox="0 0 24 24" aria-hidden="true"><path d="M0 0h11.4v11.4H0zM12.6 0H24v11.4H12.6zM0 12.6h11.4V24H0zM12.6 12.6H24V24H12.6z"/></svg></i><b>Windows</b><small>Coming soon</small></span><span class="ci off"><i><svg class="pi" viewBox="0 0 24 24" aria-hidden="true"><path d="M18.4395 5.5586c-.675 1.1664-1.352 2.3318-2.0274 3.498-.0366-.0155-.0742-.0286-.1113-.043-1.8249-.6957-3.484-.8-4.42-.787-1.8551.0185-3.3544.4643-4.2597.8203-.084-.1494-1.7526-3.021-2.0215-3.4864a1.1451 1.1451 0 0 0-.1406-.1914c-.3312-.364-.9054-.4859-1.379-.203-.475.282-.7136.9361-.3886 1.5019 1.9466 3.3696-.0966-.2158 1.9473 3.3593.0172.031-.4946.2642-1.3926 1.0177C2.8987 12.176.452 14.772 0 18.9902h24c-.119-1.1108-.3686-2.099-.7461-3.0683-.7438-1.9118-1.8435-3.2928-2.7402-4.1836a12.1048 12.1048 0 0 0-2.1309-1.6875c.6594-1.122 1.312-2.2559 1.9649-3.3848.2077-.3615.1886-.7956-.0079-1.1191a1.1001 1.1001 0 0 0-.8515-.5332c-.5225-.0536-.9392.3128-1.0488.5449zm-.0391 8.461c.3944.5926.324 1.3306-.1563 1.6503-.4799.3197-1.188.0985-1.582-.4941-.3944-.5927-.324-1.3307.1563-1.6504.4727-.315 1.1812-.1086 1.582.4941zM7.207 13.5273c.4803.3197.5506 1.0577.1563 1.6504-.394.5926-1.1038.8138-1.584.4941-.48-.3197-.5503-1.0577-.1563-1.6504.4008-.6021 1.1087-.8106 1.584-.4941z"/></svg></i><b>Android</b><small>Coming soon</small></span><span class="ci off"><i><svg class="pi" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg></i><b>macOS</b><small>Coming soon</small></span><span class="ci off"><i><svg class="pi" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg></i><b>iOS</b><small>Coming soon</small></span></div><button class="pl-demo" type="button" onclick="hsGo(3)">Watch the demo <span aria-hidden="true">→</span></button></div></header>
+<header class="nh tc q-row pl-hero" id="top"><div class="pl-cw"><svg class="pl-mark pl-mk1" viewBox="176 92 160 350" aria-hidden="true"><defs><linearGradient id="plpl-mk1" gradientUnits="userSpaceOnUse" x1="0" y1="224" x2="0" y2="430"><stop offset="0" style="stop-color:var(--ink)"/><stop offset=".45" style="stop-color:var(--ink)"/><stop offset="1" style="stop-color:var(--ink);stop-opacity:0"/></linearGradient></defs><g fill="none" stroke-width="11" stroke-linejoin="round"><path d="M200 430V250q0-26 26-26h60q26 0 26 26v180" stroke="url(#plpl-mk1)" stroke-linecap="round"/><path class="pl-fl" d="M256 202c-26-22-24-56 0-92c24 36 26 70 0 92z"/></g></svg><div class="pl-fx" aria-hidden="true"><span class="pl-flare"></span></div></div><div class="ov lf"><h1><span class="em top">The All Block</span>Extinguish your<br>distractions</h1><div class="pl-dl pl-dl8"><span class="ci off"><i><svg class="pi" viewBox="0 0 24 24" aria-hidden="true"><path d="M0 0h11.4v11.4H0zM12.6 0H24v11.4H12.6zM0 12.6h11.4V24H0zM12.6 12.6H24V24H12.6z"/></svg></i><b>Windows</b><small>Coming soon</small></span><span class="ci off"><i><svg class="pi" viewBox="0 0 24 24" aria-hidden="true"><path d="M18.4395 5.5586c-.675 1.1664-1.352 2.3318-2.0274 3.498-.0366-.0155-.0742-.0286-.1113-.043-1.8249-.6957-3.484-.8-4.42-.787-1.8551.0185-3.3544.4643-4.2597.8203-.084-.1494-1.7526-3.021-2.0215-3.4864a1.1451 1.1451 0 0 0-.1406-.1914c-.3312-.364-.9054-.4859-1.379-.203-.475.282-.7136.9361-.3886 1.5019 1.9466 3.3696-.0966-.2158 1.9473 3.3593.0172.031-.4946.2642-1.3926 1.0177C2.8987 12.176.452 14.772 0 18.9902h24c-.119-1.1108-.3686-2.099-.7461-3.0683-.7438-1.9118-1.8435-3.2928-2.7402-4.1836a12.1048 12.1048 0 0 0-2.1309-1.6875c.6594-1.122 1.312-2.2559 1.9649-3.3848.2077-.3615.1886-.7956-.0079-1.1191a1.1001 1.1001 0 0 0-.8515-.5332c-.5225-.0536-.9392.3128-1.0488.5449zm-.0391 8.461c.3944.5926.324 1.3306-.1563 1.6503-.4799.3197-1.188.0985-1.582-.4941-.3944-.5927-.324-1.3307.1563-1.6504.4727-.315 1.1812-.1086 1.582.4941zM7.207 13.5273c.4803.3197.5506 1.0577.1563 1.6504-.394.5926-1.1038.8138-1.584.4941-.48-.3197-.5503-1.0577-.1563-1.6504.4008-.6021 1.1087-.8106 1.584-.4941z"/></svg></i><b>Android</b><small>Coming soon</small></span><span class="ci off"><i><svg class="pi" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg></i><b>macOS</b><small>Coming soon</small></span><span class="ci off"><i><svg class="pi" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg></i><b>iOS</b><small>Coming soon</small></span></div><button class="pl-demo" type="button" onclick="hsGo(3)">Watch the demo</button></div></header>
 <!-- The old hero stays, off-screen, because its drum and Start button run the "Light it" demo. -->
 <header class="hero" id="oldtop" aria-hidden="true">
   <div class="hero-bg" aria-hidden="true">
@@ -1636,7 +1728,7 @@ svg.nc{overflow:visible}
     <p class="demo-line">Your mouse and keyboard are switched off system-wide.</p>
     <p class="demo-sub" id="demoSub">Clicking, typing and Alt+Tab stop reaching Windows
       until the clock hits zero.</p>
-    <p class="demo-foot">Demo only — that's why there's a Back button. A real session has none.</p>
+    <p class="demo-foot">Demo only. That's why there's a Back button. A real session has none.</p>
   </div>
 </div>
 
@@ -1688,21 +1780,100 @@ svg.nc{overflow:visible}
 <!-- ═══ BELOW THE HERO ═══ -->
 <div class="v2">
 <section id="devices" class="v-band v-sand"><div class="v-wrap v-split v-flip">
- <div><p class="v-eyebrow">Windows and Android</p><h2>One app,<br>every screen.</h2>
- <p class="v-lede">The same candle on your computer and your phone. On Pro, a schedule set on one runs on both.</p></div>
+ <div><h2>One app,<br>every screen.</h2>
+ <p class="v-lede">The same candle on your computer and your phone.</p></div>
  <div class="pl-combo"><div class="pl-stage"><div class="pl-win"><img class="v-sw-l" src="../img/v3/d_timer_light.webp" alt="The All Block on Windows" loading="lazy"><img class="v-sw-d" src="../img/v3/d_timer_dark.webp" alt="The All Block on Windows" loading="lazy"></div><div class="pl-pw"><div class="pl-phone"><div class="pl-scr"><div class="pl-sb" aria-hidden="true"><i>9:30</i><i class="cam"></i><i><svg width="1em" height="1em" viewBox="0 0 24 24" fill="currentColor"><path d="M12 20 1 8a16 16 0 0 1 22 0z"/></svg><svg width="1em" height="1em" viewBox="0 0 24 24" fill="currentColor"><path d="M22 2v20H2z"/></svg><svg width=".6em" height="1em" viewBox="0 0 14 24" fill="currentColor"><rect x="1" y="3" width="12" height="20" rx="2"/><rect x="4" y="0" width="6" height="3"/></svg></i></div><img class="v-sw-l" src="../img/v3/p_timer_light.webp" alt="The All Block on Android" loading="lazy"><img class="v-sw-d" src="../img/v3/p_timer_dark.webp" alt="The All Block on Android" loading="lazy"></div></div></div></div></div></div></section>
-<section id="how" class="v-band"><div class="v-wrap v-split">
- <div><p class="v-eyebrow">Why it's called The All Block</p><h2>Not a nudge.<br>A complete block.</h2>
- <ul class="v-ticks"><li>The whole device locks, not just a few apps. Calls still come through.</li><li>Restarting doesn't end it.</li><li>Closing the app doesn't end it.</li><li>A friend can hold the password (Pro).</li></ul>
- <p class="v-ash" style="margin-top:14px">Need out? One escape a month, three on Pro.</p></div>
- <div class="pl-cost" id="cost"><p class="pl-cost-k">What it costs you</p><label class="pl-cost-q" for="costR">I spend <output id="costH">4h</output> a day on my phone.</label><input type="range" id="costR" min="1" max="12" step="0.5" value="4" aria-label="Hours a day on your phone"><div class="pl-cost-sc"><span>1h</span><span>12h</span></div><dl class="pl-cost-g"><div><dt id="costY">61 days</dt><dd>every year</dd></div><div><dt id="costL">8.3 years</dt><dd>over the next 50</dd></div><div><dt id="costW">25%</dt><dd>of your waking hours</dd></div></dl><p class="pl-cost-f">That time is your life. The All Block gives it back.</p><a class="v-btn pl-cost-go" href="#top">Get my time back</a></div></div></section>
-<section id="lock" class="v-band v-sand"><div class="v-wrap v-split v-flip">
- <div><p class="v-eyebrow">Accountability Lock · Pro</p><h2>Keep getting past?</h2><p class="v-lede">Give the password to someone else. Without it, the schedule can't be changed or switched off.</p>
- <ul class="v-ticks"><li>Uninstall protection: on Android, the app can't be deleted to get out of a block. The iPhone app will do the same.</li><li>It comes back on every time the app restarts.</li><li>Your monthly emergency escape still works.</li></ul></div>
- <div><img class="pl-lockph v-sw-l" src="../img/v3/p_guard_light.webp" alt="The Accountability Lock on Android" loading="lazy"><img class="pl-lockph v-sw-d" src="../img/v3/p_guard_dark.webp" alt="Accountability Lock" loading="lazy"></div></div></section>
+<section id="schedule" class="v-band"><div class="v-wrap">
+ <h2>Set it once.<br>Both devices follow.</h2>
+ <div class="sk-row3" aria-hidden="true"><div class="sk-dv"><div class="sk-os"><span class="off"><svg viewBox="0 0 24 24"><path d="M3 5.4l7.4-1V11.4H3zM11.4 4.2L21 3v8.4h-9.6zM3 12.6h7.4v7L3 18.6zM11.4 12.6H21V21l-9.6-1.3z"/></svg>Windows<em>Coming soon</em></span><span class="off"><svg viewBox="0 0 24 24"><path d="M16.4 12.7c0-2.5 2-3.6 2.1-3.7-1.2-1.7-3-1.9-3.6-2-1.5-.2-3 .9-3.8.9-.8 0-2-.9-3.3-.8-1.7 0-3.3 1-4.2 2.5-1.8 3.1-.5 7.7 1.3 10.2.8 1.2 1.8 2.6 3.1 2.5 1.3 0 1.7-.8 3.2-.8s1.9.8 3.2.8c1.3 0 2.2-1.2 3-2.4.9-1.4 1.3-2.7 1.3-2.8 0 0-2.6-1-2.6-3.9zM14 5.3c.7-.8 1.1-1.9 1-3-1 0-2.1.7-2.8 1.5-.6.7-1.2 1.8-1 2.9 1.1.1 2.1-.6 2.8-1.4z"/></svg>Mac<em>Coming soon</em></span></div><div class="sk-frame sk-tab"><div class="sk-scr"><canvas class="sx-cv"></canvas><div class="sk-clk"><small>BACK AT</small>12:00</div></div></div></div><div class="sk-link"><span class="sk-sync"><i><svg viewBox="0 0 24 24"><path d="M20 11a8 8 0 0 0-14.3-4.9L4 8"/><path d="M4 4v4h4"/><path d="M4 13a8 8 0 0 0 14.3 4.9L20 16"/><path d="M20 20v-4h-4"/></svg></i>Same schedule</span></div><div class="sk-dv"><div class="sk-os"><span class="off"><svg viewBox="0 0 24 24"><path fill-rule="evenodd" d="M2.5 18.5a9.5 9.5 0 0 1 19 0zM7.2 14.6a1.1 1.1 0 1 0 2.2 0a1.1 1.1 0 1 0-2.2 0zM14.6 14.6a1.1 1.1 0 1 0 2.2 0a1.1 1.1 0 1 0-2.2 0z"/><path d="M6.3 7.2l2.2 3.6M17.7 7.2l-2.2 3.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg>Android<em>Coming soon</em></span><span class="off"><svg viewBox="0 0 24 24"><path d="M16.4 12.7c0-2.5 2-3.6 2.1-3.7-1.2-1.7-3-1.9-3.6-2-1.5-.2-3 .9-3.8.9-.8 0-2-.9-3.3-.8-1.7 0-3.3 1-4.2 2.5-1.8 3.1-.5 7.7 1.3 10.2.8 1.2 1.8 2.6 3.1 2.5 1.3 0 1.7-.8 3.2-.8s1.9.8 3.2.8c1.3 0 2.2-1.2 3-2.4.9-1.4 1.3-2.7 1.3-2.8 0 0-2.6-1-2.6-3.9zM14 5.3c.7-.8 1.1-1.9 1-3-1 0-2.1.7-2.8 1.5-.6.7-1.2 1.8-1 2.9 1.1.1 2.1-.6 2.8-1.4z"/></svg>iPhone<em>Coming soon</em></span></div><div class="sk-frame sk-ph"><div class="sk-scr"><canvas class="sx-cv"></canvas><div class="sk-clk"><small>BACK AT</small>12:00</div></div></div></div></div>
+ <div class="sk-plans"><b>Free</b><span>One schedule, up to 3 hours, on one device</span><b class="pro">Pro</b><span>As many as you like, up to 24 hours, on both</span></div>
+<style>
+#schedule .sk-dv{display:flex;flex-direction:column;align-items:center;min-width:0;position:relative}
+#schedule .sk-dv::after{content:"";position:absolute;left:8%;right:8%;bottom:-22px;height:26px;border-radius:50%;background:radial-gradient(closest-side,rgba(20,18,14,.28),transparent);filter:blur(4px);z-index:0}
+#schedule .sk-frame{position:relative;z-index:1;width:100%;background:linear-gradient(150deg,#3a3d45 0%,#1d1f25 38%,#121318 100%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.07),inset 0 1px 0 rgba(255,255,255,.16),0 50px 70px -46px rgba(20,18,14,.7),0 20px 30px -24px rgba(20,18,14,.45)}
+#schedule .sk-scr{position:relative;width:100%;height:100%;background:radial-gradient(120% 90% at 50% 40%,#0b0a09,#000 70%);display:flex;align-items:center;justify-content:center;color:#fff;overflow:hidden}
+#schedule .sk-scr::after{content:"";position:absolute;inset:0;background:linear-gradient(118deg,rgba(255,255,255,.07) 0%,rgba(255,255,255,.02) 32%,transparent 32.2%);pointer-events:none}
+#schedule .sk-tab{aspect-ratio:16/10.6;border-radius:clamp(18px,2.4vw,30px);padding:clamp(8px,1.1vw,13px)}
+#schedule .sk-tab .sk-scr{border-radius:clamp(11px,1.5vw,18px);gap:5%}
+#schedule .sk-tab::before{content:"";position:absolute;top:calc(clamp(8px,1.1vw,13px)/2 - 2px);left:50%;width:4px;height:4px;margin-left:-2px;border-radius:50%;background:#2c3038;box-shadow:inset 0 0 0 1px #0d0e11}
+#schedule .sk-tab .sx-cv{width:30%;height:90%}
+#schedule .sk-ph{max-width:156px;aspect-ratio:9/19.3;border-radius:clamp(20px,2.6vw,30px);padding:clamp(5px,.6vw,7px)}
+#schedule .sk-ph .sk-scr{flex-direction:column;border-radius:clamp(15px,2vw,24px)}
+#schedule .sk-ph .sk-scr::before{content:"";position:absolute;top:6%;left:50%;width:30%;height:3.6%;transform:translateX(-50%);border-radius:99px;background:#000;box-shadow:0 0 0 1px #15161a;z-index:2}
+#schedule .sk-ph::before{content:"";position:absolute;right:-2px;top:22%;width:2px;height:14%;border-radius:2px;background:#2a2c33}
+#schedule .sk-ph .sx-cv{width:100%;height:56%;margin-top:6%}
+#schedule .sx-cv{display:block;min-width:0}
+#schedule .sk-clk{font:800 clamp(18px,2.4vw,32px)/1 var(--display);letter-spacing:-.02em;color:rgba(255,255,255,.9)}
+#schedule .sk-clk small{display:block;font:700 9px var(--mono);letter-spacing:.2em;color:rgba(255,255,255,.45);margin-bottom:7px}
+#schedule .sk-ph .sk-clk{text-align:center;font-size:clamp(14px,1.5vw,19px)}#schedule .sk-ph .sk-clk small{font-size:7px;margin-bottom:5px}
+#schedule .sk-os{display:flex;gap:6px;justify-content:center;margin-bottom:18px;position:relative;z-index:1}
+#schedule .sk-os span{display:inline-flex;align-items:center;gap:7px;padding:6px 12px 6px 10px;border-radius:999px;background:var(--card);border:1px solid var(--line);font:600 12.5px var(--body);color:var(--ink);white-space:nowrap;box-shadow:0 1px 2px rgba(20,18,14,.05)}
+#schedule .sk-os svg{width:15px;height:15px;fill:currentColor;flex:none}
+#schedule .sk-sync{display:inline-flex;align-items:center;gap:8px;padding:7px 14px 7px 8px;border-radius:999px;background:var(--card);border:1px solid var(--line);font:600 12.5px var(--body);color:var(--ink);white-space:nowrap;position:relative;box-shadow:0 6px 18px -10px rgba(20,18,14,.3)}
+#schedule .sk-sync i{display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--flame);color:#1a1205}
+#schedule .sk-sync svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+#schedule .sk-plans{display:inline-grid;grid-template-columns:auto auto;gap:8px 18px;margin-top:34px;font:500 14px/1.4 var(--body);color:var(--ash);text-align:left}
+#schedule .sk-plans b{font:700 10.5px/1.9 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--ink)}
+#schedule .sk-plans b.pro{color:var(--green-txt)}
+#schedule h2{max-width:none}
+#schedule .sk-row3{display:grid;grid-template-columns:minmax(0,2.7fr) minmax(0,1.05fr) minmax(0,.95fr);align-items:end;margin-top:52px}
+#schedule .sk-link{align-self:center;position:relative;text-align:center;margin-top:46px}
+#schedule .sk-link::before{content:"";position:absolute;left:6px;right:6px;top:50%;height:2px;background:repeating-linear-gradient(90deg,var(--flame) 0 6px,transparent 6px 11px);opacity:.75}
 
+#schedule .sk-os span.off{color:var(--ash);background:transparent;box-shadow:none}
+#schedule .sk-os em{font:700 9px var(--mono);letter-spacing:.14em;text-transform:uppercase;font-style:normal;color:var(--faint);margin-left:2px}
+@media (max-width:800px){#schedule .sk-row3{grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:16px}#schedule .sk-link{display:none}#schedule .sk-os{flex-direction:column;align-items:center}#schedule .sk-os span{font-size:11.5px;padding:5px 10px 5px 8px}}
+</style>
+<script>
+/* The resting candle from the phone app (aodDraw), drawn on each screen. */
+(function(){
+ var cvs=[].slice.call(document.querySelectorAll('#schedule .sx-cv')),still=matchMedia('(prefers-reduced-motion: reduce)').matches,run=false;
+ function draw(cv,t,k){
+  var W=cv.clientWidth,H=cv.clientHeight,d=devicePixelRatio||1;if(!W||!H)return;
+  if(cv.width!==Math.round(W*d)){cv.width=Math.round(W*d);cv.height=Math.round(H*d)}
+  var x=cv.getContext('2d');x.setTransform(d,0,0,d,0,0);x.clearRect(0,0,W,H);
+  var u=Math.min(W/90,H/230),s=t/1000+k*3.1,cx=W/2;
+  var maxH=H*.5,frac=.62,base=H/2+maxH*frac/2+14*u,top=base-maxH*frac,ww=30*u;
+  var n=(Math.sin(s*7.3)*.5+Math.sin(s*13.1+1.7)*.3+Math.sin(s*2.1+.4)*.6)/1.4;
+  var g=Math.pow(Math.max(0,Math.sin(s*.83+.6)),10)*Math.sin(s*21);
+  var fl=1+.07*n+.1*g,sway=Math.sin(s*1.7)*1.4+Math.sin(s*5.3+1)*.7+g*3.2;
+  var fh=36*fl*u,fw=8.5*(1.06-.06*fl)*u,by=top-7*u,tipX=cx+sway*u,tipY=by-fh;
+  var gx=cx+sway*.3*u,gy=by-fh*.4,edge=Math.min(gx,W-gx,gy,H-gy)-2;
+  var gr=x.createRadialGradient(gx,gy,0,gx,gy,Math.max(20,Math.min(190*u*fl,edge)));
+  gr.addColorStop(0,'rgba(255,170,80,'+(.34*fl).toFixed(3)+')');gr.addColorStop(.35,'rgba(255,135,50,.12)');gr.addColorStop(.75,'rgba(255,120,40,.03)');gr.addColorStop(1,'rgba(255,120,40,0)');
+  x.fillStyle=gr;x.fillRect(0,0,W,H);
+  var wg=x.createLinearGradient(0,top,0,base);
+  wg.addColorStop(0,'rgba(255,222,175,'+Math.min(1,.62*fl).toFixed(3)+')');wg.addColorStop(.18,'rgba(185,148,106,.42)');wg.addColorStop(1,'rgba(60,48,38,0)');
+  x.fillStyle=wg;x.beginPath();if(x.roundRect)x.roundRect(cx-ww/2,top,ww,base-top,[5*u,5*u,0,0]);else x.rect(cx-ww/2,top,ww,base-top);x.fill();
+  var rim=x.createRadialGradient(cx,top+2*u,0,cx,top+2*u,ww*.6);rim.addColorStop(0,'rgba(255,230,188,'+Math.min(1,.55*fl).toFixed(3)+')');rim.addColorStop(1,'rgba(255,230,188,0)');
+  x.fillStyle=rim;x.beginPath();x.ellipse(cx,top+2*u,ww/2,3.5*u,0,0,7);x.fill();
+  x.strokeStyle='#5a4632';x.lineWidth=2*u;x.lineCap='round';x.beginPath();x.moveTo(cx,top+u);x.quadraticCurveTo(cx,top-5*u,cx+sway*.15*u,top-9*u);x.stroke();
+  x.fillStyle='rgba(255,120,48,.95)';x.beginPath();x.arc(cx+sway*.15*u,top-9*u,1.3*u,0,7);x.fill();
+  var fg=x.createRadialGradient(cx+sway*.2*u,by-fh*.28,0,cx+sway*.2*u,by-fh*.35,fh*.75);
+  fg.addColorStop(0,'rgba(255,251,232,1)');fg.addColorStop(.3,'rgba(255,214,128,.97)');fg.addColorStop(.7,'rgba(246,140,52,.7)');fg.addColorStop(1,'rgba(210,70,24,0)');
+  x.fillStyle=fg;x.beginPath();x.moveTo(cx,by+2*u);
+  x.bezierCurveTo(cx-fw*1.35,by-fh*.18,tipX-fw*.75+sway*.2*u,by-fh*.68,tipX,tipY);
+  x.bezierCurveTo(tipX+fw*.75+sway*.2*u,by-fh*.68,cx+fw*1.35,by-fh*.18,cx,by+2*u);x.fill();
+ }
+ function frame(t){cvs.forEach(function(c,i){draw(c,t,i)});if(run&&!still)requestAnimationFrame(frame)}
+ frame(800);addEventListener('resize',function(){frame(800)});
+ if('IntersectionObserver' in window)new IntersectionObserver(function(e){var was=run;run=e[0].isIntersecting;if(run&&!was&&!still)requestAnimationFrame(frame)}).observe(document.querySelector('#schedule .sk-row3'));
+})();
+</script>
+</div></section>
+<section id="lock" class="v-band al"><div class="v-wrap">
+ <p class="v-eyebrow">Accountability Lock · Pro</p><h2><em>No</em> getting past.</h2>
+ <div class="al-bar"><span class="al-big"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span><span class="al-k">Password</span><span class="al-dots">••••••</span><p class="al-cap"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M17 6l3 3M14 9l2 2"/></svg>Held by someone you trust</p></div>
+ <ul class="al-fx">
+  <li><span class="al-bub"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M9 7V4h6v3M6 7l1 14h10l1-14"/></svg></span><b>Can't be uninstalled on mobile</b></li>
+  <li><span class="al-bub"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 0 1 14-5.3L20 9M20 4v5h-5M20 12a8 8 0 0 1-14 5.3L4 15M4 20v-5h5"/></svg></span><b>Back after every restart</b></li>
+  <li><span class="al-bub"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 21V4a1 1 0 0 1 1-1h9l4 3v15"/><path d="M3 21h18M12 12h.01"/></svg></span><b>1 escape a month, 3 with Pro</b></li>
+ </ul>
+</div></section>
+
+<section id="how" class="v-band v-sand nn pre w-white noq"><div class="v-wrap"><div class="nn-col c r7"><h2>Why would this benefit you?</h2><p class="r4-tap">Tap your daily screen time to find out.</p><div class="r3 r4 tight duo" role="group" aria-label="Hours a day"><button type="button" data-h="1"><span>1h a day</span><span class="v"><span class="a">15 days a year</span><span class="b"><b>3.1</b> waking years</span></span></button><button type="button" data-h="2"><span>2h a day</span><span class="v"><span class="a">30 days a year</span><span class="b"><b>6.3</b> waking years</span></span></button><button type="button" data-h="3"><span>3h a day</span><span class="v"><span class="a">46 days a year</span><span class="b"><b>9.4</b> waking years</span></span></button><button type="button" data-h="4"><span>4h a day</span><span class="v"><span class="a">61 days a year</span><span class="b"><b>12.5</b> waking years</span></span></button><button type="button" data-h="5"><span>5h a day</span><span class="v"><span class="a">76 days a year</span><span class="b"><b>15.6</b> waking years</span></span></button><button type="button" data-h="6"><span>6h a day</span><span class="v"><span class="a">91 days a year</span><span class="b"><b>18.8</b> waking years</span></span></button><button type="button" data-h="7"><span>7h a day</span><span class="v"><span class="a">106 days a year</span><span class="b"><b>21.9</b> waking years</span></span></button><button type="button" data-h="8"><span>8h a day</span><span class="v"><span class="a">122 days a year</span><span class="b"><b>25</b> waking years</span></span></button><button type="button" data-h="9"><span>9h a day</span><span class="v"><span class="a">137 days a year</span><span class="b"><b>28.1</b> waking years</span></span></button><button type="button" data-h="10"><span>10h a day</span><span class="v"><span class="a">152 days a year</span><span class="b"><b>31.3</b> waking years</span></span></button><button type="button" data-h="11"><span>11h a day</span><span class="v"><span class="a">167 days a year</span><span class="b"><b>34.4</b> waking years</span></span></button><button type="button" data-h="12"><span>12h a day</span><span class="v"><span class="a">182 days a year</span><span class="b"><b>37.5</b> waking years</span></span></button></div><div class="ck-show r8"><div class="r10 r11 "><div class="r10-lab"><div class="p"><output class="r8-n" data-o="wk">12.5</output><p class="r8-u">years on your phone</p></div><div class="e"><output class="r8-n" data-o="left">37.5</output><p class="r8-u">for everything else</p></div></div><div class="r10-br"><i class="p"></i><i class="e"></i></div><div class="r10-ln"></div><div class="tk"><span>Today</span><span>10</span><span>20</span><span>30</span><span>40</span><span>50 years</span></div></div><div class="r8-btn"><a class="bx b6" href="#top"><span class="lb">You&rsquo;d reclaim <em><output data-o="wkr">13</output> years</em></span></a></div></div></div></div></section>
 <section class="v-band v-sand" id="pricing"><div class="v-wrap v-center" data-bill="y">
-<p class="v-eyebrow">Pricing</p><h2>End your screen time, for real this time.</h2><p class="v-lede">Manual sessions up to three hours are free for good.</p>
+<h2>End your screen time, for real this time.</h2><p class="v-lede">Manual sessions up to three hours are free for good.</p>
 <div class="v-toggle"><button data-b="m" aria-pressed="false">Monthly</button><button data-b="y" class="v-on" aria-pressed="true">Yearly <em class="v-save">save 64%</em></button><button data-b="o" aria-pressed="false">One-off</button></div>
 <div class="v-plans">
  <div class="v-plan"><h3>Free</h3><p class="v-price">£0</p><p class="v-per">for good</p><ul class="v-ticks"><li>Sessions from 10 seconds to 3 hours</li><li>One scheduled block, up to 3 hours</li><li>One emergency escape a month</li></ul><span class="v-btn v-btn--ghost dl-off" aria-disabled="true">Coming soon</span></div>
@@ -1713,7 +1884,7 @@ svg.nc{overflow:visible}
 <div class="v-trust"><span class="v-sub">Cancel any time</span><span class="v-one">Pay once, nothing renews</span></div>
 </div></section>
 <section class="v-band" id="faq"><div class="v-wrap v-narrow">
-<p class="v-eyebrow">FAQ</p><h2>Questions</h2><div class="v-mt"><details><summary>What if I really need to get out?</summary><p>Use an emergency escape. You get one a month free, three on Pro, and they refill on the 1st. On Windows, hold <kbd>Esc</kbd> for five seconds on the lock screen. On the phone, tap Emergency escape. An extra escape costs £0.99.</p></details><details><summary>What still works on my phone?</summary><p>Calls, the dialer and contacts. Everything else waits for the timer.</p></details><details><summary>Does restarting end a block?</summary><p>No. It comes back locked, with the time that was left.</p></details><details><summary>What if Windows locks during a block?</summary><p>Sign in as usual. The block carries on, and the clock keeps its time.</p></details><details><summary>Windows warned me about the download.</summary><p>The All Block is not code-signed yet, so SmartScreen warns about it. Click <b>More info</b>, then <b>Run anyway</b>, then <b>Yes</b> on the admin prompt.</p></details></div>
+<h2>Questions</h2><div class="v-mt"><details><summary>What if I really need to get out?</summary><p>Use an emergency escape. You get one a month free, three on Pro, and they refill on the 1st. On Windows, hold <kbd>Esc</kbd> for five seconds on the lock screen. On the phone, tap Emergency escape. An extra escape costs £0.99.</p></details><details><summary>What still works on my phone?</summary><p>Calls, the dialer and contacts. Everything else waits for the timer.</p></details><details><summary>Does restarting end a block?</summary><p>No. It comes back locked, with the time that was left.</p></details><details><summary>What if Windows locks during a block?</summary><p>Sign in as usual. The block carries on, and the clock keeps its time.</p></details><details><summary>Windows warned me about the download.</summary><p>The All Block is not code-signed yet, so SmartScreen warns about it. Click <b>More info</b>, then <b>Run anyway</b>, then <b>Yes</b> on the admin prompt.</p></details></div>
 <p class="v-ash v-small v-mt">Still stuck? <a href="mailto:MrAuzeo@protonmail.com?subject=All%20Block%20help">Email me</a>. I love feedback, and I answer personally.</p>
 </div></section>
 <section class="v-band pl-end" id="get"><div class="v-wrap v-center"><svg class="pl-mark pl-mk2" viewBox="176 92 160 350" aria-hidden="true"><defs><linearGradient id="plpl-mk2" gradientUnits="userSpaceOnUse" x1="0" y1="224" x2="0" y2="430"><stop offset="0" style="stop-color:var(--ink)"/><stop offset=".45" style="stop-color:var(--ink)"/><stop offset="1" style="stop-color:var(--ink);stop-opacity:0"/></linearGradient></defs><g fill="none" stroke-width="10" stroke-linejoin="round"><path d="M200 430V250q0-26 26-26h60q26 0 26 26v180" stroke="url(#plpl-mk2)" stroke-linecap="round"/><path class="pl-fl" d="M256 202c-26-22-24-56 0-92c24 36 26 70 0 92z"/></g></svg>
@@ -2714,7 +2885,7 @@ if(t&&pro){var c=t.cloneNode(true);c.classList.add('fx-bill');var co=c.querySele
   host.removeAttribute('data-once');host.setAttribute('data-bill',x.dataset.b)})})}
 
 })();</script>
-<script>(function(){var r=document.documentElement,u=navigator.userAgent,n=document.querySelector('.nav-cta');
+<script>(function(){var r=document.documentElement,u=navigator.userAgent;
  var and=/Android/i.test(u),win=!and&&/Windows/i.test(u);if(and)r.classList.add('is-android');if(win)r.classList.add('is-win');
  /* nav Download: one tap for this device; anywhere else it goes to the hero's four keys */
  })()</script>
@@ -2742,62 +2913,22 @@ function setF(v){mode=v;
  if(v!=='0'&&!rm.matches){spawn();tm=setInterval(spawn,v==='5'?900:1400)}}
 setF('5')})()</script>
 <script>(function(){var r=document.getElementById("costR");if(!r)return;function f(h){var m=Math.round(h*60);return Math.floor(m/60)+"h"+(m%60?" "+m%60+"m":"")}function u(){var h=+r.value,d=Math.round(h*365/24),y=h*50/24;r.style.setProperty("--p",((h-1)/11*100)+"%");document.getElementById("costH").textContent=f(h);document.getElementById("costY").textContent=d+" days";document.getElementById("costL").textContent=(y<10?y.toFixed(1):Math.round(y))+" years";document.getElementById("costW").textContent=Math.round(h/16*100)+"%"}r.addEventListener("input",u);u();var g=document.querySelector(".pl-cost-go"),n=document.querySelector(".nav-cta");if(g&&n)g.href=n.getAttribute("href");var e=document.querySelector(".pl-end-go");if(e&&n)e.href=n.getAttribute("href")})()</script>
-<script>/* hero waiting list -> Supabase join_waitlist() (insert-only; the list itself can't be read from here) */
-(function(){
- var f=document.getElementById('wl');if(!f)return;
- var SUPA="https://jkssypznppzqmdndmssz.supabase.co",ANON="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6" +
-             "Imprc3N5cHpucHB6cW1kbmRtc3N6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODcyMDcw" +
-             "NjYsImV4cCI6MjEwMjc4MzA2Nn0.ujK9-FfekXhQ_6F2nep47u4K5KU2_Pwyax3Xww-YMMw";
- var e=document.getElementById('wl-e'),m=document.getElementById('wl-m'),b=f.querySelector('button'),u=navigator.userAgent;
- var plat=/Android/i.test(u)?'android':/iPhone|iPad/i.test(u)?'ios':/Macintosh/i.test(u)?'mac':/Windows/i.test(u)?'windows':'';
- var row=f.querySelector('.wl-row'),asked='';
- function say(t,bad){m.textContent=t;m.classList.toggle('bad',!!bad);row.classList.toggle('bad',!!bad);if(bad)e.setAttribute('aria-invalid','true');else e.removeAttribute('aria-invalid')}
- /* the address itself: one @, no spaces, a real-looking name and domain */
- function wrong(v){
-  if(!v)return 'Enter your email address.';
-  if(/\s/.test(v))return 'Remove the space from your email address.';
-  var at=v.split('@');
-  if(at.length<2)return 'Add the @ to your email address.';
-  if(at.length>2)return 'An email address has only one @.';
-  var n=at[0],d=at[1].toLowerCase();
-  if(!n)return 'Add the part before the @.';
-  if(!d)return 'Finish the address after the @, like gmail.com.';
-  if(v.length>254||n.length>64)return 'That address is too long.';
-  if(!/^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+$/i.test(n)||/^\.|\.$|\.\./.test(n))return 'Check the part before the @ for typos.';
-  if(d.indexOf('.')<0)return 'Finish the address after the @, like gmail.com.';
-  if(!/^(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z]{2,24}$/.test(d))return 'Check the part after the @ for typos.';
-  return '';
- }
- /* common slips in the big providers' names */
- var TYPO={'gmial.com':'gmail.com','gmai.com':'gmail.com','gmal.com':'gmail.com','gnail.com':'gmail.com','gamil.com':'gmail.com','gmaill.com':'gmail.com','gmail.co':'gmail.com','gmail.con':'gmail.com','gmail.cm':'gmail.com','gmail.om':'gmail.com','googlemail.co':'googlemail.com',
-  'hotmial.com':'hotmail.com','hotmai.com':'hotmail.com','hotmal.com':'hotmail.com','hotmail.co':'hotmail.com','hotmail.con':'hotmail.com','hotmail.co.k':'hotmail.co.uk',
-  'yaho.com':'yahoo.com','yahooo.com':'yahoo.com','yahoo.co':'yahoo.com','yahoo.con':'yahoo.com','yahoo.co.k':'yahoo.co.uk',
-  'outlok.com':'outlook.com','outllok.com':'outlook.com','outlook.co':'outlook.com','outlook.con':'outlook.com',
-  'iclod.com':'icloud.com','icoud.com':'icloud.com','icloud.co':'icloud.com','icloud.con':'icloud.com',
-  'protonmial.com':'protonmail.com','protonmail.co':'protonmail.com','proton.me.com':'proton.me','live.co':'live.com','aol.co':'aol.com'};
- function typo(v){var i=v.lastIndexOf('@'),d=v.slice(i+1).toLowerCase(),t=TYPO[d]||(/\.(con|cmo|ocm|vom|xom|coma|comm|cim|cpm|cok)$/.test(d)?d.replace(/\.[a-z]+$/,'.com'):'');return t?v.slice(0,i+1)+t:''}
- e.addEventListener('input',function(){if(m.classList.contains('bad'))say('')});
- function done(){f.classList.add('done');say("You're on the list.")}
- try{if(localStorage.getItem('ab-waitlist'))done()}catch(x){}
- var nav=document.getElementById('wl-nav');
- if(nav)nav.addEventListener('click',function(){if(!f.classList.contains('done'))setTimeout(function(){e.focus({preventScroll:true})},450)});
- f.addEventListener('submit',function(ev){
-  ev.preventDefault();var v=e.value.trim();
-  e.value=v;if(wrong(v)){say('Please enter a valid email.',1);e.focus();return}
-  var t=typo(v);
-  if(t&&asked!==v){asked=v;say('Did you mean ',1);var fx=document.createElement('button');fx.type='button';fx.className='wl-fix';fx.textContent=t;
-   fx.onclick=function(){e.value=t;say('');e.focus()};m.appendChild(fx);m.appendChild(document.createTextNode('?'));return}
-  b.disabled=true;
-  fetch(SUPA+'/rest/v1/rpc/join_waitlist',{method:'POST',headers:{apikey:ANON,Authorization:'Bearer '+ANON,'Content-Type':'application/json'},
-   body:JSON.stringify({p_email:v,p_platform:plat})})
-  .then(function(r){return r.ok?r.json():Promise.reject('server')})
-  .then(function(r){
-   if(r==='ok'){done();try{localStorage.setItem('ab-waitlist','1')}catch(x){}}
-   else if(r==='slow')say('Too many sign-ups from this connection. Try again in an hour.',1);
-   else{say('Please enter a valid email.',1);e.focus()}})
-  .catch(function(x){say(x==='server'?"Something went wrong on our side. Your email wasn't saved. Please try again later.":'No internet connection. Check it and try again.',1)})
-  .then(function(){b.disabled=false});
- });
+<script>/* Be honest: tap your hours, see the years split, the button counts them up */
+(function(){var sec=document.querySelector('#how.nn');if(!sec)return;
+var o=sec.querySelector('.r8-btn [data-o="wkr"]'),shown=0,raf=0,still=matchMedia('(prefers-reduced-motion: reduce)');
+function put(k,v){sec.querySelectorAll('[data-o="'+k+'"]').forEach(function(x){x.textContent=v})}
+sec.addEventListener('click',function(e){var b=e.target.closest('[data-h]');if(!b)return;
+ var h=+b.dataset.h,w=Math.round(h*50/16*10)/10,p=w/50,to=Math.round(w),from=shown;
+ sec.querySelectorAll('[data-h]').forEach(function(x){var on=x===b;x.classList.toggle('on',on);x.setAttribute('aria-pressed',on)});
+ put('wk',String(w));put('left',String(Math.round((50-w)*10)/10));
+ sec.querySelectorAll('.r10 .p').forEach(function(x){x.style.flexGrow=w});
+ sec.querySelectorAll('.r10 .e').forEach(function(x){x.style.flexGrow=50-w});
+ var st=sec.style;st.setProperty('--p',p);st.setProperty('--q',1-p);st.setProperty('--sp',Math.sqrt(p));st.setProperty('--sq',Math.sqrt(1-p));
+ sec.classList.add('done');cancelAnimationFrame(raf);shown=to;
+ if(still.matches){o.textContent=to;return}
+ var t0=performance.now();(function f(t){var k=Math.min(1,(t-t0)/800);o.textContent=String(Math.round(from+(to-from)*(1-Math.pow(1-k,3))));if(k<1)raf=requestAnimationFrame(f)})(t0);
+});
+o.textContent='0';
 })();
 </script>
 </body>
