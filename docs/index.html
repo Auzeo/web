@@ -1421,8 +1421,7 @@ svg.nc{overflow:visible}
 .pl-lockph{display:block;width:100%;max-width:460px;height:auto;margin:0 auto;border-radius:22px;box-shadow:0 0 0 1px var(--line),0 30px 60px -30px rgba(40,34,20,.45)}
 :root[data-theme="dark"] .pl-lockph{box-shadow:0 0 0 1px var(--line),0 30px 60px -30px rgba(0,0,0,.8)}
 /* A soft lit card, a few shades off the page, with a warm glow behind the devices */
-.pl-combo{border-radius:28px;padding:7% 6% 6%;background:radial-gradient(60% 55% at 55% 45%,rgba(255,170,80,.16),transparent 70%),linear-gradient(180deg,#fff,#ece8e1);box-shadow:0 0 0 1px rgba(20,22,28,.07)}
-:root[data-theme="dark"] .pl-combo{background:radial-gradient(60% 55% at 55% 45%,rgba(255,160,70,.13),transparent 70%),linear-gradient(180deg,#252f4d,#161c32);box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 0 0 1px rgba(160,175,215,.12)}
+.pl-combo{padding:0}
 .pl-stage{position:relative;padding:0 0 9% 9%}
 .v2 #devices .v-wrap{max-width:1240px}
 .v2 #devices .v-split{grid-template-columns:1.6fr 1fr}
@@ -1503,7 +1502,26 @@ svg.nc{overflow:visible}
 .nh.pl-hero .fx-t{color:rgba(255,255,255,.82)}
 .nh.pl-hero .fx-o{color:#fff}
 </style>
-<style id="dl-paused">.dl-off{cursor:default!important;pointer-events:none;opacity:.6}</style></head>
+<style id="dl-paused">.dl-off{cursor:default!important;pointer-events:none;opacity:.6}</style><style id="lock-al">
+/* Accountability Lock (2026-11-21): centred, a lock bar, then the facts as pills. */
+.v2 .al{--al-g:#a8701c;--al-s:#f3e6cc;background:var(--paper)}
+:root[data-theme="dark"] .v2 .al{--al-g:#ffc867;--al-s:#2a2619}
+.v2 .al .v-eyebrow{color:var(--al-g)}
+.v2 .al .ic{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.v2 .al .v-wrap{text-align:center}
+.v2 .al h2 em{font-style:normal;color:var(--al-g)}
+.v2 .al .al-bar{display:flex;align-items:center;gap:22px;max-width:620px;margin:40px auto 24px;padding:18px 26px;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:999px;box-shadow:var(--shadow)}
+.v2 .al .al-big{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:var(--al-s);color:var(--al-g);flex:none}
+.v2 .al .al-big .ic{width:24px;height:24px}
+.v2 .al .al-k{font:700 11px var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--faint)}
+.v2 .al .al-dots{font:800 22px var(--mono);letter-spacing:.3em;color:var(--ink)}
+.v2 .al .al-cap{display:flex;align-items:center;gap:8px;margin:0 0 0 auto;color:var(--al-g);font-size:15px;font-weight:600}
+.v2 .al .al-fx{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;justify-content:center;gap:12px}
+.v2 .al .al-fx li{display:flex;gap:10px;align-items:center;padding:8px 20px 8px 8px;background:var(--card);border:1px solid var(--line);border-radius:999px}
+.v2 .al .al-bub{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:var(--al-s);color:var(--al-g);flex:none}
+.v2 .al .al-fx b{font:800 15px var(--display);letter-spacing:-.01em;color:var(--ink)}
+@media (max-width:860px){.v2 .al .al-bar{flex-wrap:wrap;border-radius:24px}.v2 .al .al-cap{margin-left:0;width:100%}}
+</style></head>
 <body>
 
 
@@ -1763,10 +1781,15 @@ svg.nc{overflow:visible}
 })();
 </script>
 </div></section>
-<section id="lock" class="v-band"><div class="v-wrap v-split v-flip">
- <div><p class="v-eyebrow">Accountability Lock · Pro</p><h2>Keep getting past?</h2><p class="v-lede">Give the password to someone else. Without it, the schedule can't be changed or switched off.</p>
- <ul class="v-ticks"><li>Uninstall protection: on Android, the app can't be deleted to get out of a block. The iPhone app will do the same.</li><li>It comes back on every time the app restarts.</li><li>Your monthly emergency escape still works.</li></ul></div>
- <div><img class="pl-lockph v-sw-l" src="img/v3/p_guard_light.webp" alt="The Accountability Lock on Android" loading="lazy"><img class="pl-lockph v-sw-d" src="img/v3/p_guard_dark.webp" alt="Accountability Lock" loading="lazy"></div></div></section>
+<section id="lock" class="v-band al"><div class="v-wrap">
+ <p class="v-eyebrow">Accountability Lock · Pro</p><h2><em>Stays</em> locked.</h2>
+ <div class="al-bar"><span class="al-big"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span><span class="al-k">Password</span><span class="al-dots">••••••</span><p class="al-cap"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M17 6l3 3M14 9l2 2"/></svg>Held by someone you trust</p></div>
+ <ul class="al-fx">
+  <li><span class="al-bub"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M9 7V4h6v3M6 7l1 14h10l1-14"/></svg></span><b>Can't be uninstalled on mobile</b></li>
+  <li><span class="al-bub"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 0 1 14-5.3L20 9M20 4v5h-5M20 12a8 8 0 0 1-14 5.3L4 15M4 20v-5h5"/></svg></span><b>Back after every restart</b></li>
+  <li><span class="al-bub"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 21V4a1 1 0 0 1 1-1h9l4 3v15"/><path d="M3 21h18M12 12h.01"/></svg></span><b>1 escape a month, 3 with Pro</b></li>
+ </ul>
+</div></section>
 
 <section class="v-band v-sand" id="pricing"><div class="v-wrap v-center" data-bill="y">
 <p class="v-eyebrow">Pricing</p><h2>End your screen time, for real this time.</h2><p class="v-lede">Manual sessions up to three hours are free for good.</p>
