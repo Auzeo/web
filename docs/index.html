@@ -1710,7 +1710,7 @@ body::before{top:-7vh;bottom:-7vh;will-change:transform;transform:translate3d(0,
 .wl .wl-back{background:none;border:0;padding:0;font:inherit;font-size:13.5px;color:rgba(255,255,255,.7);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
 .wl .wl-back:focus-visible{outline:2px solid #ffc867;outline-offset:2px;border-radius:3px}
 .wl.done .wl-row{display:none}
-.wl.done .wl-msg{margin:0;font-size:19px;font-weight:700;color:#ffc867}
+.wl.done .wl-msg{margin:0;max-width:440px;font-size:18px;line-height:1.45;font-weight:600;color:#ffc867}
 @media(max-width:800px){.pl-hero .pl-cw .pl-mark{height:clamp(190px,34svh,400px)}.wl{width:100%;max-width:420px;margin-top:20px}.wl-msg{text-align:center;margin-left:0;margin-right:0}}
 @media(max-width:380px){.wl button{padding:12px 15px}}
 @media (prefers-reduced-motion:reduce){.wl button,.wl-row{transition:none}}
@@ -3173,8 +3173,8 @@ fit();addEventListener('resize',fit);document.fonts&&document.fonts.ready.then(f
   'protonmial.com':'protonmail.com','protonmail.co':'protonmail.com','proton.me.com':'proton.me','live.co':'live.com','aol.co':'aol.com'};
  function typo(v){var i=v.lastIndexOf('@'),d=v.slice(i+1).toLowerCase(),t=TYPO[d]||(/\.(con|cmo|ocm|vom|xom|coma|comm|cim|cpm|cok)$/.test(d)?d.replace(/\.[a-z]+$/,'.com'):'');return t?v.slice(0,i+1)+t:''}
  e.addEventListener('input',function(){if(m.classList.contains('bad'))say('')});
- function done(){f.classList.add('done');say("You're on the list.")}
- try{if(localStorage.getItem('ab-waitlist'))done()}catch(x){}
+ function done(k){f.classList.add('done');say(k==='u'?"Thank you for your support. We'll keep you posted on new features and updates.":"Thank you for your support. You'll be the first to know when it's out.")}
+ try{var was=localStorage.getItem('ab-waitlist');if(was)done(was)}catch(x){}
  var nav=document.getElementById('wl-nav');
  if(nav)nav.addEventListener('click',function(){if(!f.classList.contains('done'))setTimeout(function(){e.focus({preventScroll:true})},450)});
  f.addEventListener('submit',function(ev){
@@ -3190,7 +3190,7 @@ fit();addEventListener('resize',fit);document.fonts&&document.fonts.ready.then(f
    body:JSON.stringify({p_email:v,p_platform:plat,p_launch:ln.checked,p_updates:nw.checked})})
   .then(function(r){return r.ok?r.json():Promise.reject('server')})
   .then(function(r){
-   if(r==='ok'){done();try{localStorage.setItem('ab-waitlist','1')}catch(x){}}
+   if(r==='ok'){var k=ln.checked?'1':'u';done(k);try{localStorage.setItem('ab-waitlist',k)}catch(x){}}
    else if(r==='slow')say('Too many sign-ups from this connection. Try again in an hour.',1);
    else{shut();say('Please enter a valid email.',1)}})
   .catch(function(x){say(x==='server'?"Something went wrong on our side. Your email wasn't saved. Please try again later.":'No internet connection. Check it and try again.',1)})
