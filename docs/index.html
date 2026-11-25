@@ -1722,6 +1722,9 @@ body{background:transparent!important}
 /* phones: the longer "Join the waiting list" label left no room for the address, so stack them */
 @media(max-width:480px){.wl-row{flex-direction:column;border-radius:26px;gap:4px}.wl-row input{padding:12px 14px;text-align:center}.wl-row button{width:100%;padding:13px 20px}}
 @media (prefers-reduced-motion:reduce){.wl button,.wl-row{transition:none}}
+/* Phones (2026-11-25): no nav up there, so less top padding; no screen-high gap before Devices; the four platform circles fit one line. */
+@media(max-width:800px){.nh.q-row.pl-hero{padding-top:40px}#devices{margin-top:56px}.pl-hero .pl-cw .pl-mark{height:clamp(160px,calc(100svh - 520px),400px)}}
+@media(max-width:560px){.pl-hero .pl-dl{margin-top:16px}.pl-dl8{gap:6px 10px}.pl-dl8 i{width:50px;height:50px}.pl-dl .pi{width:20px;height:20px}.pl-dl8 b{font-size:13px}.pl-dl8 small{font-size:10.5px;white-space:nowrap}.fx-n{width:164px;font-size:11px}}
 /* Accountability Lock (2026-11-21): centred, a lock bar, then the facts as pills. */
 .v2 .al{--al-g:#a8701c;--al-s:#f3e6cc;background:var(--paper)}
 :root[data-theme="dark"] .v2 .al{--al-g:#ffc867;--al-s:#2a2619}
@@ -1958,6 +1961,8 @@ body{background:transparent!important}
 #schedule .sk-os span.off{color:var(--ash);background:transparent;box-shadow:none}
 #schedule .sk-os em{font:700 9px var(--mono);letter-spacing:.14em;text-transform:uppercase;font-style:normal;color:var(--faint);margin-left:2px}
 @media (max-width:800px){#schedule .sk-row3{grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:16px}#schedule .sk-link{display:none}#schedule .sk-os{flex-direction:column;align-items:center}#schedule .sk-os span{font-size:11.5px;padding:5px 10px 5px 8px}}
+/* Phones: the phone column is narrow, so each chip puts "Coming soon" under the name instead of running off the screen. */
+@media (max-width:560px){#schedule .sk-os span{display:grid;grid-template-columns:auto auto;justify-content:center;align-items:center;column-gap:6px;row-gap:1px;border-radius:14px;padding:5px 10px}#schedule .sk-os span em{grid-column:1/-1;text-align:center;margin:0}}
 </style>
 <script>
 /* The resting candle from the phone app (aodDraw), drawn on each screen. */
@@ -3036,10 +3041,10 @@ function make(m){var e=document.createElement('div'),a=pick(A);if(m==='5'){if(!b
  else{var o=pick(O);if(o[0]==='o'){e.className='fx-o';e.innerHTML='<svg viewBox="0 0 24 24">'+o[1]+'</svg>'}else{e.className='fx-t';e.textContent=o[1]}}
  return e}
 var F='brightness(1) sepia(0) saturate(1) hue-rotate(0deg) blur(0px)',H='brightness(1.5) sepia(1) saturate(5) hue-rotate(-12deg) blur(1px)',T='translate(-50%,-50%) translate(';
-function spawn(){if(document.hidden||off||live>5)return;var sm=innerWidth<=800?.45:1,side=(k++%3===2)?1:-1,
- x0=side*(side<0?140+Math.random()*220:120+Math.random()*80)*sm,y0=(-90+Math.random()*440)*sm,rt=Math.random()*30-15,e=make(mode);fx.appendChild(e);live++;
+function spawn(){var ph=innerWidth<=560;if(document.hidden||off||live>(ph?2:5))return;var sm=innerWidth<=800?.45:1,side=(k++%3===2)?1:-1,
+ x0=ph?side*(150+Math.random()*30):side*(side<0?140+Math.random()*220:120+Math.random()*80)*sm,y0=ph?-50+Math.random()*130:(-90+Math.random()*440)*sm,mx=ph?.5:.32,rt=Math.random()*30-15,e=make(mode);fx.appendChild(e);live++;
  var an=e.animate([{transform:T+x0+'px,'+y0+'px) rotate('+rt+'deg) scale(.96)',opacity:0,filter:F},{offset:.14,opacity:1},
-  {offset:.62,transform:T+(x0*.32)+'px,'+(y0*.3-40*sm)+'px) rotate('+rt/2+'deg) scale(.8)',opacity:1,filter:F},
+  {offset:.62,transform:T+(x0*mx)+'px,'+(y0*.3-40*sm)+'px) rotate('+rt/2+'deg) scale(.8)',opacity:1,filter:F},
   {offset:.88,transform:T+'0px,-4px) rotate(0deg) scale(.32)',opacity:.85,filter:H},
   {transform:T+'0px,-18px) rotate(0deg) scale(.08)',opacity:0,filter:H}],{duration:3800+Math.random()*900,easing:'cubic-bezier(.45,0,.6,1)'});
  an.onfinish=function(){e.remove();live--;fl.animate([{opacity:0,transform:'scale(.7)'},{opacity:1,transform:'scale(1.15)',offset:.3},{opacity:0,transform:'scale(1.3)'}],{duration:700,easing:'ease-out'})}}
