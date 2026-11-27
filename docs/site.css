@@ -1750,3 +1750,19 @@ body{background:transparent!important}
 #how .bal-u{background:none;border:0;padding:6px 4px;font:600 14px var(--body);color:rgba(255,255,255,.75);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
 #how .bal-u:hover{color:#fff}
 @media(max-width:700px){#how .bal-card{padding:12px 8px 12px;border-radius:18px}#how .bal text{font-size:20px}#how .bal text.h{font-size:27px}}
+
+/* the scales, version F: gold lines on the photograph, no card, the pans weigh years */
+#how h2{font:900 clamp(32px,5.4vw,58px)/1.02 var(--display);letter-spacing:-.03em;text-wrap:balance}
+#how h2 em{font-style:normal;color:#ffc867}
+#how .bal-lede{font:500 clamp(16px,1.8vw,19px)/1.5 var(--body);color:rgba(255,255,255,.75);margin:16px auto 0;max-width:34em;text-align:center;text-wrap:pretty}
+#how .bal-card{max-width:600px;margin:26px auto 0;padding:0;background:none;border:0;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none}
+#how .bal:focus,#how .bal:focus-visible{outline:none}
+#how .bal .st{stroke:#ffc867;stroke-width:2.5;fill:none}
+#how .bal .str{stroke:rgba(255,200,103,.5)}
+#how .bal .pan{fill:rgba(255,200,103,.06);stroke:#ffc867;stroke-width:1.6}
+#how .bal .hub{fill:#ffc867}
+#how .bal .we{fill:rgba(255,255,255,.78)}
+#how .bal text.hint{font:700 15px var(--body);fill:#ffc867;letter-spacing:.04em;animation:balHint 1.6s ease-in-out infinite}
+@keyframes balHint{0%,100%{opacity:.35}50%{opacity:1}}
+@media(max-width:700px){#how .bal-card{padding:0}#how .bal text.hint{font-size:18px}}
+@media(prefers-reduced-motion:reduce){#how .bal text.hint{animation:none}}

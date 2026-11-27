@@ -1038,15 +1038,22 @@ function pick(h){if(!h){sec.classList.remove('done');return}
 o.textContent='0';
 /* the scales: one tap for each hour a day on the phone, against the rest of a sixteen-hour waking day */
 var s=sec.querySelector('svg.bal'),n=sec.querySelector('.bal-n'),u=sec.querySelector('.bal-u');if(!s)return;
-var v=0,cur=18*Math.PI/180,af=0;
-function draw(){var ex=165*Math.cos(cur),ey=165*Math.sin(cur),
- g='<line class="st" x1="0" y1="-30" x2="0" y2="178"/><line class="st" x1="-64" y1="178" x2="64" y2="178"/>';
- [[-ex,-30-ey,v,'wp','Your phone',' p'],[ex,-30+ey,16-v,'we','Everything else','']].forEach(function(a){var x=a[0],y=a[1],c=a[2],py=y+86,lx=Math.max(-150,Math.min(150,x)),k;
-  g+='<line class="str" x1="'+x+'" y1="'+y+'" x2="'+(x-62)+'" y2="'+py+'"/><line class="str" x1="'+x+'" y1="'+y+'" x2="'+(x+62)+'" y2="'+py+'"/>';
-  for(k=0;k<c;k++)g+='<circle class="'+a[3]+'" r="8" cx="'+(x-36+(k%4)*24)+'" cy="'+(py-9-Math.floor(k/4)*17)+'"/>';
-  g+='<path class="pan" d="M'+(x-62)+' '+py+'Q'+x+' '+(py+32)+' '+(x+62)+' '+py+'Z"/><text x="'+lx+'" y="'+(py+46)+'">'+a[4]+'</text><text class="h'+a[5]+'" x="'+lx+'" y="'+(py+76)+'">'+c+'h</text>'});
- s.innerHTML=g+'<line class="st" x1="'+(-ex)+'" y1="'+(-30-ey)+'" x2="'+ex+'" y2="'+(-30+ey)+'"/><circle r="7" cy="-30" fill="currentColor"/>'}
-function tip(){var t=(16-2*v)/16*18*Math.PI/180;cancelAnimationFrame(af);if(still.matches){cur=t;return draw()}
+var v=0,M=14*Math.PI/180,cur=M,af=0;
+function yr(h){return Math.round(h*50/16*10)/10}
+function spots(x,rim,n){var o=[],st=16,k=0,row=0,top,av,c,cy,i;
+ while(k<n&&row<14){top=row*st+10;av=72*(1-top/100)-8.5;c=av<0?1:Math.floor(av*2/st)+1;c=Math.min(c,n-k);
+  cy=rim-3.5-row*st;for(i=0;i<c;i++)o.push([x+(i-(c-1)/2)*st,cy]);k+=c;row++}return o}
+function draw(){var ex=165*Math.cos(cur),ey=165*Math.sin(cur),w=yr(v),
+ g='<line class="st" x1="0" y1="-40" x2="0" y2="190"/><line class="st" x1="-70" y1="190" x2="70" y2="190"/>';
+ [[-ex,-40-ey,v,'wp'],[ex,-40+ey,16-v,'we']].forEach(function(a){var x=a[0],y=a[1],rim=y+100;
+  g+='<line class="str" x1="'+x+'" y1="'+y+'" x2="'+(x-72)+'" y2="'+rim+'"/><line class="str" x1="'+x+'" y1="'+y+'" x2="'+(x+72)+'" y2="'+rim+'"/>';
+  g+='<path class="pan" d="M'+(x-72)+' '+rim+'Q'+x+' '+(rim+18)+' '+(x+72)+' '+rim+'Z"/>';
+  spots(x,rim,a[2]).forEach(function(p){g+='<circle class="'+a[3]+'" r="6.5" cx="'+p[0]+'" cy="'+p[1]+'"/>'})});
+ g+='<line class="st" x1="'+(-ex)+'" y1="'+(-40-ey)+'" x2="'+ex+'" y2="'+(-40+ey)+'"/><circle class="hub" r="7" cy="-40"/>';
+ g+='<text x="-150" y="222">Your phone</text><text class="h p" x="-150" y="252">'+w+' yrs</text><text x="150" y="222">Everything else</text><text class="h" x="150" y="252">'+(Math.round((50-w)*10)/10)+' yrs</text>';
+ if(!v)g+='<text class="hint" x="-150" y="-6">TAP</text>';
+ s.innerHTML=g}
+function tip(){var t=(16-2*v)/16*M;cancelAnimationFrame(af);if(still.matches){cur=t;return draw()}
  (function f(){cur+=(t-cur)*.12;if(Math.abs(t-cur)<.0005)cur=t;draw();if(cur!==t)af=requestAnimationFrame(f)})()}
 function setH(k){v=Math.max(0,Math.min(12,k));u.hidden=!v;n.textContent=v?v+(v===1?' hour a day':' hours a day'):'No hours yet';
  s.setAttribute('aria-label',v<12?'Put another hour on the phone side. Now '+v+' of 12.':'Twelve hours, the most it holds');tip();pick(v)}
