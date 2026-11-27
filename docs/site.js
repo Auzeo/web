@@ -1040,18 +1040,18 @@ o.textContent='0';
 var s=sec.querySelector('svg.bal'),n=sec.querySelector('.bal-n'),u=sec.querySelector('.bal-u');if(!s)return;
 var v=0,M=14*Math.PI/180,cur=M,af=0;
 function yr(h){return Math.round(h*50/16*10)/10}
-function spots(x,rim,n){var o=[],st=16,k=0,row=0,top,av,c,cy,i;
- while(k<n&&row<14){top=row*st+10;av=72*(1-top/100)-8.5;c=av<0?1:Math.floor(av*2/st)+1;c=Math.min(c,n-k);
-  cy=rim-3.5-row*st;for(i=0;i<c;i++)o.push([x+(i-(c-1)/2)*st,cy]);k+=c;row++}return o}
+function spots(x,rim,n){var o=[],k=0,row=0,top,c,i;
+ while(k<n&&row<8){top=(row+1)*12;c=Math.max(1,Math.floor((2*(72*(1-top/100)-2)+2)/24));c=Math.min(c,n-k);
+  for(i=0;i<c;i++)o.push([x+(i-(c-1)/2)*24-11,rim+1-top]);k+=c;row++}return o}
 function draw(){var ex=165*Math.cos(cur),ey=165*Math.sin(cur),w=yr(v),
  g='<line class="st" x1="0" y1="-40" x2="0" y2="190"/><line class="st" x1="-70" y1="190" x2="70" y2="190"/>';
  [[-ex,-40-ey,v,'wp'],[ex,-40+ey,16-v,'we']].forEach(function(a){var x=a[0],y=a[1],rim=y+100;
   g+='<line class="str" x1="'+x+'" y1="'+y+'" x2="'+(x-72)+'" y2="'+rim+'"/><line class="str" x1="'+x+'" y1="'+y+'" x2="'+(x+72)+'" y2="'+rim+'"/>';
   g+='<path class="pan" d="M'+(x-72)+' '+rim+'Q'+x+' '+(rim+18)+' '+(x+72)+' '+rim+'Z"/>';
-  spots(x,rim,a[2]).forEach(function(p){g+='<circle class="'+a[3]+'" r="6.5" cx="'+p[0]+'" cy="'+p[1]+'"/>'})});
+  spots(x,rim,a[2]).forEach(function(p){g+='<rect class="'+a[3]+'" width="22" height="10" rx="2" x="'+p[0]+'" y="'+p[1]+'"/>'})});
  g+='<line class="st" x1="'+(-ex)+'" y1="'+(-40-ey)+'" x2="'+ex+'" y2="'+(-40+ey)+'"/><circle class="hub" r="7" cy="-40"/>';
  g+='<text x="-150" y="222">Your phone</text><text class="h p" x="-150" y="252">'+w+' yrs</text><text x="150" y="222">Everything else</text><text class="h" x="150" y="252">'+(Math.round((50-w)*10)/10)+' yrs</text>';
- if(!v)g+='<text class="hint" x="-150" y="-6">TAP</text>';
+ if(!v)g+='<text class="hint" x="'+(-ex)+'" y="'+(-40-ey+72)+'">TAP</text>';
  s.innerHTML=g}
 function tip(){var t=(16-2*v)/16*M;cancelAnimationFrame(af);if(still.matches){cur=t;return draw()}
  (function f(){cur+=(t-cur)*.12;if(Math.abs(t-cur)<.0005)cur=t;draw();if(cur!==t)af=requestAnimationFrame(f)})()}
