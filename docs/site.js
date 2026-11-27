@@ -1025,9 +1025,8 @@ try{
 (function(){var sec=document.querySelector('#how.nn');if(!sec)return;
 var o=sec.querySelector('.r8-btn [data-o="wkr"]'),shown=0,raf=0,still=matchMedia('(prefers-reduced-motion: reduce)');
 function put(k,v){sec.querySelectorAll('[data-o="'+k+'"]').forEach(function(x){x.textContent=v})}
-sec.addEventListener('click',function(e){var b=e.target.closest('[data-h]');if(!b)return;
- var h=+b.dataset.h,w=Math.round(h*50/16*10)/10,p=w/50,to=Math.round(w),from=shown;
- sec.querySelectorAll('[data-h]').forEach(function(x){var on=x===b;x.classList.toggle('on',on);x.setAttribute('aria-pressed',on)});
+function pick(h){if(!h){sec.classList.remove('done');return}
+ var w=Math.round(h*50/16*10)/10,p=w/50,to=Math.round(w),from=shown;
  put('wk',String(w));put('left',String(Math.round((50-w)*10)/10));
  sec.querySelectorAll('.r10 .p').forEach(function(x){x.style.flexGrow=w});
  sec.querySelectorAll('.r10 .e').forEach(function(x){x.style.flexGrow=50-w});
@@ -1035,8 +1034,26 @@ sec.addEventListener('click',function(e){var b=e.target.closest('[data-h]');if(!
  sec.classList.add('done');cancelAnimationFrame(raf);shown=to;
  if(still.matches){o.textContent=to;return}
  var t0=performance.now();(function f(t){var k=Math.min(1,(t-t0)/800);o.textContent=String(Math.round(from+(to-from)*(1-Math.pow(1-k,3))));if(k<1)raf=requestAnimationFrame(f)})(t0);
-});
+}
 o.textContent='0';
+/* the scales: one tap for each hour a day on the phone, against the rest of a sixteen-hour waking day */
+var s=sec.querySelector('svg.bal'),n=sec.querySelector('.bal-n'),u=sec.querySelector('.bal-u');if(!s)return;
+var v=0,cur=18*Math.PI/180,af=0;
+function draw(){var ex=165*Math.cos(cur),ey=165*Math.sin(cur),
+ g='<line class="st" x1="0" y1="-30" x2="0" y2="178"/><line class="st" x1="-64" y1="178" x2="64" y2="178"/>';
+ [[-ex,-30-ey,v,'wp','Your phone',' p'],[ex,-30+ey,16-v,'we','Everything else','']].forEach(function(a){var x=a[0],y=a[1],c=a[2],py=y+86,lx=Math.max(-150,Math.min(150,x)),k;
+  g+='<line class="str" x1="'+x+'" y1="'+y+'" x2="'+(x-62)+'" y2="'+py+'"/><line class="str" x1="'+x+'" y1="'+y+'" x2="'+(x+62)+'" y2="'+py+'"/>';
+  for(k=0;k<c;k++)g+='<circle class="'+a[3]+'" r="8" cx="'+(x-36+(k%4)*24)+'" cy="'+(py-9-Math.floor(k/4)*17)+'"/>';
+  g+='<path class="pan" d="M'+(x-62)+' '+py+'Q'+x+' '+(py+32)+' '+(x+62)+' '+py+'Z"/><text x="'+lx+'" y="'+(py+46)+'">'+a[4]+'</text><text class="h'+a[5]+'" x="'+lx+'" y="'+(py+76)+'">'+c+'h</text>'});
+ s.innerHTML=g+'<line class="st" x1="'+(-ex)+'" y1="'+(-30-ey)+'" x2="'+ex+'" y2="'+(-30+ey)+'"/><circle r="7" cy="-30" fill="currentColor"/>'}
+function tip(){var t=(16-2*v)/16*18*Math.PI/180;cancelAnimationFrame(af);if(still.matches){cur=t;return draw()}
+ (function f(){cur+=(t-cur)*.12;if(Math.abs(t-cur)<.0005)cur=t;draw();if(cur!==t)af=requestAnimationFrame(f)})()}
+function setH(k){v=Math.max(0,Math.min(12,k));u.hidden=!v;n.textContent=v?v+(v===1?' hour a day':' hours a day'):'No hours yet';
+ s.setAttribute('aria-label',v<12?'Put another hour on the phone side. Now '+v+' of 12.':'Twelve hours, the most it holds');tip();pick(v)}
+s.addEventListener('click',function(){setH(v+1)});
+s.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();setH(v+1)}});
+u.addEventListener('click',function(){setH(v-1)});
+draw();
 })();
 }catch(e){console.error(e)}
 try{

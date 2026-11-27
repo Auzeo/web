@@ -1730,3 +1730,23 @@ body{background:transparent!important}
 @media (max-width:800px){#schedule .sk-row3{grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:16px}#schedule .sk-link{display:none}#schedule .sk-os{flex-direction:column;align-items:center}#schedule .sk-os span{font-size:11.5px;padding:5px 10px 5px 8px}}
 /* Phones: the phone column is narrow, so each chip puts "Coming soon" under the name instead of running off the screen. */
 @media (max-width:560px){#schedule .sk-os span{display:grid;grid-template-columns:auto auto;justify-content:center;align-items:center;column-gap:6px;row-gap:1px;border-radius:14px;padding:5px 10px}#schedule .sk-os span em{grid-column:1/-1;text-align:center;margin:0}}
+
+/* "Why would this benefit you?": the scales. Tap once for each hour on the phone; the beam tips towards it. */
+#how .bal-card{max-width:620px;margin:0 auto;padding:18px 18px 16px;border-radius:22px;background:rgba(8,12,22,.5);
+  -webkit-backdrop-filter:blur(14px) saturate(1.15);backdrop-filter:blur(14px) saturate(1.15);
+  border:1px solid rgba(255,255,255,.13);box-shadow:0 30px 60px -30px rgba(0,0,0,.8),inset 0 1px 0 rgba(255,255,255,.08)}
+#how .bal{display:block;width:100%;height:auto;cursor:pointer;color:#fff;touch-action:manipulation;-webkit-tap-highlight-color:transparent;border-radius:14px;transition:transform .16s ease-out}
+#how .bal:active{transform:scale(.985)}
+#how .bal:focus-visible{outline:2px solid #ffc867;outline-offset:4px}
+#how .bal .st{stroke:#fff;stroke-width:3.5;stroke-linecap:round}
+#how .bal .str{stroke:rgba(255,255,255,.55);stroke-width:1.2}
+#how .bal .pan{fill:rgba(255,255,255,.1);stroke:#fff;stroke-width:2}
+#how .bal .wp{fill:#ffc867}#how .bal .we{fill:rgba(255,255,255,.72)}
+#how .bal text{font:600 17px var(--body);fill:rgba(255,255,255,.8);text-anchor:middle}
+#how .bal text.h{font:800 22px var(--body);fill:#fff}#how .bal text.h.p{fill:#ffc867}
+#how .bal-row{display:flex;align-items:baseline;justify-content:center;gap:14px;margin-top:8px;min-height:32px}
+#how .bal-n{font:800 22px var(--body);color:#fff}
+#how:not(.done) .bal-n{font:600 15px var(--body);color:rgba(255,255,255,.7)}
+#how .bal-u{background:none;border:0;padding:6px 4px;font:600 14px var(--body);color:rgba(255,255,255,.75);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+#how .bal-u:hover{color:#fff}
+@media(max-width:700px){#how .bal-card{padding:12px 8px 12px;border-radius:18px}#how .bal text{font-size:20px}#how .bal text.h{font-size:27px}}
